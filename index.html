@@ -103,11 +103,31 @@
     font-weight: 600;
     font-size: 16px;
   }
-  .brand__dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
+  .brand__logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .brand:hover .brand__logo {
+    transform: rotate(-8deg) scale(1.05);
+  }
+  .brand__logo .lg-bg {
+    fill: var(--accent);
+    transition: fill 0.3s;
+  }
+  .brand__logo .lg-letter {
+    fill: #ffffff;
+  }
+  .brand__logo .lg-accent {
+    fill: var(--accent);
+  }
+  .brand__logo .lg-bar {
+    fill: rgba(255,255,255,0.85);
+  }
+  .brand__logo .lg-dot {
+    fill: #ffffff;
   }
   .nav {
     display: none;
@@ -826,8 +846,19 @@
 
 <header class="top">
   <div class="top__inner">
-    <a href="#top" class="brand">
-      <span class="brand__dot"></span>
+    <a href="#top" class="brand" aria-label="Michael Rusch — Startseite">
+      <svg class="brand__logo" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Squircle Hintergrund -->
+        <path class="lg-bg" d="M0 12 C0 4, 4 0, 12 0 L28 0 C36 0, 40 4, 40 12 L40 28 C40 36, 36 40, 28 40 L12 40 C4 40, 0 36, 0 28 Z"/>
+        <!-- M: zwei vertikale Striche + V dazwischen -->
+        <path class="lg-letter" d="M 9 11 L 9 29 L 12 29 L 12 17 L 16 25 L 17 25 L 21 17 L 21 24 L 24 24 L 24 11 L 21 11 L 16.5 20 L 12 11 Z"/>
+        <!-- R: gespiegelt-rechts, eigenständig -->
+        <path class="lg-letter" d="M 25 14 L 25 29 L 28 29 L 28 23 L 30 23 L 32.5 29 L 35.8 29 L 33 22.5 C 34.5 21.8, 35.5 20.3, 35.5 18.5 C 35.5 16, 33.5 14, 31 14 Z M 28 16.5 L 30.5 16.5 C 31.7 16.5, 32.5 17.3, 32.5 18.5 C 32.5 19.7, 31.7 20.5, 30.5 20.5 L 28 20.5 Z"/>
+        <!-- Akzent-Linie unten -->
+        <rect class="lg-bar" x="9" y="32" width="15" height="2" rx="1"/>
+        <!-- Akzent-Punkt -->
+        <circle class="lg-dot" cx="29" cy="33" r="1.5"/>
+      </svg>
       <span>Michael Rusch</span>
     </a>
     <nav class="nav">
@@ -853,13 +884,13 @@
   <div class="container">
     <div class="pill" data-reveal>
       <span class="pill__dot"></span>
-      <span data-i18n="hero.pill">Nehme aktuell neue Projekte an</span>
+      <span data-i18n="hero.pill">Verfügbar für neue Projekte</span>
     </div>
     <h1 class="hero__title" data-reveal>
       <span data-i18n="hero.t1">Schöne Websites für </span><span class="accent-word" data-i18n="hero.t2">Restaurants</span><span> &amp; </span><span class="accent-word" data-i18n="hero.t3">kleine Unternehmen</span><span>.</span>
     </h1>
     <p class="hero__sub" data-reveal data-i18n="hero.sub">
-      Hi, ich bin Michael — freier Webentwickler aus Deutschland. Ich baue schlichte, moderne Websites, die gefunden werden und verkaufen. Faire Preise, persönlicher Service.
+      Freier Webentwickler aus Deutschland — spezialisiert auf moderne, performante Websites für Restaurants, Studios und kleine Unternehmen. Klare Konzepte, sauberer Code, persönliche Betreuung.
     </p>
     <div class="hero__ctas" data-reveal>
       <a href="#contact" class="cta cta--primary"><span data-i18n="hero.cta1">Kontakt aufnehmen</span> →</a>
@@ -886,14 +917,14 @@
   <div class="container">
     <header class="sh" data-reveal>
       <span class="sh__eyebrow" data-i18n="about.eyebrow">Über mich</span>
-      <h2 class="sh__title" data-i18n="about.title">Klein, ehrlich, engagiert.</h2>
+      <h2 class="sh__title" data-i18n="about.title">Sorgfalt im Detail.</h2>
     </header>
     <div class="about">
       <div data-reveal>
         <div class="portrait">
           <div class="portrait__frame">
             <span class="portrait__initials">MR</span>
-            <span class="portrait__caption" data-i18n="about.cap">Michael, 20</span>
+            <span class="portrait__caption" data-i18n="about.cap">Michael Rusch</span>
           </div>
           <span class="portrait__sticker">Hi!</span>
         </div>
@@ -905,9 +936,9 @@
         </dl>
       </div>
       <div class="about__text">
-        <p data-reveal data-i18n="about.p1">Ich bin 20 und habe vor ein paar Monaten mit Webentwicklung angefangen. Genau deshalb arbeite ich gerne mit kleinen Unternehmen: mit Zeit, Sorgfalt und ohne Agentur-Preisschild.</p>
-        <p data-reveal data-i18n="about.p2">Mein Fokus: klare, freundliche Websites — eine einzelne Seite mit allem Wichtigen, oder ein paar Unterseiten. Speisekarte, Öffnungszeiten, Fotos, Kontakt — sauber und mobiloptimiert.</p>
-        <p data-reveal data-i18n="about.p3">Du willst eine neue Seite? Schick mir kurz eine Nachricht. Ich melde mich innerhalb von 24 Stunden mit einem ehrlichen Angebot.</p>
+        <p data-reveal data-i18n="about.p1">Ich entwickle Websites für kleine Unternehmen, die nach außen genauso präzise wirken wollen, wie sie es im Inneren sind. Mein Ansatz: jedes Projekt bekommt die Aufmerksamkeit, die es verdient — keine Schablonen, keine Agentur-Bürokratie.</p>
+        <p data-reveal data-i18n="about.p2">Der Fokus liegt auf dem, was zählt: schnelle Ladezeiten, einwandfreie Darstellung auf jedem Gerät und Inhalte, die deine Kunden sofort verstehen. Ob One-Pager oder mehrseitige Website — sauberer Code und ein Design, das zu deiner Marke passt.</p>
+        <p data-reveal data-i18n="about.p3">Klingt nach dem, was du suchst? Dann lass uns reden. Erstes Beratungsgespräch ist kostenfrei und unverbindlich.</p>
       </div>
     </div>
   </div>
@@ -918,8 +949,8 @@
   <div class="container">
     <header class="sh" data-reveal>
       <span class="sh__eyebrow" data-i18n="proj.eyebrow">Beispielprojekte</span>
-      <h2 class="sh__title" data-i18n="proj.title">So könnte deine Seite aussehen.</h2>
-      <span class="sh__note" data-i18n="proj.note">Ich starte gerade — hier ein Eindruck, was möglich ist.</span>
+      <h2 class="sh__title" data-i18n="proj.title">Ausgewählte Konzepte.</h2>
+      <span class="sh__note" data-i18n="proj.note">Beispielentwürfe für unterschiedliche Branchen.</span>
     </header>
 
     <div class="carousel" data-reveal>
@@ -949,7 +980,7 @@
             <div class="slide__body">
               <span class="slide__cat" data-i18n="proj.b1">Restaurant · One-Pager</span>
               <h3 class="slide__name">Trattoria da Luca</h3>
-              <p class="slide__sum" data-i18n="proj.s1">Beispielkonzept: One-Pager für ein italienisches Restaurant — Karte, Galerie, Reservierungslink.</p>
+              <p class="slide__sum" data-i18n="proj.s1">Italienisches Restaurant: One-Pager mit Speisekarte, Bildgalerie und integriertem Reservierungssystem. Mobil-first, schnell, einladend.</p>
               <div class="slide__chips">
                 <span class="slide__chip">Restaurant</span>
                 <span class="slide__chip">One-Pager</span>
@@ -970,7 +1001,7 @@
             <div class="slide__body">
               <span class="slide__cat" data-i18n="proj.b2">Blumenladen · Kleine Seite</span>
               <h3 class="slide__name">Blumen Meier</h3>
-              <p class="slide__sum" data-i18n="proj.s2">Beispiel: Start, Produkte, Öffnungszeiten, Kontakt — schlicht und persönlich.</p>
+              <p class="slide__sum" data-i18n="proj.s2">Floristik-Boutique: dreiseitige Website mit Sortimentsübersicht, Standortinformationen und Kontaktbereich. Lokales SEO inklusive.</p>
               <div class="slide__chips">
                 <span class="slide__chip">Laden</span>
                 <span class="slide__chip">3 Seiten</span>
@@ -991,7 +1022,7 @@
             <div class="slide__body">
               <span class="slide__cat" data-i18n="proj.b3">Studio · One-Pager</span>
               <h3 class="slide__name">Yoga mit Sarah</h3>
-              <p class="slide__sum" data-i18n="proj.s3">Beispiel: Kurse, Preise, über Sarah, Kontakt — ruhig und warm im Look.</p>
+              <p class="slide__sum" data-i18n="proj.s3">Yoga-Studio: One-Pager mit Kursplan, Preisstruktur, Trainerprofil und Online-Buchungsanbindung. Reduziertes Design, klare Hierarchie.</p>
               <div class="slide__chips">
                 <span class="slide__chip">Studio</span>
                 <span class="slide__chip">One-Pager</span>
@@ -1011,7 +1042,7 @@
             <div class="slide__body">
               <span class="slide__cat" data-i18n="proj.b4">Freier Platz</span>
               <h3 class="slide__name" data-i18n="proj.t4">Dein Projekt?</h3>
-              <p class="slide__sum" data-i18n="proj.s4">Platz für dein Projekt. Erzähl mir von deinem Laden, Studio oder Café.</p>
+              <p class="slide__sum" data-i18n="proj.s4">Dein Unternehmen kann hier stehen. Ich entwickle Konzept und Umsetzung — auf deine Branche und Zielgruppe zugeschnitten.</p>
               <div class="slide__chips">
                 <span class="slide__chip" data-i18n="proj.tag4">Frei</span>
               </div>
@@ -1033,8 +1064,8 @@
   <div class="container">
     <header class="sh" data-reveal>
       <span class="sh__eyebrow" data-i18n="srv.eyebrow">Pakete</span>
-      <h2 class="sh__title" data-i18n="srv.title">Drei einfache Pakete.</h2>
-      <span class="sh__note" data-i18n="srv.note">Was ich anbiete.</span>
+      <h2 class="sh__title" data-i18n="srv.title">Klar strukturierte Pakete.</h2>
+      <span class="sh__note" data-i18n="srv.note">Transparent kalkuliert — keine versteckten Kosten.</span>
     </header>
     <div class="stack">
       <div class="stack__col" data-reveal>
@@ -1046,7 +1077,7 @@
           <li><span class="stack__check">✓</span><span data-i18n="srv.1a">Eine Seite, alles drauf</span></li>
           <li><span class="stack__check">✓</span><span data-i18n="srv.1b">Mobiloptimiert</span></li>
           <li><span class="stack__check">✓</span><span data-i18n="srv.1c">Kontaktformular</span></li>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.1d">Perfekt zum Starten</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1d">SEO-Grundoptimierung</span></li>
         </ul>
         <a href="#contact" class="stack__cta"><span data-i18n="srv.cta">Loslegen</span> →</a>
       </div>
@@ -1061,7 +1092,7 @@
           <li><span class="stack__check">✓</span><span data-i18n="srv.2a">Mehrere Unterseiten</span></li>
           <li><span class="stack__check">✓</span><span data-i18n="srv.2b">Speisekarte / Galerie</span></li>
           <li><span class="stack__check">✓</span><span data-i18n="srv.2c">Google Maps &amp; Kontakt</span></li>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.2d">Selbst leicht aktualisierbar</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2d">Eigenständig pflegbar</span></li>
         </ul>
         <a href="#contact" class="stack__cta"><span data-i18n="srv.cta">Loslegen</span> →</a>
       </div>
@@ -1087,11 +1118,11 @@
   <div class="container">
     <header class="sh" data-reveal>
       <span class="sh__eyebrow" data-i18n="ct.eyebrow">Kontakt</span>
-      <h2 class="sh__title" data-i18n="ct.title">Lass uns reden.</h2>
+      <h2 class="sh__title" data-i18n="ct.title">Projekt anfragen.</h2>
     </header>
     <div class="contact">
       <div data-reveal>
-        <p class="contact__big" data-i18n="ct.big">Erzähl mir von deinem Projekt. Ich antworte innerhalb von 24 Stunden — das erste Gespräch ist kostenlos.</p>
+        <p class="contact__big" data-i18n="ct.big">Beschreibe dein Vorhaben in wenigen Sätzen — ich melde mich innerhalb von 24 Stunden mit einer ersten Einschätzung. Erstgespräch kostenfrei.</p>
         <div class="contact__links">
           <a href="mailto:michael.rusch@gmail.com" class="contact__link">
             <span class="contact__icon">✉</span>
@@ -1170,64 +1201,64 @@
   const translations = {
     de: {
       'nav.about': 'Über mich', 'nav.work': 'Projekte', 'nav.stack': 'Pakete', 'nav.contact': 'Kontakt', 'nav.start': 'Projekt starten',
-      'hero.pill': 'Nehme aktuell neue Projekte an',
+      'hero.pill': 'Verfügbar für neue Projekte',
       'hero.t1': 'Schöne Websites für ', 'hero.t2': 'Restaurants', 'hero.t3': 'kleine Unternehmen',
-      'hero.sub': 'Hi, ich bin Michael — freier Webentwickler aus Deutschland. Ich baue schlichte, moderne Websites, die gefunden werden und verkaufen. Faire Preise, persönlicher Service.',
+      'hero.sub': 'Freier Webentwickler aus Deutschland — spezialisiert auf moderne, performante Websites für Restaurants, Studios und kleine Unternehmen. Klare Konzepte, sauberer Code, persönliche Betreuung.',
       'hero.cta1': 'Kontakt aufnehmen', 'hero.cta2': 'Beispiele ansehen',
       'trust.1': 'Antwortzeit', 'trust.2num': 'ab 125 €', 'trust.2': 'Faire Preise', 'trust.3': 'Persönlich',
-      'about.eyebrow': 'Über mich', 'about.title': 'Klein, ehrlich, engagiert.',
-      'about.cap': 'Michael, 20',
-      'about.p1': 'Ich bin 20 und habe vor ein paar Monaten mit Webentwicklung angefangen. Genau deshalb arbeite ich gerne mit kleinen Unternehmen: mit Zeit, Sorgfalt und ohne Agentur-Preisschild.',
-      'about.p2': 'Mein Fokus: klare, freundliche Websites — eine einzelne Seite mit allem Wichtigen, oder ein paar Unterseiten. Speisekarte, Öffnungszeiten, Fotos, Kontakt — sauber und mobiloptimiert.',
-      'about.p3': 'Du willst eine neue Seite? Schick mir kurz eine Nachricht. Ich melde mich innerhalb von 24 Stunden mit einem ehrlichen Angebot.',
+      'about.eyebrow': 'Über mich', 'about.title': 'Sorgfalt im Detail.',
+      'about.cap': 'Michael Rusch',
+      'about.p1': 'Ich entwickle Websites für kleine Unternehmen, die nach außen genauso präzise wirken wollen, wie sie es im Inneren sind. Mein Ansatz: jedes Projekt bekommt die Aufmerksamkeit, die es verdient — keine Schablonen, keine Agentur-Bürokratie.',
+      'about.p2': 'Der Fokus liegt auf dem, was zählt: schnelle Ladezeiten, einwandfreie Darstellung auf jedem Gerät und Inhalte, die deine Kunden sofort verstehen. Ob One-Pager oder mehrseitige Website — sauberer Code und ein Design, das zu deiner Marke passt.',
+      'about.p3': 'Klingt nach dem, was du suchst? Dann lass uns reden. Erstes Beratungsgespräch ist kostenfrei und unverbindlich.',
       'facts.name': 'Name', 'facts.based': 'Standort', 'facts.basedV': 'Deutschland', 'facts.works': 'Arbeitet mit', 'facts.worksV': 'kl. Unternehmen', 'facts.lang': 'Sprachen',
-      'proj.eyebrow': 'Beispielprojekte', 'proj.title': 'So könnte deine Seite aussehen.', 'proj.note': 'Ich starte gerade — hier ein Eindruck, was möglich ist.',
-      'proj.b1': 'Restaurant · One-Pager', 'proj.s1': 'Beispielkonzept: One-Pager für ein italienisches Restaurant — Karte, Galerie, Reservierungslink.',
-      'proj.b2': 'Blumenladen · Kleine Seite', 'proj.s2': 'Beispiel: Start, Produkte, Öffnungszeiten, Kontakt — schlicht und persönlich.',
-      'proj.b3': 'Studio · One-Pager', 'proj.s3': 'Beispiel: Kurse, Preise, über Sarah, Kontakt — ruhig und warm im Look.',
-      'proj.b4': 'Freier Platz', 'proj.t4': 'Dein Projekt?', 'proj.s4': 'Platz für dein Projekt. Erzähl mir von deinem Laden, Studio oder Café.', 'proj.tag4': 'Frei',
+      'proj.eyebrow': 'Beispielprojekte', 'proj.title': 'Ausgewählte Konzepte.', 'proj.note': 'Beispielentwürfe für unterschiedliche Branchen.',
+      'proj.b1': 'Restaurant · One-Pager', 'proj.s1': 'Italienisches Restaurant: One-Pager mit Speisekarte, Bildgalerie und integriertem Reservierungssystem. Mobil-first, schnell, einladend.',
+      'proj.b2': 'Blumenladen · Kleine Seite', 'proj.s2': 'Floristik-Boutique: dreiseitige Website mit Sortimentsübersicht, Standortinformationen und Kontaktbereich. Lokales SEO inklusive.',
+      'proj.b3': 'Studio · One-Pager', 'proj.s3': 'Yoga-Studio: One-Pager mit Kursplan, Preisstruktur, Trainerprofil und Online-Buchungsanbindung. Reduziertes Design, klare Hierarchie.',
+      'proj.b4': 'Freier Platz', 'proj.t4': 'Dein Projekt?', 'proj.s4': 'Dein Unternehmen kann hier stehen. Ich entwickle Konzept und Umsetzung — auf deine Branche und Zielgruppe zugeschnitten.', 'proj.tag4': 'Frei',
       'car.tip': 'Tipp:', 'car.keys': 'Pfeiltasten', 'car.preview': 'Vorschau', 'car.open': 'Frei', 'car.soon': 'Demo folgt bald', 'car.start': 'Projekt anfragen',
-      'srv.eyebrow': 'Pakete', 'srv.title': 'Drei einfache Pakete.', 'srv.note': 'Was ich anbiete.',
-      'srv.p1': 'ab 125 €', 'srv.1a': 'Eine Seite, alles drauf', 'srv.1b': 'Mobiloptimiert', 'srv.1c': 'Kontaktformular', 'srv.1d': 'Perfekt zum Starten',
+      'srv.eyebrow': 'Pakete', 'srv.title': 'Klar strukturierte Pakete.', 'srv.note': 'Transparent kalkuliert — keine versteckten Kosten.',
+      'srv.p1': 'ab 125 €', 'srv.1a': 'Eine Seite, alles drauf', 'srv.1b': 'Mobiloptimiert', 'srv.1c': 'Kontaktformular', 'srv.1d': 'SEO-Grundoptimierung',
       'srv.popular': 'Beliebt', 'srv.n2': 'Kleine Website', 'srv.p2': 'ab 300 €',
-      'srv.2a': 'Mehrere Unterseiten', 'srv.2b': 'Speisekarte / Galerie', 'srv.2c': 'Google Maps & Kontakt', 'srv.2d': 'Selbst leicht aktualisierbar',
+      'srv.2a': 'Mehrere Unterseiten', 'srv.2b': 'Speisekarte / Galerie', 'srv.2c': 'Google Maps & Kontakt', 'srv.2d': 'Eigenständig pflegbar',
       'srv.n3': 'Extras', 'srv.p3': 'auf Anfrage',
       'srv.3a': 'Domain & Hosting', 'srv.3b': 'Texte & Foto-Feinschliff', 'srv.3c': 'SEO-Grundlagen', 'srv.3d': 'Später erweiterbar',
       'srv.cta': 'Loslegen',
-      'ct.eyebrow': 'Kontakt', 'ct.title': 'Lass uns reden.',
-      'ct.big': 'Erzähl mir von deinem Projekt. Ich antworte innerhalb von 24 Stunden — das erste Gespräch ist kostenlos.',
+      'ct.eyebrow': 'Kontakt', 'ct.title': 'Projekt anfragen.',
+      'ct.big': 'Beschreibe dein Vorhaben in wenigen Sätzen — ich melde mich innerhalb von 24 Stunden mit einer ersten Einschätzung. Erstgespräch kostenfrei.',
       'ct.phone': 'Telefon', 'ct.phoneV': '+49 · auf Anfrage', 'ct.based': 'Standort', 'ct.basedV': 'Deutschland',
       'form.name': 'Name', 'form.msg': 'Nachricht', 'form.send': 'Senden',
       'ft.built': 'Gebaut mit HTML, CSS & JavaScript.'
     },
     en: {
       'nav.about': 'About', 'nav.work': 'Work', 'nav.stack': 'Stack', 'nav.contact': 'Contact', 'nav.start': 'Start a project',
-      'hero.pill': 'Booking new projects now',
+      'hero.pill': 'Available for new projects',
       'hero.t1': 'Beautiful websites for ', 'hero.t2': 'restaurants', 'hero.t3': 'small businesses',
-      'hero.sub': "Hi, I'm Michael — a freelance web developer based in Germany. I build simple, modern websites that get found and sell. Fair pricing, personal service.",
+      'hero.sub': "Freelance web developer based in Germany — specialised in modern, performant websites for restaurants, studios and small businesses. Clear concepts, clean code, personal service.",
       'hero.cta1': 'Get in touch', 'hero.cta2': 'See examples',
       'trust.1': 'Response time', 'trust.2num': 'from €125', 'trust.2': 'Fair pricing', 'trust.3': 'Personal',
-      'about.eyebrow': 'About', 'about.title': 'Small, honest, engaged.',
-      'about.cap': 'Michael, 20',
-      'about.p1': "I'm 20 and started with web development a few months ago. That's exactly why I love working with small businesses: with time, care, and without a big agency's price tag.",
-      'about.p2': 'My focus: clear, friendly websites — a single page with everything that matters, or a handful of subpages. Menu, hours, photos, contact — clean and mobile-friendly.',
-      'about.p3': "Want a new site? Send me a short note. I'll reply within 24 hours with an honest proposal.",
+      'about.eyebrow': 'About', 'about.title': 'Attention to detail.',
+      'about.cap': 'Michael Rusch',
+      'about.p1': "I build websites for small businesses that want to look as polished outside as they are inside. My approach: every project gets the attention it deserves — no templates, no agency bureaucracy.",
+      'about.p2': 'The focus is on what matters: fast loading times, flawless display on every device, and content your customers understand instantly. Whether one-pager or multi-page site — clean code and a design that fits your brand.',
+      'about.p3': "Sounds like what you're looking for? Then let's talk. First consultation is free and no-obligation.",
       'facts.name': 'Name', 'facts.based': 'Based', 'facts.basedV': 'Germany', 'facts.works': 'Works with', 'facts.worksV': 'small businesses', 'facts.lang': 'Languages',
-      'proj.eyebrow': 'Example projects', 'proj.title': 'What your site could look like.', 'proj.note': "Just starting out — here's a taste of what's possible.",
-      'proj.b1': 'Restaurant · One-pager', 'proj.s1': 'Example concept: a one-pager for an Italian restaurant — menu, gallery, reservation link.',
-      'proj.b2': 'Flower shop · Small site', 'proj.s2': 'Example: home, products, hours, contact — simple and personal.',
-      'proj.b3': 'Studio · One-pager', 'proj.s3': 'Example: classes, prices, about Sarah, contact — calm and warm in feel.',
-      'proj.b4': 'Open slot', 'proj.t4': 'Your project?', 'proj.s4': 'Space for your project. Tell me about your shop, studio, or café.', 'proj.tag4': 'Open',
+      'proj.eyebrow': 'Selected work', 'proj.title': 'Selected concepts.', 'proj.note': 'Sample designs across different industries.',
+      'proj.b1': 'Restaurant · One-pager', 'proj.s1': 'Italian restaurant: one-pager with menu, image gallery and integrated reservation system. Mobile-first, fast, inviting.',
+      'proj.b2': 'Flower shop · Small site', 'proj.s2': 'Florist boutique: three-page website with product overview, location info and contact section. Local SEO included.',
+      'proj.b3': 'Studio · One-pager', 'proj.s3': 'Yoga studio: one-pager with class schedule, pricing, instructor profile and online booking integration. Reduced design, clear hierarchy.',
+      'proj.b4': 'Open slot', 'proj.t4': 'Your project?', 'proj.s4': 'Your business could be here. I develop concept and implementation — tailored to your industry and audience.', 'proj.tag4': 'Open',
       'car.tip': 'Tip:', 'car.keys': 'Arrow keys', 'car.preview': 'Preview', 'car.open': 'Open', 'car.soon': 'Demo coming soon', 'car.start': 'Request a project',
-      'srv.eyebrow': 'Services', 'srv.title': 'Three simple packages.', 'srv.note': 'What I offer.',
-      'srv.p1': 'from €125', 'srv.1a': 'Single page, everything on it', 'srv.1b': 'Mobile-friendly', 'srv.1c': 'Contact form', 'srv.1d': 'Great for a start',
+      'srv.eyebrow': 'Services', 'srv.title': 'Clearly structured packages.', 'srv.note': 'Transparent pricing — no hidden costs.',
+      'srv.p1': 'from €125', 'srv.1a': 'Single page, everything on it', 'srv.1b': 'Mobile-friendly', 'srv.1c': 'Contact form', 'srv.1d': 'Basic SEO optimisation',
       'srv.popular': 'Popular', 'srv.n2': 'Small website', 'srv.p2': 'from €300',
-      'srv.2a': 'Multiple subpages', 'srv.2b': 'Menu / gallery', 'srv.2c': 'Google Maps & contact', 'srv.2d': 'Easy to update yourself',
+      'srv.2a': 'Multiple subpages', 'srv.2b': 'Menu / gallery', 'srv.2c': 'Google Maps & contact', 'srv.2d': 'Self-maintainable',
       'srv.n3': 'Extras', 'srv.p3': 'on request',
       'srv.3a': 'Domain & hosting setup', 'srv.3b': 'Copy & photo tuning', 'srv.3c': 'SEO basics', 'srv.3d': 'Expandable later',
       'srv.cta': 'Get started',
-      'ct.eyebrow': 'Contact', 'ct.title': "Let's talk.",
-      'ct.big': 'Tell me about your project. I reply within 24 hours — first chat is free.',
+      'ct.eyebrow': 'Contact', 'ct.title': 'Request a project.',
+      'ct.big': "Describe your project briefly — I'll respond within 24 hours with an initial assessment. First consultation is free.",
       'ct.phone': 'Phone', 'ct.phoneV': '+49 · on request', 'ct.based': 'Based', 'ct.basedV': 'Germany',
       'form.name': 'Name', 'form.msg': 'Message', 'form.send': 'Send',
       'ft.built': 'Built with HTML, CSS & JavaScript.'
