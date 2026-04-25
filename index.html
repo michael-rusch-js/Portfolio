@@ -451,6 +451,10 @@
     background: linear-gradient(135deg, #c5532e, #9a3d1e);
   }
   .slide__preview--trattoria::before { display: none; }
+  .slide__preview--blumen {
+    background: linear-gradient(135deg, #f7f2ea, #ebe0cc);
+  }
+  .slide__preview--blumen::before { display: none; }
   .slide__tag {
     position: absolute;
     top: 16px; left: 16px;
@@ -1049,9 +1053,63 @@
           </article>
 
           <article class="slide">
-            <div class="slide__preview" style="--proj-color: #e91e63; --proj-color-2: #ad1457;" data-emoji="🌷">
+            <div class="slide__preview slide__preview--blumen" data-emoji="🌷">
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
-              <span class="slide__emoji">🌷</span>
+              <svg class="slide__svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="blumenBg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#f7f2ea"/>
+                    <stop offset="100%" stop-color="#ebe0cc"/>
+                  </linearGradient>
+                  <linearGradient id="blumenPaper" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#fdfaf4"/>
+                    <stop offset="100%" stop-color="#f7f2ea"/>
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="300" fill="url(#blumenBg)"/>
+
+                <g opacity="0.5">
+                  <circle cx="55" cy="55" r="10" fill="#e8b8a8"/>
+                  <circle cx="55" cy="55" r="5" fill="#c97e63"/>
+                  <ellipse cx="40" cy="65" rx="8" ry="3" fill="#6b7a4f" transform="rotate(-30 40 65)"/>
+                  <ellipse cx="70" cy="65" rx="8" ry="3" fill="#6b7a4f" transform="rotate(30 70 65)"/>
+                </g>
+                <g opacity="0.5">
+                  <circle cx="350" cy="245" r="9" fill="#c97e63"/>
+                  <circle cx="350" cy="245" r="4" fill="#a85f47"/>
+                  <ellipse cx="338" cy="255" rx="7" ry="3" fill="#6b7a4f" transform="rotate(-30 338 255)"/>
+                  <ellipse cx="362" cy="255" rx="7" ry="3" fill="#6b7a4f" transform="rotate(30 362 255)"/>
+                </g>
+                <g opacity="0.35">
+                  <circle cx="370" cy="60" r="6" fill="#e8b8a8"/>
+                  <ellipse cx="375" cy="68" rx="5" ry="2" fill="#6b7a4f" transform="rotate(40 375 68)"/>
+                </g>
+
+                <rect x="60" y="62" width="280" height="190" rx="10" fill="rgba(45,36,28,0.18)"/>
+                <rect x="56" y="58" width="280" height="190" rx="10" fill="url(#blumenPaper)"/>
+                <rect x="56" y="58" width="280" height="22" rx="10" fill="#f0e8db"/>
+                <rect x="56" y="72" width="280" height="8" fill="#f0e8db"/>
+                <circle cx="68" cy="69" r="3" fill="#c97e63"/>
+                <circle cx="78" cy="69" r="3" fill="#e8b8a8"/>
+                <circle cx="88" cy="69" r="3" fill="#6b7a4f"/>
+                <rect x="100" y="65" width="180" height="9" rx="4.5" fill="#fdfaf4"/>
+
+                <text x="196" y="120" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#8a7a66" letter-spacing="3">FLORISTIK-BOUTIQUE</text>
+
+                <text x="196" y="148" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-style="italic" font-weight="700" fill="#c97e63">Blumen</text>
+                <text x="196" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="500" fill="#2d241c">Meier</text>
+
+                <line x1="140" y1="184" x2="180" y2="184" stroke="#6b7a4f" stroke-width="0.8"/>
+                <circle cx="196" cy="184" r="2" fill="#c97e63"/>
+                <line x1="212" y1="184" x2="252" y2="184" stroke="#6b7a4f" stroke-width="0.8"/>
+
+                <rect x="141" y="200" width="110" height="22" rx="11" fill="#2d241c"/>
+                <text x="196" y="215" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#fdfaf4" letter-spacing="0.5">STRAUSS BESTELLEN</text>
+
+                <text x="80" y="240" font-family="Georgia, serif" font-size="8" fill="#8a7a66">SORTIMENT</text>
+                <text x="170" y="240" font-family="Georgia, serif" font-size="8" fill="#8a7a66">STANDORT</text>
+                <text x="260" y="240" font-family="Georgia, serif" font-size="8" fill="#8a7a66">KONTAKT</text>
+              </svg>
               <span class="slide__num-big">02</span>
             </div>
             <div class="slide__body">
@@ -1063,8 +1121,8 @@
                 <span class="slide__chip">3 Seiten</span>
                 <span class="slide__chip">SEO</span>
               </div>
-              <button class="slide__view slide__view--soon" data-demo="" type="button">
-                <span data-i18n="car.soon">Demo folgt bald</span> ○
+              <button class="slide__view" data-demo="demos/blumen-meier/" type="button">
+                <span data-i18n="car.view">Reinschauen</span> →
               </button>
             </div>
           </article>

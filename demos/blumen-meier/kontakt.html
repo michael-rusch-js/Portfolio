@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Kontakt – Blumen Meier Heilbronn | Anfrage & Bestellung</title>
+<meta name="description" content="Kontaktieren Sie Blumen Meier in Heilbronn – per Telefon, E-Mail oder direkt im Laden. Persönliche Beratung für Hochzeit, Trauer und individuelle Sträuße." />
+<meta name="keywords" content="Blumen Meier Kontakt, Florist Heilbronn anrufen, Blumen bestellen Heilbronn, Hochzeitsfloristik Anfrage" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-mark">✿</span>
+      <span class="nav__logo-text">Blumen Meier</span>
+    </a>
+    <nav>
+      <ul class="nav__links">
+        <li><a href="index.html">Sortiment</a></li>
+        <li><a href="standort.html">Standort</a></li>
+        <li><a href="kontakt.html" class="active">Kontakt</a></li>
+      </ul>
+    </nav>
+    <a href="tel:+497131123456" class="nav__cta">Jetzt anrufen</a>
+  </div>
+</header>
+
+<section class="page-header">
+  <span class="section-eyebrow">Kontakt</span>
+  <h1 class="page-header__title">
+    Erzählen Sie uns von Ihrem<br />
+    <em>besonderen</em> Anlass.
+  </h1>
+  <p class="page-header__lead">
+    Ob Hochzeit, Geburtstag, Beerdigung oder einfach nur ein schöner Mittwoch – wir freuen uns über Ihre Nachricht und melden uns innerhalb eines Werktages zurück.
+  </p>
+</section>
+
+<section class="contact">
+  <!-- Linke Seite: Kontaktdaten -->
+  <aside class="contact__side">
+    <div class="contact-card">
+      <span class="contact-card__label">Telefon</span>
+      <a href="tel:+497131123456" class="contact-card__value">+49 7131 123 456</a>
+      <span class="contact-card__hint">Mo – Sa zu den Öffnungszeiten</span>
+    </div>
+
+    <div class="contact-card">
+      <span class="contact-card__label">E-Mail</span>
+      <a href="mailto:hallo@blumen-meier-heilbronn.de" class="contact-card__value">hallo@blumen-meier-heilbronn.de</a>
+      <span class="contact-card__hint">Antwort innerhalb von 24 Stunden</span>
+    </div>
+
+    <div class="contact-card">
+      <span class="contact-card__label">Im Laden</span>
+      <span class="contact-card__value">Kaiserstraße 17<br />74072 Heilbronn</span>
+      <span class="contact-card__hint">Persönliche Beratung jederzeit willkommen</span>
+    </div>
+
+    <div class="contact-quote">
+      <p>„Manche Sträuße entstehen nicht aus einem Listenpunkt, sondern aus einem Gespräch. Wir nehmen uns gern die Zeit dafür."</p>
+      <span>— Margarete Meier</span>
+    </div>
+  </aside>
+
+  <!-- Rechte Seite: Formular -->
+  <div class="contact__form-wrap">
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('Vielen Dank für Ihre Nachricht! Wir melden uns bald.');">
+      <div class="form-row">
+        <label>
+          <span>Ihr Name</span>
+          <input type="text" name="name" placeholder="Wie dürfen wir Sie ansprechen?" required />
+        </label>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          <span>E-Mail</span>
+          <input type="email" name="email" placeholder="ihre@email.de" required />
+        </label>
+        <label>
+          <span>Telefon (optional)</span>
+          <input type="tel" name="phone" placeholder="0 7131 ..." />
+        </label>
+      </div>
+
+      <div class="form-row">
+        <span class="form-label">Anlass</span>
+        <div class="chip-group">
+          <input type="radio" id="a1" name="anlass" value="strauss" checked />
+          <label for="a1" class="chip">Strauß</label>
+
+          <input type="radio" id="a2" name="anlass" value="hochzeit" />
+          <label for="a2" class="chip">Hochzeit</label>
+
+          <input type="radio" id="a3" name="anlass" value="trauer" />
+          <label for="a3" class="chip">Trauerfloristik</label>
+
+          <input type="radio" id="a4" name="anlass" value="abo" />
+          <label for="a4" class="chip">Blumen-Abo</label>
+
+          <input type="radio" id="a5" name="anlass" value="anderes" />
+          <label for="a5" class="chip">Etwas anderes</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>
+          <span>Ihre Nachricht</span>
+          <textarea name="message" rows="6" placeholder="Erzählen Sie uns ein bisschen mehr – Anlass, Datum, Lieblingsfarben, Budget..." required></textarea>
+        </label>
+      </div>
+
+      <div class="form-row form-actions">
+        <p class="form-hint">Mit dem Absenden willigen Sie ein, dass wir Sie zur Beantwortung Ihrer Anfrage kontaktieren dürfen.</p>
+        <button type="submit" class="btn btn--primary">Nachricht senden →</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq__head">
+    <span class="section-eyebrow">Häufig gefragt</span>
+    <h2 class="section-title">Bevor Sie schreiben.</h2>
+  </div>
+
+  <div class="faq__list">
+    <details>
+      <summary>Liefern Sie auch nach Hause?</summary>
+      <p>Ja – innerhalb des Heilbronner Stadtgebiets liefern wir am selben Tag, wenn die Bestellung bis 11 Uhr bei uns eingeht. Lieferpauschale: 6 €.</p>
+    </details>
+    <details>
+      <summary>Wie viel Vorlauf brauchen Sie für eine Hochzeit?</summary>
+      <p>Wir empfehlen mindestens 8 Wochen, damit wir gemeinsam in Ruhe planen können. Bei kleineren Hochzeiten geht es auch kurzfristiger – sprechen Sie uns gern an.</p>
+    </details>
+    <details>
+      <summary>Kann ich einen Strauß online bestellen?</summary>
+      <p>Wir verzichten bewusst auf einen Online-Shop, weil jeder Strauß bei uns von Hand und nach Tagesangebot gebunden wird. Eine Bestellung per Telefon oder Formular ist genauso einfach – und persönlicher.</p>
+    </details>
+    <details>
+      <summary>Bieten Sie auch Trockenblumen-Workshops an?</summary>
+      <p>Ja, in den Wintermonaten finden regelmäßig Workshops statt. Termine kündigen wir auf unserer Startseite und im Schaufenster an.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">Blumen Meier</div>
+      <p class="footer__tagline">Floristik-Boutique<br />Kaiserstraße 17 · 74072 Heilbronn</p>
+    </div>
+    <div>
+      <h4>Öffnungszeiten</h4>
+      <p>Mo – Fr · 09:00 – 18:30<br />Samstag · 09:00 – 14:00<br />Sonntag · geschlossen</p>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <p>+49 7131 123 456<br />hallo@blumen-meier-heilbronn.de</p>
+    </div>
+    <div>
+      <h4>Seiten</h4>
+      <p><a href="index.html">Sortiment</a><br /><a href="standort.html">Standort</a><br /><a href="kontakt.html">Kontakt</a></p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2026 Blumen Meier · Heilbronn</span>
+    <span>Mit ❀ gebunden in Baden-Württemberg</span>
+  </div>
+</footer>
+
+</body>
+</html>
