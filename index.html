@@ -8,6 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Theme so früh wie möglich setzen (verhindert Flash)
+  (function() {
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light') {
+        document.documentElement.classList.add('light');
+      }
+    } catch(e) {}
+  })();
+</script>
 <style>
   :root {
     --bg: #1a1613;
@@ -15,12 +26,14 @@
     --fg: #f5ede0;
     --fg-muted: #b8a892;
     --fg-faint: #8a7a64;
-    --accent: oklch(0.72 0.17 40);
-    --accent-soft: oklch(0.72 0.17 40 / 0.15);
+    --accent: #d97a3c;
+    --accent-2: #b8552a;
+    --accent-soft: rgba(217, 122, 60, 0.15);
     --border: rgba(245, 237, 224, 0.1);
     --border-strong: rgba(245, 237, 224, 0.2);
     --card: #2a231d;
     --shadow: 0 4px 30px rgba(0,0,0,0.3);
+    --top-bg: rgba(26, 22, 19, 0.85);
   }
 
   html.light {
@@ -29,12 +42,14 @@
     --fg: #1e1a17;
     --fg-muted: #5a4f43;
     --fg-faint: #8a7a64;
-    --accent: oklch(0.68 0.16 40);
-    --accent-soft: oklch(0.68 0.16 40 / 0.12);
+    --accent: #c25a1f;
+    --accent-2: #a04415;
+    --accent-soft: rgba(194, 90, 31, 0.12);
     --border: rgba(30, 26, 23, 0.1);
     --border-strong: rgba(30, 26, 23, 0.2);
     --card: #ffffff;
     --shadow: 0 4px 30px rgba(0,0,0,0.06);
+    --top-bg: rgba(251, 246, 239, 0.85);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,7 +81,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    background: var(--top-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -141,8 +156,8 @@
     animation: float 20s ease-in-out infinite;
   }
   .blob--1 { width: 400px; height: 400px; background: var(--accent); top: -100px; left: -100px; }
-  .blob--2 { width: 350px; height: 350px; background: oklch(0.7 0.15 290); bottom: -80px; right: -80px; animation-delay: -7s; }
-  .blob--3 { width: 250px; height: 250px; background: oklch(0.7 0.15 180); top: 40%; left: 50%; animation-delay: -14s; opacity: 0.25; }
+  .blob--2 { width: 350px; height: 350px; background: #8b5cf6; bottom: -80px; right: -80px; animation-delay: -7s; }
+  .blob--3 { width: 250px; height: 250px; background: #14b8a6; top: 40%; left: 50%; animation-delay: -14s; opacity: 0.25; }
   @keyframes float {
     0%, 100% { transform: translate(0,0) scale(1); }
     33% { transform: translate(40px, -30px) scale(1.05); }
@@ -249,7 +264,7 @@
   .portrait__frame {
     width: 100%; height: 100%;
     border-radius: 24px;
-    background: linear-gradient(135deg, var(--accent), oklch(0.6 0.18 320));
+    background: linear-gradient(135deg, var(--accent), #c2185b);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     color: #fff;
@@ -372,7 +387,7 @@
 
   .slide__preview {
     aspect-ratio: 4/3;
-    background: linear-gradient(135deg, oklch(0.6 0.15 var(--hue, 40)), oklch(0.4 0.12 var(--hue, 40)));
+    background: linear-gradient(135deg, var(--proj-color, #d97a3c), var(--proj-color-2, #b8552a));
     position: relative;
     overflow: hidden;
     display: flex;
@@ -666,7 +681,7 @@
   .stack__col:hover { border-color: var(--accent); }
   .stack__col.is-featured {
     border-color: var(--accent);
-    background: linear-gradient(180deg, var(--card), color-mix(in srgb, var(--accent) 6%, var(--card)));
+    background: var(--card);
   }
   .stack__tag {
     position: absolute;
@@ -925,7 +940,7 @@
         <div class="carousel__track" id="cTrack">
 
           <article class="slide">
-            <div class="slide__preview" style="--hue: 25;" data-emoji="🍝">
+            <div class="slide__preview" style="--proj-color: #e74c3c; --proj-color-2: #c0392b;" data-emoji="🍝">
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <span class="slide__emoji">🍝</span>
               <span class="slide__num-big">01</span>
@@ -947,7 +962,7 @@
           </article>
 
           <article class="slide">
-            <div class="slide__preview" style="--hue: 330;" data-emoji="🌷">
+            <div class="slide__preview" style="--proj-color: #e91e63; --proj-color-2: #ad1457;" data-emoji="🌷">
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <span class="slide__emoji">🌷</span>
               <span class="slide__num-big">02</span>
@@ -968,7 +983,7 @@
           </article>
 
           <article class="slide">
-            <div class="slide__preview" style="--hue: 150;" data-emoji="🧘">
+            <div class="slide__preview" style="--proj-color: #16a085; --proj-color-2: #0e6655;" data-emoji="🧘">
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <span class="slide__emoji">🧘</span>
               <span class="slide__num-big">03</span>
