@@ -986,8 +986,8 @@
                 <span class="slide__chip">One-Pager</span>
                 <span class="slide__chip">Mobile</span>
               </div>
-              <button class="slide__view slide__view--soon" data-demo="" type="button">
-                <span data-i18n="car.soon">Demo folgt bald</span> ○
+              <button class="slide__view" data-demo="demos/trattoria/" type="button">
+                <span data-i18n="car.view">Reinschauen</span> →
               </button>
             </div>
           </article>
@@ -1217,7 +1217,7 @@
       'proj.b2': 'Blumenladen · Kleine Seite', 'proj.s2': 'Floristik-Boutique: dreiseitige Website mit Sortimentsübersicht, Standortinformationen und Kontaktbereich. Lokales SEO inklusive.',
       'proj.b3': 'Studio · One-Pager', 'proj.s3': 'Yoga-Studio: One-Pager mit Kursplan, Preisstruktur, Trainerprofil und Online-Buchungsanbindung. Reduziertes Design, klare Hierarchie.',
       'proj.b4': 'Freier Platz', 'proj.t4': 'Dein Projekt?', 'proj.s4': 'Dein Unternehmen kann hier stehen. Ich entwickle Konzept und Umsetzung — auf deine Branche und Zielgruppe zugeschnitten.', 'proj.tag4': 'Frei',
-      'car.tip': 'Tipp:', 'car.keys': 'Pfeiltasten', 'car.preview': 'Vorschau', 'car.open': 'Frei', 'car.soon': 'Demo folgt bald', 'car.start': 'Projekt anfragen',
+      'car.tip': 'Tipp:', 'car.keys': 'Pfeiltasten', 'car.preview': 'Vorschau', 'car.open': 'Frei', 'car.soon': 'Demo folgt bald', 'car.view': 'Reinschauen', 'car.start': 'Projekt anfragen',
       'srv.eyebrow': 'Pakete', 'srv.title': 'Klar strukturierte Pakete.', 'srv.note': 'Transparent kalkuliert — keine versteckten Kosten.',
       'srv.p1': 'ab 125 €', 'srv.1a': 'Eine Seite, alles drauf', 'srv.1b': 'Mobiloptimiert', 'srv.1c': 'Kontaktformular', 'srv.1d': 'SEO-Grundoptimierung',
       'srv.popular': 'Beliebt', 'srv.n2': 'Kleine Website', 'srv.p2': 'ab 300 €',
@@ -1249,7 +1249,7 @@
       'proj.b2': 'Flower shop · Small site', 'proj.s2': 'Florist boutique: three-page website with product overview, location info and contact section. Local SEO included.',
       'proj.b3': 'Studio · One-pager', 'proj.s3': 'Yoga studio: one-pager with class schedule, pricing, instructor profile and online booking integration. Reduced design, clear hierarchy.',
       'proj.b4': 'Open slot', 'proj.t4': 'Your project?', 'proj.s4': 'Your business could be here. I develop concept and implementation — tailored to your industry and audience.', 'proj.tag4': 'Open',
-      'car.tip': 'Tip:', 'car.keys': 'Arrow keys', 'car.preview': 'Preview', 'car.open': 'Open', 'car.soon': 'Demo coming soon', 'car.start': 'Request a project',
+      'car.tip': 'Tip:', 'car.keys': 'Arrow keys', 'car.preview': 'Preview', 'car.open': 'Open', 'car.soon': 'Demo coming soon', 'car.view': 'Take a look', 'car.start': 'Request a project',
       'srv.eyebrow': 'Services', 'srv.title': 'Clearly structured packages.', 'srv.note': 'Transparent pricing — no hidden costs.',
       'srv.p1': 'from €125', 'srv.1a': 'Single page, everything on it', 'srv.1b': 'Mobile-friendly', 'srv.1c': 'Contact form', 'srv.1d': 'Basic SEO optimisation',
       'srv.popular': 'Popular', 'srv.n2': 'Small website', 'srv.p2': 'from €300',
@@ -1364,7 +1364,7 @@
     modalUrl.textContent = demoUrl || (name.toLowerCase().replace(/\s+/g, '-') + '.example.com');
 
     if (demoUrl) {
-      modalContent.innerHTML = '<iframe src="' + demoUrl + '" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>';
+      modalContent.innerHTML = '<iframe src="' + demoUrl + '" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>';
     } else {
       const txt = currentLang === 'de'
         ? { t: 'Demo folgt bald', s: 'Diese Beispielseite wird gerade gebaut. Sobald sie fertig ist, kannst du hier reinschauen.' }
