@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael Rusch — Freelance Webentwickler</title>
+<meta name="description" content="Michael Rusch, freier Webentwickler aus Deutschland. Schöne, schlichte Websites für Restaurants, Läden und Studios. Faire Preise.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Theme so früh wie möglich setzen (verhindert Flash)
+  (function() {
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light') {
+        document.documentElement.classList.add('light');
+      }
+    } catch(e) {}
+  })();
+</script>
+<style>
+  :root {
+    --bg: #1a1613;
+    --bg-soft: #221d18;
+    --fg: #f5ede0;
+    --fg-muted: #b8a892;
+    --fg-faint: #8a7a64;
+    --accent: #d97a3c;
+    --accent-2: #b8552a;
+    --accent-soft: rgba(217, 122, 60, 0.15);
+    --border: rgba(245, 237, 224, 0.1);
+    --border-strong: rgba(245, 237, 224, 0.2);
+    --card: #2a231d;
+    --shadow: 0 4px 30px rgba(0,0,0,0.3);
+    --top-bg: rgba(26, 22, 19, 0.85);
+  }
+
+  html.light {
+    --bg: #fbf6ef;
+    --bg-soft: #f5efe5;
+    --fg: #1e1a17;
+    --fg-muted: #5a4f43;
+    --fg-faint: #8a7a64;
+    --accent: #c25a1f;
+    --accent-2: #a04415;
+    --accent-soft: rgba(194, 90, 31, 0.12);
+    --border: rgba(30, 26, 23, 0.1);
+    --border-strong: rgba(30, 26, 23, 0.2);
+    --card: #ffffff;
+    --shadow: 0 4px 30px rgba(0,0,0,0.06);
+    --top-bg: rgba(251, 246, 239, 0.85);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* HEADER */
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--top-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .top__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .brand__logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .brand:hover .brand__logo {
+    transform: rotate(-8deg) scale(1.05);
+  }
+  .brand__logo .lg-bg {
+    fill: var(--accent);
+    transition: fill 0.3s;
+  }
+  .brand__logo .lg-letter {
+    fill: #ffffff;
+  }
+  .brand__logo .lg-accent {
+    fill: var(--accent);
+  }
+  .brand__logo .lg-bar {
+    fill: rgba(255,255,255,0.85);
+  }
+  .brand__logo .lg-dot {
+    fill: #ffffff;
+  }
+  .nav {
+    display: none;
+    gap: 28px;
+    font-size: 14px;
+    color: var(--fg-muted);
+  }
+  .nav a { transition: color 0.2s; }
+  .nav a:hover { color: var(--fg); }
+  .top__actions { display: flex; align-items: center; gap: 8px; }
+  .icon-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .cta-sm {
+    display: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.2s;
+  }
+  .cta-sm:hover { transform: translateY(-1px); }
+  @media (min-width: 768px) {
+    .nav { display: flex; }
+    .cta-sm { display: inline-flex; }
+  }
+
+  /* HERO */
+  .hero { position: relative; padding: 80px 0 100px; overflow: hidden; }
+  .hero__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: float 20s ease-in-out infinite;
+  }
+  .blob--1 { width: 400px; height: 400px; background: var(--accent); top: -100px; left: -100px; }
+  .blob--2 { width: 350px; height: 350px; background: #8b5cf6; bottom: -80px; right: -80px; animation-delay: -7s; }
+  .blob--3 { width: 250px; height: 250px; background: #14b8a6; top: 40%; left: 50%; animation-delay: -14s; opacity: 0.25; }
+  @keyframes float {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(40px, -30px) scale(1.05); }
+    66% { transform: translate(-30px, 40px) scale(0.95); }
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-soft);
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-bottom: 24px;
+  }
+  .pill__dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  .hero__title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(36px, 8vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .accent-word { color: var(--accent); font-style: italic; }
+  .hero__sub {
+    font-size: clamp(16px, 2.5vw, 19px);
+    color: var(--fg-muted);
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 60px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px; border-radius: 999px;
+    font-size: 15px; font-weight: 500;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .cta--primary { background: var(--accent); color: #fff; }
+  .cta--primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-soft); }
+  .cta--ghost { border: 1px solid var(--border-strong); color: var(--fg); }
+  .cta--ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero__trust {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .trust__num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .trust__label {
+    font-size: 12px;
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTIONS */
+  .sec { padding: 80px 0; }
+  .sec--soft { background: var(--bg-soft); }
+  .sh { margin-bottom: 48px; text-align: center; }
+  .sh__eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .sh__title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .sh__note { color: var(--fg-muted); font-size: 15px; }
+
+  /* ABOUT */
+  .about { display: grid; gap: 40px; }
+  @media (min-width: 768px) {
+    .about { grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: start; }
+  }
+  .portrait { position: relative; aspect-ratio: 1; max-width: 360px; margin: 0 auto; }
+  .portrait__frame {
+    width: 100%; height: 100%;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--accent), #c2185b);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: #fff;
+    box-shadow: var(--shadow);
+  }
+  .portrait__initials { font-family: 'Space Grotesk', sans-serif; font-size: 96px; font-weight: 700; }
+  .portrait__caption { font-size: 14px; margin-top: 8px; opacity: 0.9; }
+  .portrait__sticker {
+    position: absolute; top: -16px; right: -8px;
+    background: var(--card); color: var(--fg);
+    padding: 10px 18px; border-radius: 999px;
+    font-weight: 600; transform: rotate(8deg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .facts > div {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .facts dt {
+    font-size: 11px;
+    color: var(--fg-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .facts dd { font-size: 14px; font-weight: 500; }
+  .about__text p {
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+    font-size: clamp(15px, 2vw, 17px);
+  }
+
+  /* ============ CAROUSEL ============ */
+  .carousel {
+    position: relative;
+  }
+  .carousel__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .carousel__counter {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    color: var(--fg-muted);
+  }
+  .carousel__counter strong {
+    color: var(--fg);
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .carousel__nav { display: flex; gap: 10px; }
+  .carousel__btn {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: var(--card);
+    color: var(--fg);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .carousel__btn:hover:not(:disabled) {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .carousel__btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .carousel__hint {
+    font-size: 12px;
+    color: var(--fg-faint);
+    display: none;
+  }
+  @media (min-width: 700px) { .carousel__hint { display: inline; } }
+  .carousel__hint kbd {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    margin: 0 2px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-family: inherit;
+  }
+
+  .carousel__viewport {
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+  }
+  .carousel__track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+  }
+  .slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    background: var(--card);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 800px) {
+    .slide { grid-template-columns: 1fr 1fr; }
+  }
+
+  .slide__preview {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--proj-color, #d97a3c), var(--proj-color-2, #b8552a));
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (min-width: 800px) {
+    .slide__preview { aspect-ratio: auto; min-height: 480px; }
+  }
+  .slide__preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 30%, rgba(255,255,255,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 75% 70%, rgba(0,0,0,0.18) 0%, transparent 50%);
+  }
+  .slide__emoji {
+    font-size: clamp(80px, 16vw, 140px);
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+    position: relative;
+    z-index: 1;
+  }
+  .slide__preview img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+  }
+  .slide__tag {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 3;
+  }
+  .slide__num-big {
+    position: absolute;
+    bottom: 14px;
+    right: 22px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(70px, 12vw, 130px);
+    line-height: 0.85;
+    color: rgba(255,255,255,0.25);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .slide__body {
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    min-height: 280px;
+  }
+  @media (min-width: 800px) {
+    .slide__body { padding: 48px 40px; }
+  }
+  .slide__cat {
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .slide__name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .slide__sum {
+    color: var(--fg-muted);
+    font-size: clamp(15px, 1.8vw, 17px);
+    line-height: 1.55;
+  }
+  .slide__chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .slide__chip {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+  .slide__view {
+    margin-top: 14px;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .slide__view:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-soft); }
+  .slide__view--soon {
+    background: transparent;
+    color: var(--fg-muted);
+    border: 1px solid var(--border-strong);
+    cursor: default;
+  }
+  .slide__view--soon:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .slide__preview--open {
+    background: var(--bg-soft);
+    background-image:
+      repeating-linear-gradient(45deg,
+        transparent 0,
+        transparent 18px,
+        var(--border) 18px,
+        var(--border) 19px
+      );
+  }
+  .slide__preview--open::before { display: none; }
+  .slide__preview--open .slide__emoji {
+    color: var(--fg-muted);
+  }
+
+  .carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .carousel__dot {
+    width: 28px; height: 4px;
+    border-radius: 2px;
+    background: var(--border-strong);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .carousel__dot:hover { background: var(--fg-muted); }
+  .carousel__dot.is-active {
+    background: var(--accent);
+    width: 56px;
+  }
+
+  /* ============ MODAL ============ */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .modal.is-open { display: flex; animation: modalIn 0.25s ease; }
+  @keyframes modalIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal__close {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border-strong);
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal__close:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .modal__frame {
+    width: 100%;
+    max-width: 1100px;
+    height: 90vh;
+    max-height: 800px;
+    background: var(--card);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border-strong);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .modal__bar {
+    flex-shrink: 0;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .modal__dots { display: flex; gap: 6px; }
+  .modal__dots span {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--border-strong);
+    opacity: 0.6;
+  }
+  .modal__url {
+    flex: 1;
+    background: var(--bg);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--fg-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .modal__content {
+    flex: 1;
+    overflow: auto;
+    background: #fff;
+  }
+  .modal__content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .modal__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px 20px;
+    text-align: center;
+    background: var(--card);
+    color: var(--fg);
+  }
+  .modal__placeholder__big { font-size: 80px; margin-bottom: 20px; }
+  .modal__placeholder__title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .modal__placeholder__sub {
+    font-size: 16px;
+    color: var(--fg-muted);
+    max-width: 480px;
+    line-height: 1.5;
+  }
+  .modal__placeholder__sub strong { color: var(--accent); font-weight: 600; }
+
+  /* SERVICES */
+  .stack { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 768px) { .stack { grid-template-columns: repeat(3, 1fr); } }
+  .stack__col {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 22px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .stack__col:hover { border-color: var(--accent); }
+  .stack__col.is-featured {
+    border-color: var(--accent);
+    background: var(--card);
+  }
+  .stack__tag {
+    position: absolute;
+    top: -10px; left: 22px;
+    background: var(--accent); color: #fff;
+    padding: 4px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .stack__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .stack__name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; }
+  .stack__price { color: var(--accent); font-weight: 600; font-size: 15px; }
+  .stack__col ul { list-style: none; margin-bottom: 22px; }
+  .stack__col li {
+    display: flex; gap: 10px;
+    padding: 8px 0; font-size: 14px;
+    color: var(--fg-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .stack__col li:last-child { border-bottom: none; }
+  .stack__check { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .stack__cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--accent); font-weight: 500;
+    font-size: 14px; transition: gap 0.2s;
+  }
+  .stack__cta:hover { gap: 10px; }
+
+  /* CONTACT */
+  .contact { display: grid; gap: 40px; }
+  @media (min-width: 768px) { .contact { grid-template-columns: 1fr 1fr; gap: 60px; } }
+  .contact__big {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(20px, 3vw, 26px);
+    line-height: 1.4;
+    margin-bottom: 28px;
+  }
+  .contact__links { display: flex; flex-direction: column; gap: 14px; }
+  .contact__link {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact__link:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact__icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .contact__label {
+    display: block;
+    font-size: 11px;
+    color: var(--fg-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+  .contact__value { font-size: 15px; word-break: break-word; }
+
+  /* FORM */
+  .form { display: flex; flex-direction: column; gap: 16px; }
+  .field label { display: block; font-size: 13px; color: var(--fg-muted); margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .form__submit {
+    align-self: flex-start;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    transition: transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .form__submit:hover { transform: translateY(-2px); }
+
+  /* FOOTER */
+  .footer {
+    padding: 32px 20px;
+    text-align: center;
+    color: var(--fg-faint);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  @media (min-width: 600px) {
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+
+  /* REVEAL */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    [data-reveal] { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top__inner">
+    <a href="#top" class="brand" aria-label="Michael Rusch — Startseite">
+      <svg class="brand__logo" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Squircle Hintergrund -->
+        <path class="lg-bg" d="M0 12 C0 4, 4 0, 12 0 L28 0 C36 0, 40 4, 40 12 L40 28 C40 36, 36 40, 28 40 L12 40 C4 40, 0 36, 0 28 Z"/>
+        <!-- M: zwei vertikale Striche + V dazwischen -->
+        <path class="lg-letter" d="M 9 11 L 9 29 L 12 29 L 12 17 L 16 25 L 17 25 L 21 17 L 21 24 L 24 24 L 24 11 L 21 11 L 16.5 20 L 12 11 Z"/>
+        <!-- R: gespiegelt-rechts, eigenständig -->
+        <path class="lg-letter" d="M 25 14 L 25 29 L 28 29 L 28 23 L 30 23 L 32.5 29 L 35.8 29 L 33 22.5 C 34.5 21.8, 35.5 20.3, 35.5 18.5 C 35.5 16, 33.5 14, 31 14 Z M 28 16.5 L 30.5 16.5 C 31.7 16.5, 32.5 17.3, 32.5 18.5 C 32.5 19.7, 31.7 20.5, 30.5 20.5 L 28 20.5 Z"/>
+        <!-- Akzent-Linie unten -->
+        <rect class="lg-bar" x="9" y="32" width="15" height="2" rx="1"/>
+        <!-- Akzent-Punkt -->
+        <circle class="lg-dot" cx="29" cy="33" r="1.5"/>
+      </svg>
+      <span>Michael Rusch</span>
+    </a>
+    <nav class="nav">
+      <a href="#about" data-i18n="nav.about">Über mich</a>
+      <a href="#projects" data-i18n="nav.work">Projekte</a>
+      <a href="#skills" data-i18n="nav.stack">Pakete</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="top__actions">
+      <button class="icon-btn" id="langBtn" aria-label="Sprache wechseln">EN</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Theme wechseln">☀</button>
+      <a href="#contact" class="cta-sm" data-i18n="nav.start">Projekt starten</a>
+    </div>
+  </div>
+</header>
+
+<section id="top" class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="blob blob--3"></div>
+  </div>
+  <div class="container">
+    <div class="pill" data-reveal>
+      <span class="pill__dot"></span>
+      <span data-i18n="hero.pill">Verfügbar für neue Projekte</span>
+    </div>
+    <h1 class="hero__title" data-reveal>
+      <span data-i18n="hero.t1">Schöne Websites für </span><span class="accent-word" data-i18n="hero.t2">Restaurants</span><span> &amp; </span><span class="accent-word" data-i18n="hero.t3">kleine Unternehmen</span><span>.</span>
+    </h1>
+    <p class="hero__sub" data-reveal data-i18n="hero.sub">
+      Freier Webentwickler aus Deutschland — spezialisiert auf moderne, performante Websites für Restaurants, Studios und kleine Unternehmen. Klare Konzepte, sauberer Code, persönliche Betreuung.
+    </p>
+    <div class="hero__ctas" data-reveal>
+      <a href="#contact" class="cta cta--primary"><span data-i18n="hero.cta1">Kontakt aufnehmen</span> →</a>
+      <a href="#projects" class="cta cta--ghost" data-i18n="hero.cta2">Beispiele ansehen</a>
+    </div>
+    <div class="hero__trust" data-reveal>
+      <div>
+        <div class="trust__num">24h</div>
+        <div class="trust__label" data-i18n="trust.1">Antwortzeit</div>
+      </div>
+      <div>
+        <div class="trust__num" data-i18n="trust.2num">ab 125 €</div>
+        <div class="trust__label" data-i18n="trust.2">Faire Preise</div>
+      </div>
+      <div>
+        <div class="trust__num">100%</div>
+        <div class="trust__label" data-i18n="trust.3">Persönlich</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="sec">
+  <div class="container">
+    <header class="sh" data-reveal>
+      <span class="sh__eyebrow" data-i18n="about.eyebrow">Über mich</span>
+      <h2 class="sh__title" data-i18n="about.title">Sorgfalt im Detail.</h2>
+    </header>
+    <div class="about">
+      <div data-reveal>
+        <div class="portrait">
+          <div class="portrait__frame">
+            <span class="portrait__initials">MR</span>
+            <span class="portrait__caption" data-i18n="about.cap">Michael Rusch</span>
+          </div>
+          <span class="portrait__sticker">Hi!</span>
+        </div>
+        <dl class="facts">
+          <div><dt data-i18n="facts.name">Name</dt><dd>Michael Rusch</dd></div>
+          <div><dt data-i18n="facts.based">Standort</dt><dd data-i18n="facts.basedV">Deutschland</dd></div>
+          <div><dt data-i18n="facts.works">Arbeitet mit</dt><dd data-i18n="facts.worksV">kl. Unternehmen</dd></div>
+          <div><dt data-i18n="facts.lang">Sprachen</dt><dd>DE · EN</dd></div>
+        </dl>
+      </div>
+      <div class="about__text">
+        <p data-reveal data-i18n="about.p1">Ich entwickle Websites für kleine Unternehmen, die nach außen genauso präzise wirken wollen, wie sie es im Inneren sind. Mein Ansatz: jedes Projekt bekommt die Aufmerksamkeit, die es verdient — keine Schablonen, keine Agentur-Bürokratie.</p>
+        <p data-reveal data-i18n="about.p2">Der Fokus liegt auf dem, was zählt: schnelle Ladezeiten, einwandfreie Darstellung auf jedem Gerät und Inhalte, die deine Kunden sofort verstehen. Ob One-Pager oder mehrseitige Website — sauberer Code und ein Design, das zu deiner Marke passt.</p>
+        <p data-reveal data-i18n="about.p3">Klingt nach dem, was du suchst? Dann lass uns reden. Erstes Beratungsgespräch ist kostenfrei und unverbindlich.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS / CAROUSEL ============ -->
+<section id="projects" class="sec sec--soft">
+  <div class="container">
+    <header class="sh" data-reveal>
+      <span class="sh__eyebrow" data-i18n="proj.eyebrow">Beispielprojekte</span>
+      <h2 class="sh__title" data-i18n="proj.title">Ausgewählte Konzepte.</h2>
+      <span class="sh__note" data-i18n="proj.note">Beispielentwürfe für unterschiedliche Branchen.</span>
+    </header>
+
+    <div class="carousel" data-reveal>
+      <div class="carousel__top">
+        <div class="carousel__counter">
+          <strong id="cIdx">01</strong> / <span id="cTotal">04</span>
+        </div>
+        <div class="carousel__hint">
+          <span data-i18n="car.tip">Tipp:</span> <kbd>←</kbd> <kbd>→</kbd> <span data-i18n="car.keys">Pfeiltasten</span>
+        </div>
+        <div class="carousel__nav">
+          <button class="carousel__btn" id="cPrev" aria-label="Vorheriges Beispiel">←</button>
+          <button class="carousel__btn" id="cNext" aria-label="Nächstes Beispiel">→</button>
+        </div>
+      </div>
+
+      <div class="carousel__viewport" id="cViewport">
+        <div class="carousel__track" id="cTrack">
+
+          <article class="slide">
+            <div class="slide__preview" style="--proj-color: #e74c3c; --proj-color-2: #c0392b;" data-emoji="🍝">
+              <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
+              <span class="slide__emoji">🍝</span>
+              <span class="slide__num-big">01</span>
+              <!-- HIER später: <img src="screenshots/trattoria.jpg" alt=""> -->
+            </div>
+            <div class="slide__body">
+              <span class="slide__cat" data-i18n="proj.b1">Restaurant · One-Pager</span>
+              <h3 class="slide__name">Trattoria da Luca</h3>
+              <p class="slide__sum" data-i18n="proj.s1">Italienisches Restaurant: One-Pager mit Speisekarte, Bildgalerie und integriertem Reservierungssystem. Mobil-first, schnell, einladend.</p>
+              <div class="slide__chips">
+                <span class="slide__chip">Restaurant</span>
+                <span class="slide__chip">One-Pager</span>
+                <span class="slide__chip">Mobile</span>
+              </div>
+              <button class="slide__view" data-demo="demos/trattoria/" type="button">
+                <span data-i18n="car.view">Reinschauen</span> →
+              </button>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="slide__preview" style="--proj-color: #e91e63; --proj-color-2: #ad1457;" data-emoji="🌷">
+              <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
+              <span class="slide__emoji">🌷</span>
+              <span class="slide__num-big">02</span>
+            </div>
+            <div class="slide__body">
+              <span class="slide__cat" data-i18n="proj.b2">Blumenladen · Kleine Seite</span>
+              <h3 class="slide__name">Blumen Meier</h3>
+              <p class="slide__sum" data-i18n="proj.s2">Floristik-Boutique: dreiseitige Website mit Sortimentsübersicht, Standortinformationen und Kontaktbereich. Lokales SEO inklusive.</p>
+              <div class="slide__chips">
+                <span class="slide__chip">Laden</span>
+                <span class="slide__chip">3 Seiten</span>
+                <span class="slide__chip">SEO</span>
+              </div>
+              <button class="slide__view slide__view--soon" data-demo="" type="button">
+                <span data-i18n="car.soon">Demo folgt bald</span> ○
+              </button>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="slide__preview" style="--proj-color: #16a085; --proj-color-2: #0e6655;" data-emoji="🧘">
+              <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
+              <span class="slide__emoji">🧘</span>
+              <span class="slide__num-big">03</span>
+            </div>
+            <div class="slide__body">
+              <span class="slide__cat" data-i18n="proj.b3">Studio · One-Pager</span>
+              <h3 class="slide__name">Yoga mit Sarah</h3>
+              <p class="slide__sum" data-i18n="proj.s3">Yoga-Studio: One-Pager mit Kursplan, Preisstruktur, Trainerprofil und Online-Buchungsanbindung. Reduziertes Design, klare Hierarchie.</p>
+              <div class="slide__chips">
+                <span class="slide__chip">Studio</span>
+                <span class="slide__chip">One-Pager</span>
+                <span class="slide__chip">Buchung</span>
+              </div>
+              <button class="slide__view slide__view--soon" data-demo="" type="button">
+                <span data-i18n="car.soon">Demo folgt bald</span> ○
+              </button>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="slide__preview slide__preview--open" data-emoji="✨">
+              <span class="slide__tag" data-i18n="car.open">Frei</span>
+              <span class="slide__emoji">✨</span>
+            </div>
+            <div class="slide__body">
+              <span class="slide__cat" data-i18n="proj.b4">Freier Platz</span>
+              <h3 class="slide__name" data-i18n="proj.t4">Dein Projekt?</h3>
+              <p class="slide__sum" data-i18n="proj.s4">Dein Unternehmen kann hier stehen. Ich entwickle Konzept und Umsetzung — auf deine Branche und Zielgruppe zugeschnitten.</p>
+              <div class="slide__chips">
+                <span class="slide__chip" data-i18n="proj.tag4">Frei</span>
+              </div>
+              <a href="#contact" class="slide__view">
+                <span data-i18n="car.start">Projekt anfragen</span> →
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="carousel__dots" id="cDots"></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="sec">
+  <div class="container">
+    <header class="sh" data-reveal>
+      <span class="sh__eyebrow" data-i18n="srv.eyebrow">Pakete</span>
+      <h2 class="sh__title" data-i18n="srv.title">Klar strukturierte Pakete.</h2>
+      <span class="sh__note" data-i18n="srv.note">Transparent kalkuliert — keine versteckten Kosten.</span>
+    </header>
+    <div class="stack">
+      <div class="stack__col" data-reveal>
+        <div class="stack__head">
+          <span class="stack__name">One-Pager</span>
+          <span class="stack__price" data-i18n="srv.p1">ab 125 €</span>
+        </div>
+        <ul>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1a">Eine Seite, alles drauf</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1b">Mobiloptimiert</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1c">Kontaktformular</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1d">SEO-Grundoptimierung</span></li>
+        </ul>
+        <a href="#contact" class="stack__cta"><span data-i18n="srv.cta">Loslegen</span> →</a>
+      </div>
+
+      <div class="stack__col is-featured" data-reveal>
+        <span class="stack__tag" data-i18n="srv.popular">Beliebt</span>
+        <div class="stack__head">
+          <span class="stack__name" data-i18n="srv.n2">Kleine Website</span>
+          <span class="stack__price" data-i18n="srv.p2">ab 300 €</span>
+        </div>
+        <ul>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2a">Mehrere Unterseiten</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2b">Speisekarte / Galerie</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2c">Google Maps &amp; Kontakt</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2d">Eigenständig pflegbar</span></li>
+        </ul>
+        <a href="#contact" class="stack__cta"><span data-i18n="srv.cta">Loslegen</span> →</a>
+      </div>
+
+      <div class="stack__col" data-reveal>
+        <div class="stack__head">
+          <span class="stack__name" data-i18n="srv.n3">Extras</span>
+          <span class="stack__price" data-i18n="srv.p3">auf Anfrage</span>
+        </div>
+        <ul>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.3a">Domain &amp; Hosting</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.3b">Texte &amp; Foto-Feinschliff</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.3c">SEO-Grundlagen</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.3d">Später erweiterbar</span></li>
+        </ul>
+        <a href="#contact" class="stack__cta"><span data-i18n="srv.cta">Loslegen</span> →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="sec sec--soft">
+  <div class="container">
+    <header class="sh" data-reveal>
+      <span class="sh__eyebrow" data-i18n="ct.eyebrow">Kontakt</span>
+      <h2 class="sh__title" data-i18n="ct.title">Projekt anfragen.</h2>
+    </header>
+    <div class="contact">
+      <div data-reveal>
+        <p class="contact__big" data-i18n="ct.big">Beschreibe dein Vorhaben in wenigen Sätzen — ich melde mich innerhalb von 24 Stunden mit einer ersten Einschätzung. Erstgespräch kostenfrei.</p>
+        <div class="contact__links">
+          <a href="mailto:michael.rusch@gmail.com" class="contact__link">
+            <span class="contact__icon">✉</span>
+            <span>
+              <span class="contact__label">E-Mail</span>
+              <span class="contact__value">michael.rusch@gmail.com</span>
+            </span>
+          </a>
+          <a href="tel:+4900000000" class="contact__link">
+            <span class="contact__icon">☎</span>
+            <span>
+              <span class="contact__label" data-i18n="ct.phone">Telefon</span>
+              <span class="contact__value" data-i18n="ct.phoneV">+49 · auf Anfrage</span>
+            </span>
+          </a>
+          <div class="contact__link">
+            <span class="contact__icon">⌖</span>
+            <span>
+              <span class="contact__label" data-i18n="ct.based">Standort</span>
+              <span class="contact__value" data-i18n="ct.basedV">Deutschland</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <form class="form" id="contactForm">
+        <div class="field">
+          <label for="f-name" data-i18n="form.name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email">E-Mail</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-msg" data-i18n="form.msg">Nachricht</label>
+          <textarea id="f-msg" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="form__submit"><span data-i18n="form.send">Senden</span> →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>© 2026 · Michael Rusch</div>
+  <div data-i18n="ft.built">Gebaut mit HTML, CSS &amp; JavaScript.</div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Projekt-Vorschau">
+  <button class="modal__close" id="modalClose" aria-label="Schließen">×</button>
+  <div class="modal__frame" onclick="event.stopPropagation()">
+    <div class="modal__bar">
+      <div class="modal__dots"><span></span><span></span><span></span></div>
+      <div class="modal__url" id="modalUrl">vorschau.example.com</div>
+    </div>
+    <div class="modal__content" id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+  // Theme Toggle
+  const themeBtn = document.getElementById('themeBtn');
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'light') html.classList.add('light');
+  themeBtn.textContent = html.classList.contains('light') ? '☾' : '☀';
+  themeBtn.addEventListener('click', () => {
+    html.classList.toggle('light');
+    const isLight = html.classList.contains('light');
+    themeBtn.textContent = isLight ? '☾' : '☀';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+
+  // Translations
+  const translations = {
+    de: {
+      'nav.about': 'Über mich', 'nav.work': 'Projekte', 'nav.stack': 'Pakete', 'nav.contact': 'Kontakt', 'nav.start': 'Projekt starten',
+      'hero.pill': 'Verfügbar für neue Projekte',
+      'hero.t1': 'Schöne Websites für ', 'hero.t2': 'Restaurants', 'hero.t3': 'kleine Unternehmen',
+      'hero.sub': 'Freier Webentwickler aus Deutschland — spezialisiert auf moderne, performante Websites für Restaurants, Studios und kleine Unternehmen. Klare Konzepte, sauberer Code, persönliche Betreuung.',
+      'hero.cta1': 'Kontakt aufnehmen', 'hero.cta2': 'Beispiele ansehen',
+      'trust.1': 'Antwortzeit', 'trust.2num': 'ab 125 €', 'trust.2': 'Faire Preise', 'trust.3': 'Persönlich',
+      'about.eyebrow': 'Über mich', 'about.title': 'Sorgfalt im Detail.',
+      'about.cap': 'Michael Rusch',
+      'about.p1': 'Ich entwickle Websites für kleine Unternehmen, die nach außen genauso präzise wirken wollen, wie sie es im Inneren sind. Mein Ansatz: jedes Projekt bekommt die Aufmerksamkeit, die es verdient — keine Schablonen, keine Agentur-Bürokratie.',
+      'about.p2': 'Der Fokus liegt auf dem, was zählt: schnelle Ladezeiten, einwandfreie Darstellung auf jedem Gerät und Inhalte, die deine Kunden sofort verstehen. Ob One-Pager oder mehrseitige Website — sauberer Code und ein Design, das zu deiner Marke passt.',
+      'about.p3': 'Klingt nach dem, was du suchst? Dann lass uns reden. Erstes Beratungsgespräch ist kostenfrei und unverbindlich.',
+      'facts.name': 'Name', 'facts.based': 'Standort', 'facts.basedV': 'Deutschland', 'facts.works': 'Arbeitet mit', 'facts.worksV': 'kl. Unternehmen', 'facts.lang': 'Sprachen',
+      'proj.eyebrow': 'Beispielprojekte', 'proj.title': 'Ausgewählte Konzepte.', 'proj.note': 'Beispielentwürfe für unterschiedliche Branchen.',
+      'proj.b1': 'Restaurant · One-Pager', 'proj.s1': 'Italienisches Restaurant: One-Pager mit Speisekarte, Bildgalerie und integriertem Reservierungssystem. Mobil-first, schnell, einladend.',
+      'proj.b2': 'Blumenladen · Kleine Seite', 'proj.s2': 'Floristik-Boutique: dreiseitige Website mit Sortimentsübersicht, Standortinformationen und Kontaktbereich. Lokales SEO inklusive.',
+      'proj.b3': 'Studio · One-Pager', 'proj.s3': 'Yoga-Studio: One-Pager mit Kursplan, Preisstruktur, Trainerprofil und Online-Buchungsanbindung. Reduziertes Design, klare Hierarchie.',
+      'proj.b4': 'Freier Platz', 'proj.t4': 'Dein Projekt?', 'proj.s4': 'Dein Unternehmen kann hier stehen. Ich entwickle Konzept und Umsetzung — auf deine Branche und Zielgruppe zugeschnitten.', 'proj.tag4': 'Frei',
+      'car.tip': 'Tipp:', 'car.keys': 'Pfeiltasten', 'car.preview': 'Vorschau', 'car.open': 'Frei', 'car.soon': 'Demo folgt bald', 'car.view': 'Reinschauen', 'car.start': 'Projekt anfragen',
+      'srv.eyebrow': 'Pakete', 'srv.title': 'Klar strukturierte Pakete.', 'srv.note': 'Transparent kalkuliert — keine versteckten Kosten.',
+      'srv.p1': 'ab 125 €', 'srv.1a': 'Eine Seite, alles drauf', 'srv.1b': 'Mobiloptimiert', 'srv.1c': 'Kontaktformular', 'srv.1d': 'SEO-Grundoptimierung',
+      'srv.popular': 'Beliebt', 'srv.n2': 'Kleine Website', 'srv.p2': 'ab 300 €',
+      'srv.2a': 'Mehrere Unterseiten', 'srv.2b': 'Speisekarte / Galerie', 'srv.2c': 'Google Maps & Kontakt', 'srv.2d': 'Eigenständig pflegbar',
+      'srv.n3': 'Extras', 'srv.p3': 'auf Anfrage',
+      'srv.3a': 'Domain & Hosting', 'srv.3b': 'Texte & Foto-Feinschliff', 'srv.3c': 'SEO-Grundlagen', 'srv.3d': 'Später erweiterbar',
+      'srv.cta': 'Loslegen',
+      'ct.eyebrow': 'Kontakt', 'ct.title': 'Projekt anfragen.',
+      'ct.big': 'Beschreibe dein Vorhaben in wenigen Sätzen — ich melde mich innerhalb von 24 Stunden mit einer ersten Einschätzung. Erstgespräch kostenfrei.',
+      'ct.phone': 'Telefon', 'ct.phoneV': '+49 · auf Anfrage', 'ct.based': 'Standort', 'ct.basedV': 'Deutschland',
+      'form.name': 'Name', 'form.msg': 'Nachricht', 'form.send': 'Senden',
+      'ft.built': 'Gebaut mit HTML, CSS & JavaScript.'
+    },
+    en: {
+      'nav.about': 'About', 'nav.work': 'Work', 'nav.stack': 'Stack', 'nav.contact': 'Contact', 'nav.start': 'Start a project',
+      'hero.pill': 'Available for new projects',
+      'hero.t1': 'Beautiful websites for ', 'hero.t2': 'restaurants', 'hero.t3': 'small businesses',
+      'hero.sub': "Freelance web developer based in Germany — specialised in modern, performant websites for restaurants, studios and small businesses. Clear concepts, clean code, personal service.",
+      'hero.cta1': 'Get in touch', 'hero.cta2': 'See examples',
+      'trust.1': 'Response time', 'trust.2num': 'from €125', 'trust.2': 'Fair pricing', 'trust.3': 'Personal',
+      'about.eyebrow': 'About', 'about.title': 'Attention to detail.',
+      'about.cap': 'Michael Rusch',
+      'about.p1': "I build websites for small businesses that want to look as polished outside as they are inside. My approach: every project gets the attention it deserves — no templates, no agency bureaucracy.",
+      'about.p2': 'The focus is on what matters: fast loading times, flawless display on every device, and content your customers understand instantly. Whether one-pager or multi-page site — clean code and a design that fits your brand.',
+      'about.p3': "Sounds like what you're looking for? Then let's talk. First consultation is free and no-obligation.",
+      'facts.name': 'Name', 'facts.based': 'Based', 'facts.basedV': 'Germany', 'facts.works': 'Works with', 'facts.worksV': 'small businesses', 'facts.lang': 'Languages',
+      'proj.eyebrow': 'Selected work', 'proj.title': 'Selected concepts.', 'proj.note': 'Sample designs across different industries.',
+      'proj.b1': 'Restaurant · One-pager', 'proj.s1': 'Italian restaurant: one-pager with menu, image gallery and integrated reservation system. Mobile-first, fast, inviting.',
+      'proj.b2': 'Flower shop · Small site', 'proj.s2': 'Florist boutique: three-page website with product overview, location info and contact section. Local SEO included.',
+      'proj.b3': 'Studio · One-pager', 'proj.s3': 'Yoga studio: one-pager with class schedule, pricing, instructor profile and online booking integration. Reduced design, clear hierarchy.',
+      'proj.b4': 'Open slot', 'proj.t4': 'Your project?', 'proj.s4': 'Your business could be here. I develop concept and implementation — tailored to your industry and audience.', 'proj.tag4': 'Open',
+      'car.tip': 'Tip:', 'car.keys': 'Arrow keys', 'car.preview': 'Preview', 'car.open': 'Open', 'car.soon': 'Demo coming soon', 'car.view': 'Take a look', 'car.start': 'Request a project',
+      'srv.eyebrow': 'Services', 'srv.title': 'Clearly structured packages.', 'srv.note': 'Transparent pricing — no hidden costs.',
+      'srv.p1': 'from €125', 'srv.1a': 'Single page, everything on it', 'srv.1b': 'Mobile-friendly', 'srv.1c': 'Contact form', 'srv.1d': 'Basic SEO optimisation',
+      'srv.popular': 'Popular', 'srv.n2': 'Small website', 'srv.p2': 'from €300',
+      'srv.2a': 'Multiple subpages', 'srv.2b': 'Menu / gallery', 'srv.2c': 'Google Maps & contact', 'srv.2d': 'Self-maintainable',
+      'srv.n3': 'Extras', 'srv.p3': 'on request',
+      'srv.3a': 'Domain & hosting setup', 'srv.3b': 'Copy & photo tuning', 'srv.3c': 'SEO basics', 'srv.3d': 'Expandable later',
+      'srv.cta': 'Get started',
+      'ct.eyebrow': 'Contact', 'ct.title': 'Request a project.',
+      'ct.big': "Describe your project briefly — I'll respond within 24 hours with an initial assessment. First consultation is free.",
+      'ct.phone': 'Phone', 'ct.phoneV': '+49 · on request', 'ct.based': 'Based', 'ct.basedV': 'Germany',
+      'form.name': 'Name', 'form.msg': 'Message', 'form.send': 'Send',
+      'ft.built': 'Built with HTML, CSS & JavaScript.'
+    }
+  };
+
+  const langBtn = document.getElementById('langBtn');
+  let currentLang = localStorage.getItem('lang') || 'de';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    langBtn.textContent = lang === 'de' ? 'EN' : 'DE';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key] !== undefined) {
+        el.textContent = translations[lang][key];
+      }
+    });
+    localStorage.setItem('lang', lang);
+  }
+  applyLang(currentLang);
+  langBtn.addEventListener('click', () => applyLang(currentLang === 'de' ? 'en' : 'de'));
+
+  // Reveal on Scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+  // ============ CAROUSEL ============
+  const cTrack = document.getElementById('cTrack');
+  const cPrev = document.getElementById('cPrev');
+  const cNext = document.getElementById('cNext');
+  const cIdx = document.getElementById('cIdx');
+  const cTotal = document.getElementById('cTotal');
+  const cDots = document.getElementById('cDots');
+  const cViewport = document.getElementById('cViewport');
+  const slides = cTrack.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  let currentSlide = 0;
+  cTotal.textContent = String(totalSlides).padStart(2, '0');
+
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'carousel__dot';
+    dot.setAttribute('aria-label', 'Zu Slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    cDots.appendChild(dot);
+  }
+
+  function goTo(idx) {
+    currentSlide = (idx + totalSlides) % totalSlides;
+    cTrack.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    cIdx.textContent = String(currentSlide + 1).padStart(2, '0');
+    cDots.querySelectorAll('.carousel__dot').forEach((d, i) => {
+      d.classList.toggle('is-active', i === currentSlide);
+    });
+  }
+
+  cPrev.addEventListener('click', () => goTo(currentSlide - 1));
+  cNext.addEventListener('click', () => goTo(currentSlide + 1));
+
+  // Pfeiltasten
+  document.addEventListener('keydown', (e) => {
+    if (modal.classList.contains('is-open')) return;
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+    if (e.key === 'ArrowLeft') goTo(currentSlide - 1);
+    if (e.key === 'ArrowRight') goTo(currentSlide + 1);
+  });
+
+  // Swipe
+  let touchStartX = 0;
+  cViewport.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  cViewport.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goTo(currentSlide + 1);
+      else goTo(currentSlide - 1);
+    }
+  }, { passive: true });
+
+  goTo(0);
+
+  // ============ MODAL ============
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+  const modalContent = document.getElementById('modalContent');
+  const modalUrl = document.getElementById('modalUrl');
+
+  function openModal(slideIndex) {
+    const slide = slides[slideIndex];
+    const name = slide.querySelector('.slide__name').textContent.trim();
+    const emoji = slide.querySelector('.slide__preview').dataset.emoji || '✨';
+    const demoUrl = slide.querySelector('.slide__view').dataset.demo;
+
+    modalUrl.textContent = demoUrl || (name.toLowerCase().replace(/\s+/g, '-') + '.example.com');
+
+    if (demoUrl) {
+      modalContent.innerHTML = '<iframe src="' + demoUrl + '" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>';
+    } else {
+      const txt = currentLang === 'de'
+        ? { t: 'Demo folgt bald', s: 'Diese Beispielseite wird gerade gebaut. Sobald sie fertig ist, kannst du hier reinschauen.' }
+        : { t: 'Demo coming soon', s: "This example is being built. Once it's ready, you'll be able to peek inside right here." };
+      modalContent.innerHTML =
+        '<div class="modal__placeholder">' +
+        '<div class="modal__placeholder__big">' + emoji + '</div>' +
+        '<div class="modal__placeholder__title">' + name + '</div>' +
+        '<div class="modal__placeholder__sub"><strong>' + txt.t + '</strong><br>' + txt.s + '</div>' +
+        '</div>';
+    }
+
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    modalContent.innerHTML = '';
+  }
+
+  slides.forEach((slide, i) => {
+    const btn = slide.querySelector('.slide__view');
+    if (btn && btn.tagName === 'BUTTON') {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(i);
+      });
+    }
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  // Form -> mailto
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('f-name').value;
+    const email = document.getElementById('f-email').value;
+    const msg = document.getElementById('f-msg').value;
+    const subject = encodeURIComponent('Anfrage von ' + name);
+    const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + '\n\nNachricht:\n' + msg);
+    window.location.href = 'mailto:michael.rusch@gmail.com?subject=' + subject + '&body=' + body;
+  });
+</script>
+
+</body>
+</html>
