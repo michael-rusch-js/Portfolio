@@ -280,26 +280,62 @@
   @media (min-width: 768px) {
     .about { grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: start; }
   }
-  .portrait { position: relative; aspect-ratio: 1; max-width: 360px; margin: 0 auto; }
-  .portrait__frame {
-    width: 100%; height: 100%;
-    border-radius: 24px;
-    background: linear-gradient(135deg, var(--accent), #c2185b);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    color: #fff;
-    box-shadow: var(--shadow);
-  }
-  .portrait__initials { font-family: 'Space Grotesk', sans-serif; font-size: 96px; font-weight: 700; }
-  .portrait__caption { font-size: 14px; margin-top: 8px; opacity: 0.9; }
-  .portrait__sticker {
-    position: absolute; top: -16px; right: -8px;
-    background: var(--card); color: var(--fg);
-    padding: 10px 18px; border-radius: 999px;
-    font-weight: 600; transform: rotate(8deg);
-    box-shadow: var(--shadow);
+  /* Editorial-Zitat im About-Bereich */
+  .quote {
+    position: relative;
+    padding: 36px 28px 32px;
+    background: var(--card);
     border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
   }
+  .quote::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+  }
+  .quote__mark {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 0.8;
+    color: var(--accent);
+    opacity: 0.35;
+    margin-bottom: -12px;
+    user-select: none;
+  }
+  .quote__text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.35;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+    margin: 0 0 24px;
+    border: none;
+    padding: 0;
+  }
+  .quote__author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--fg-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .quote__line {
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
   .facts {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -324,6 +360,17 @@
     color: var(--fg-muted);
     margin-bottom: 16px;
     font-size: clamp(15px, 2vw, 17px);
+  }
+  .about__text strong, .contact__big strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .stack__col li strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .stack__col.is-featured li strong {
+    color: var(--fg);
   }
 
   /* ============ CAROUSEL ============ */
@@ -871,6 +918,98 @@
   }
   .stack__cta:hover { gap: 10px; }
 
+  /* ============ PROCESS / 4 SCHRITTE ============ */
+  .process {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    position: relative;
+  }
+  @media (min-width: 800px) {
+    .process { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  }
+  .process__step {
+    position: relative;
+    padding: 28px 24px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .process__step:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .process__num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    display: block;
+  }
+  /* Verbindungslinie zwischen Steps (nur Desktop) */
+  .process__line {
+    display: none;
+  }
+  @media (min-width: 800px) {
+    .process__line {
+      display: block;
+      position: absolute;
+      top: 48px;
+      right: -24px;
+      width: 24px;
+      height: 1px;
+      background: linear-gradient(to right, var(--accent-soft), transparent);
+      pointer-events: none;
+    }
+    .process__line::after {
+      content: '→';
+      position: absolute;
+      right: -2px;
+      top: -10px;
+      color: var(--accent);
+      font-size: 14px;
+      opacity: 0.7;
+    }
+  }
+  /* Mobile: vertikale Linie zwischen Steps */
+  @media (max-width: 799px) {
+    .process__step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 16px;
+      background: var(--border-strong);
+    }
+  }
+  .process__title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .process__time {
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .process__text {
+    color: var(--fg-muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
   /* CONTACT */
   .contact { display: grid; gap: 40px; }
   @media (min-width: 768px) { .contact { grid-template-columns: 1fr 1fr; gap: 60px; } }
@@ -997,6 +1136,7 @@
     </a>
     <nav class="nav">
       <a href="#about" data-i18n="nav.about">Über mich</a>
+      <a href="#process" data-i18n="nav.process">Ablauf</a>
       <a href="#projects" data-i18n="nav.work">Projekte</a>
       <a href="#skills" data-i18n="nav.stack">Pakete</a>
       <a href="#contact" data-i18n="nav.contact">Kontakt</a>
@@ -1021,27 +1161,27 @@
       <span data-i18n="hero.pill">Verfügbar für neue Projekte</span>
     </div>
     <h1 class="hero__title" data-reveal>
-      <span data-i18n="hero.t1">Schöne Websites für </span><span class="accent-word" data-i18n="hero.t2">Restaurants</span><span> &amp; </span><span class="accent-word" data-i18n="hero.t3">kleine Unternehmen</span><span>.</span>
+      <span data-i18n="hero.t1">Eine Website, die </span><span class="accent-word" data-i18n="hero.t2">Gäste bringt</span><span data-i18n="hero.tMid"> &mdash; nicht nur </span><span class="accent-word" data-i18n="hero.t3">Komplimente</span><span>.</span>
     </h1>
     <p class="hero__sub" data-reveal data-i18n="hero.sub">
-      Freier Webentwickler aus Deutschland — spezialisiert auf moderne, performante Websites für Restaurants, Studios und kleine Unternehmen. Klare Konzepte, sauberer Code, persönliche Betreuung.
+      Ich baue Websites für Restaurants, Studios und kleine Läden, die online endlich so wirken wollen, wie sie wirklich sind. Direkter Ansprechpartner aus Heilbronn — keine Agentur-Hotline, keine Schablonen.
     </p>
     <div class="hero__ctas" data-reveal>
-      <a href="#contact" class="cta cta--primary"><span data-i18n="hero.cta1">Kontakt aufnehmen</span> →</a>
-      <a href="#projects" class="cta cta--ghost" data-i18n="hero.cta2">Beispiele ansehen</a>
+      <a href="#contact" class="cta cta--primary"><span data-i18n="hero.cta1">Unverbindlich anfragen</span> →</a>
+      <a href="#projects" class="cta cta--ghost" data-i18n="hero.cta2">Live-Beispiele ansehen</a>
     </div>
     <div class="hero__trust" data-reveal>
       <div>
-        <div class="trust__num">24h</div>
-        <div class="trust__label" data-i18n="trust.1">Antwortzeit</div>
+        <div class="trust__num" data-i18n="trust.1num">14 Tage</div>
+        <div class="trust__label" data-i18n="trust.1">Bis online</div>
       </div>
       <div>
         <div class="trust__num" data-i18n="trust.2num">ab 390 €</div>
-        <div class="trust__label" data-i18n="trust.2">Faire Preise</div>
+        <div class="trust__label" data-i18n="trust.2">Transparente Preise</div>
       </div>
       <div>
-        <div class="trust__num">100%</div>
-        <div class="trust__label" data-i18n="trust.3">Persönlich</div>
+        <div class="trust__num">1:1</div>
+        <div class="trust__label" data-i18n="trust.3">Direkter Kontakt</div>
       </div>
     </div>
   </div>
@@ -1051,28 +1191,75 @@
   <div class="container">
     <header class="sh" data-reveal>
       <span class="sh__eyebrow" data-i18n="about.eyebrow">Über mich</span>
-      <h2 class="sh__title" data-i18n="about.title">Sorgfalt im Detail.</h2>
+      <h2 class="sh__title" data-i18n="about.title">Was du bekommst.</h2>
     </header>
     <div class="about">
       <div data-reveal>
-        <div class="portrait">
-          <div class="portrait__frame">
-            <span class="portrait__initials">MR</span>
-            <span class="portrait__caption" data-i18n="about.cap">Michael Rusch</span>
-          </div>
-          <span class="portrait__sticker">Hi!</span>
-        </div>
+        <figure class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="quote__text" data-i18n="about.quote">
+            Eine gute Website fühlt sich an wie ein gutes Schaufenster — einladend, klar, und unverwechselbar deins.
+          </blockquote>
+          <figcaption class="quote__author">
+            <span class="quote__line" aria-hidden="true"></span>
+            <span data-i18n="about.quoteAuthor">Michael Rusch</span>
+          </figcaption>
+        </figure>
         <dl class="facts">
           <div><dt data-i18n="facts.name">Name</dt><dd>Michael Rusch</dd></div>
-          <div><dt data-i18n="facts.based">Standort</dt><dd data-i18n="facts.basedV">Deutschland</dd></div>
+          <div><dt data-i18n="facts.based">Standort</dt><dd data-i18n="facts.basedV">Heilbronn, DE</dd></div>
           <div><dt data-i18n="facts.works">Arbeitet mit</dt><dd data-i18n="facts.worksV">kl. Unternehmen</dd></div>
           <div><dt data-i18n="facts.lang">Sprachen</dt><dd>DE · EN</dd></div>
         </dl>
       </div>
       <div class="about__text">
-        <p data-reveal data-i18n="about.p1">Ich entwickle Websites für kleine Unternehmen, die nach außen genauso präzise wirken wollen, wie sie es im Inneren sind. Mein Ansatz: jedes Projekt bekommt die Aufmerksamkeit, die es verdient — keine Schablonen, keine Agentur-Bürokratie.</p>
-        <p data-reveal data-i18n="about.p2">Der Fokus liegt auf dem, was zählt: schnelle Ladezeiten, einwandfreie Darstellung auf jedem Gerät und Inhalte, die deine Kunden sofort verstehen. Ob One-Pager oder mehrseitige Website — sauberer Code und ein Design, das zu deiner Marke passt.</p>
-        <p data-reveal data-i18n="about.p3">Klingt nach dem, was du suchst? Dann lass uns reden. Erstes Beratungsgespräch ist kostenfrei und unverbindlich.</p>
+        <p data-reveal data-i18n="about.p1">Du willst keine Website, die wie alle anderen aussieht. Du willst eine, die deinen Laden, dein Studio, dein Restaurant <strong>so zeigt, wie es wirklich ist</strong> — mit eigenem Charakter, klarer Information und der Möglichkeit, dich zu kontaktieren.</p>
+        <p data-reveal data-i18n="about.p2">Genau das mache ich. Kein Baukasten, keine Schablone. Wir reden vorab, ich bau, du gibst Feedback, wir verfeinern. Nach 14 Tagen bist du online — sauber, schnell, mobil-optimiert.</p>
+        <p data-reveal data-i18n="about.p3"><strong>Das erste Gespräch ist kostenfrei.</strong> Keine Verpflichtung, keine Verkaufstaktik. Wenn es passt, machen wir was draus. Wenn nicht, hast du trotzdem Klarheit gewonnen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS / SO ARBEITEN WIR ============ -->
+<section id="process" class="sec">
+  <div class="container">
+    <header class="sh" data-reveal>
+      <span class="sh__eyebrow" data-i18n="proc.eyebrow">Ablauf</span>
+      <h2 class="sh__title" data-i18n="proc.title">So arbeiten wir zusammen.</h2>
+      <span class="sh__note" data-i18n="proc.note">Vier klare Schritte — keine Überraschungen, kein Stress.</span>
+    </header>
+
+    <div class="process">
+      <div class="process__step" data-reveal>
+        <div class="process__num">01</div>
+        <div class="process__line" aria-hidden="true"></div>
+        <h3 class="process__title" data-i18n="proc.s1t">Erstgespräch</h3>
+        <p class="process__time" data-i18n="proc.s1time">~30 Min · kostenfrei</p>
+        <p class="process__text" data-i18n="proc.s1text">Wir reden über dein Vorhaben — was du brauchst, was deine Kunden brauchen, was dein Budget hergibt. Ehrlich und unverbindlich. Du bekommst danach ein klares Angebot per Mail.</p>
+      </div>
+
+      <div class="process__step" data-reveal>
+        <div class="process__num">02</div>
+        <div class="process__line" aria-hidden="true"></div>
+        <h3 class="process__title" data-i18n="proc.s2t">Konzept &amp; Design</h3>
+        <p class="process__time" data-i18n="proc.s2time">3–5 Tage</p>
+        <p class="process__text" data-i18n="proc.s2text">Ich entwerfe dir einen ersten Vorschlag — Struktur, Texte, Look. Du gibst Feedback, wir feilen gemeinsam, bis es sitzt. Erst dann geht's weiter.</p>
+      </div>
+
+      <div class="process__step" data-reveal>
+        <div class="process__num">03</div>
+        <div class="process__line" aria-hidden="true"></div>
+        <h3 class="process__title" data-i18n="proc.s3t">Umsetzung</h3>
+        <p class="process__time" data-i18n="proc.s3time">7–10 Tage</p>
+        <p class="process__text" data-i18n="proc.s3text">Aus dem Konzept wird eine echte, lebendige Website. Sauberer Code, mobil-optimiert, schnell. Du bekommst regelmäßig Zwischenstände — keine Black Box.</p>
+      </div>
+
+      <div class="process__step" data-reveal>
+        <div class="process__num">04</div>
+        <h3 class="process__title" data-i18n="proc.s4t">Live &amp; Betreuung</h3>
+        <p class="process__time" data-i18n="proc.s4time">Tag X + 30 Tage Support</p>
+        <p class="process__text" data-i18n="proc.s4text">Ich richte alles ein — Domain, Hosting, Google. Du bist online. Im ersten Monat sind alle Anpassungen kostenfrei: Tippfehler, Bilder tauschen, Texte ändern. Ohne Aufpreis.</p>
       </div>
     </div>
   </div>
@@ -1274,9 +1461,11 @@
         </div>
         <ul>
           <li><span class="stack__check">✓</span><span data-i18n="srv.1a">Eine Seite, alles drauf</span></li>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.1b">Mobiloptimiert</span></li>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.1c">Kontaktformular</span></li>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.1d">SEO-Grundoptimierung</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1b">Mobil & Desktop optimiert</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1c">Kontaktformular inklusive</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1d">SEO-Grundlagen für Google</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1e"><strong>Live in 14 Tagen</strong></span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.1f"><strong>30 Tage kostenfreie Anpassungen</strong></span></li>
         </ul>
         <a href="#contact" class="stack__cta"><span data-i18n="srv.cta">Loslegen</span> →</a>
       </div>
@@ -1288,10 +1477,12 @@
           <span class="stack__price" data-i18n="srv.p2">ab 890 €</span>
         </div>
         <ul>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.2a">Mehrere Unterseiten</span></li>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.2b">Speisekarte / Galerie</span></li>
-          <li><span class="stack__check">✓</span><span data-i18n="srv.2c">Google Maps &amp; Kontakt</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2a">Bis zu 5 Unterseiten</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2b">Galerie, Speisekarte, Kursplan</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2c">Google Maps & Kontaktformular</span></li>
           <li><span class="stack__check">✓</span><span data-i18n="srv.2d">Eigenständig pflegbar</span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2e"><strong>Live in 3-4 Wochen</strong></span></li>
+          <li><span class="stack__check">✓</span><span data-i18n="srv.2f"><strong>60 Tage kostenfreie Anpassungen</strong></span></li>
         </ul>
         <a href="#contact" class="stack__cta"><span data-i18n="srv.cta">Loslegen</span> →</a>
       </div>
@@ -1321,7 +1512,7 @@
     </header>
     <div class="contact">
       <div data-reveal>
-        <p class="contact__big" data-i18n="ct.big">Beschreibe dein Vorhaben in wenigen Sätzen — ich melde mich innerhalb von 24 Stunden mit einer ersten Einschätzung. Erstgespräch kostenfrei.</p>
+        <p class="contact__big" data-i18n="ct.big">Beschreib mir kurz dein Vorhaben — ich melde mich <strong>innerhalb von 24 Stunden</strong> mit einer ehrlichen Einschätzung. Erstgespräch kostenfrei, kein Verkaufsdruck.</p>
         <div class="contact__links">
           <a href="mailto:michael.rusch@gmail.com" class="contact__link">
             <span class="contact__icon">✉</span>
@@ -1348,18 +1539,22 @@
       </div>
       <form class="form" id="contactForm">
         <div class="field">
-          <label for="f-name" data-i18n="form.name">Name</label>
+          <label for="f-name" data-i18n="form.name">Wie heißt du?</label>
           <input id="f-name" name="name" type="text" autocomplete="name" required>
         </div>
         <div class="field">
-          <label for="f-email">E-Mail</label>
+          <label for="f-email" data-i18n="form.email">Deine E-Mail</label>
           <input id="f-email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field">
-          <label for="f-msg" data-i18n="form.msg">Nachricht</label>
-          <textarea id="f-msg" name="message" rows="5" required></textarea>
+          <label for="f-business" data-i18n="form.business">Was für ein Laden / Studio?</label>
+          <input id="f-business" name="business" type="text" placeholder="z.B. Restaurant, Yoga-Studio, Friseur ...">
         </div>
-        <button type="submit" class="form__submit"><span data-i18n="form.send">Senden</span> →</button>
+        <div class="field">
+          <label for="f-msg" data-i18n="form.msg">Worum gehts? (kurz reicht)</label>
+          <textarea id="f-msg" name="message" rows="4" placeholder="Brauchst du eine neue Website oder eine Überarbeitung? Was ist dir besonders wichtig?" required></textarea>
+        </div>
+        <button type="submit" class="form__submit"><span data-i18n="form.send">Nachricht senden</span> →</button>
       </form>
     </div>
   </div>
@@ -1367,7 +1562,7 @@
 
 <footer class="footer">
   <div>© 2026 · Michael Rusch</div>
-  <div data-i18n="ft.built">Gebaut mit HTML, CSS &amp; JavaScript.</div>
+  <div data-i18n="ft.built">Webentwicklung aus Heilbronn · Impressum auf Anfrage</div>
 </footer>
 
 <!-- ============ MODAL ============ -->
@@ -1399,18 +1594,29 @@
   // Translations
   const translations = {
     de: {
-      'nav.about': 'Über mich', 'nav.work': 'Projekte', 'nav.stack': 'Pakete', 'nav.contact': 'Kontakt', 'nav.start': 'Projekt starten',
+      'nav.about': 'Über mich', 'nav.process': 'Ablauf', 'nav.work': 'Projekte', 'nav.stack': 'Pakete', 'nav.contact': 'Kontakt', 'nav.start': 'Projekt starten',
       'hero.pill': 'Verfügbar für neue Projekte',
-      'hero.t1': 'Schöne Websites für ', 'hero.t2': 'Restaurants', 'hero.t3': 'kleine Unternehmen',
-      'hero.sub': 'Freier Webentwickler aus Deutschland — spezialisiert auf moderne, performante Websites für Restaurants, Studios und kleine Unternehmen. Klare Konzepte, sauberer Code, persönliche Betreuung.',
-      'hero.cta1': 'Kontakt aufnehmen', 'hero.cta2': 'Beispiele ansehen',
-      'trust.1': 'Antwortzeit', 'trust.2num': 'ab 390 €', 'trust.2': 'Faire Preise', 'trust.3': 'Persönlich',
-      'about.eyebrow': 'Über mich', 'about.title': 'Sorgfalt im Detail.',
+      'hero.t1': 'Eine Website, die ', 'hero.t2': 'Gäste bringt', 'hero.tMid': ' — nicht nur ', 'hero.t3': 'Komplimente',
+      'hero.sub': 'Ich baue Websites für Restaurants, Studios und kleine Läden, die online endlich so wirken wollen, wie sie wirklich sind. Direkter Ansprechpartner aus Heilbronn — keine Agentur-Hotline, keine Schablonen.',
+      'hero.cta1': 'Unverbindlich anfragen', 'hero.cta2': 'Live-Beispiele ansehen',
+      'trust.1num': '14 Tage', 'trust.1': 'Bis online', 'trust.2num': 'ab 390 €', 'trust.2': 'Transparente Preise', 'trust.3': 'Direkter Kontakt',
+      'about.eyebrow': 'Über mich', 'about.title': 'Was du bekommst.',
       'about.cap': 'Michael Rusch',
-      'about.p1': 'Ich entwickle Websites für kleine Unternehmen, die nach außen genauso präzise wirken wollen, wie sie es im Inneren sind. Mein Ansatz: jedes Projekt bekommt die Aufmerksamkeit, die es verdient — keine Schablonen, keine Agentur-Bürokratie.',
-      'about.p2': 'Der Fokus liegt auf dem, was zählt: schnelle Ladezeiten, einwandfreie Darstellung auf jedem Gerät und Inhalte, die deine Kunden sofort verstehen. Ob One-Pager oder mehrseitige Website — sauberer Code und ein Design, das zu deiner Marke passt.',
-      'about.p3': 'Klingt nach dem, was du suchst? Dann lass uns reden. Erstes Beratungsgespräch ist kostenfrei und unverbindlich.',
-      'facts.name': 'Name', 'facts.based': 'Standort', 'facts.basedV': 'Deutschland', 'facts.works': 'Arbeitet mit', 'facts.worksV': 'kl. Unternehmen', 'facts.lang': 'Sprachen',
+      'about.quote': 'Eine gute Website fühlt sich an wie ein gutes Schaufenster — einladend, klar, und unverwechselbar deins.',
+      'about.quoteAuthor': 'Michael Rusch',
+      'about.p1': 'Du willst keine Website, die wie alle anderen aussieht. Du willst eine, die deinen Laden, dein Studio, dein Restaurant <strong>so zeigt, wie es wirklich ist</strong> — mit eigenem Charakter, klarer Information und der Möglichkeit, dich zu kontaktieren.',
+      'about.p2': 'Genau das mache ich. Kein Baukasten, keine Schablone. Wir reden vorab, ich bau, du gibst Feedback, wir verfeinern. Nach 14 Tagen bist du online — sauber, schnell, mobil-optimiert.',
+      'about.p3': '<strong>Das erste Gespräch ist kostenfrei.</strong> Keine Verpflichtung, keine Verkaufstaktik. Wenn es passt, machen wir was draus. Wenn nicht, hast du trotzdem Klarheit gewonnen.',
+      'facts.name': 'Name', 'facts.based': 'Standort', 'facts.basedV': 'Heilbronn, DE', 'facts.works': 'Arbeitet mit', 'facts.worksV': 'kl. Unternehmen', 'facts.lang': 'Sprachen',
+      'proc.eyebrow': 'Ablauf', 'proc.title': 'So arbeiten wir zusammen.', 'proc.note': 'Vier klare Schritte — keine Überraschungen, kein Stress.',
+      'proc.s1t': 'Erstgespräch', 'proc.s1time': '~30 Min · kostenfrei',
+      'proc.s1text': 'Wir reden über dein Vorhaben — was du brauchst, was deine Kunden brauchen, was dein Budget hergibt. Ehrlich und unverbindlich. Du bekommst danach ein klares Angebot per Mail.',
+      'proc.s2t': 'Konzept & Design', 'proc.s2time': '3–5 Tage',
+      'proc.s2text': 'Ich entwerfe dir einen ersten Vorschlag — Struktur, Texte, Look. Du gibst Feedback, wir feilen gemeinsam, bis es sitzt. Erst dann gehts weiter.',
+      'proc.s3t': 'Umsetzung', 'proc.s3time': '7–10 Tage',
+      'proc.s3text': 'Aus dem Konzept wird eine echte, lebendige Website. Sauberer Code, mobil-optimiert, schnell. Du bekommst regelmäßig Zwischenstände — keine Black Box.',
+      'proc.s4t': 'Live & Betreuung', 'proc.s4time': 'Tag X + 30 Tage Support',
+      'proc.s4text': 'Ich richte alles ein — Domain, Hosting, Google. Du bist online. Im ersten Monat sind alle Anpassungen kostenfrei: Tippfehler, Bilder tauschen, Texte ändern. Ohne Aufpreis.',
       'proj.eyebrow': 'Beispielprojekte', 'proj.title': 'Ausgewählte Konzepte.', 'proj.note': 'Beispielentwürfe für unterschiedliche Branchen.',
       'proj.b1': 'Restaurant · One-Pager', 'proj.s1': 'Italienisches Restaurant: One-Pager mit Speisekarte, Bildgalerie und integriertem Reservierungssystem. Mobil-first, schnell, einladend.',
       'proj.b2': 'Blumenladen · Kleine Seite', 'proj.s2': 'Floristik-Boutique: dreiseitige Website mit Sortimentsübersicht, Standortinformationen und Kontaktbereich. Lokales SEO inklusive.',
@@ -1418,49 +1624,60 @@
       'proj.b4': 'Freier Platz', 'proj.t4': 'Dein Projekt?', 'proj.s4': 'Dein Unternehmen kann hier stehen. Ich entwickle Konzept und Umsetzung — auf deine Branche und Zielgruppe zugeschnitten.', 'proj.tag4': 'Frei',
       'car.tip': 'Tipp:', 'car.keys': 'Pfeiltasten', 'car.preview': 'Vorschau', 'car.open': 'Frei', 'car.soon': 'Demo folgt bald', 'car.view': 'Reinschauen', 'car.start': 'Projekt anfragen',
       'srv.eyebrow': 'Pakete', 'srv.title': 'Klar strukturierte Pakete.', 'srv.note': 'Transparent kalkuliert — keine versteckten Kosten.',
-      'srv.p1': 'ab 390 €', 'srv.1a': 'Eine Seite, alles drauf', 'srv.1b': 'Mobiloptimiert', 'srv.1c': 'Kontaktformular', 'srv.1d': 'SEO-Grundoptimierung',
+      'srv.p1': 'ab 390 €', 'srv.1a': 'Eine Seite, alles drauf', 'srv.1b': 'Mobil & Desktop optimiert', 'srv.1c': 'Kontaktformular inklusive', 'srv.1d': 'SEO-Grundlagen für Google', 'srv.1e': '<strong>Live in 14 Tagen</strong>', 'srv.1f': '<strong>30 Tage kostenfreie Anpassungen</strong>',
       'srv.popular': 'Beliebt', 'srv.n2': 'Kleine Website', 'srv.p2': 'ab 890 €',
-      'srv.2a': 'Mehrere Unterseiten', 'srv.2b': 'Speisekarte / Galerie', 'srv.2c': 'Google Maps & Kontakt', 'srv.2d': 'Eigenständig pflegbar',
+      'srv.2a': 'Bis zu 5 Unterseiten', 'srv.2b': 'Galerie, Speisekarte, Kursplan', 'srv.2c': 'Google Maps & Kontaktformular', 'srv.2d': 'Eigenständig pflegbar', 'srv.2e': '<strong>Live in 3-4 Wochen</strong>', 'srv.2f': '<strong>60 Tage kostenfreie Anpassungen</strong>',
       'srv.n3': 'Extras', 'srv.p3': 'auf Anfrage',
       'srv.3a': 'Domain & Hosting', 'srv.3b': 'Texte & Foto-Feinschliff', 'srv.3c': 'SEO-Grundlagen', 'srv.3d': 'Später erweiterbar',
       'srv.cta': 'Loslegen',
       'ct.eyebrow': 'Kontakt', 'ct.title': 'Projekt anfragen.',
-      'ct.big': 'Beschreibe dein Vorhaben in wenigen Sätzen — ich melde mich innerhalb von 24 Stunden mit einer ersten Einschätzung. Erstgespräch kostenfrei.',
-      'ct.phone': 'Telefon', 'ct.phoneV': '+49 · auf Anfrage', 'ct.based': 'Standort', 'ct.basedV': 'Deutschland',
-      'form.name': 'Name', 'form.msg': 'Nachricht', 'form.send': 'Senden',
-      'ft.built': 'Gebaut mit HTML, CSS & JavaScript.'
+      'ct.big': 'Beschreib mir kurz dein Vorhaben — ich melde mich <strong>innerhalb von 24 Stunden</strong> mit einer ehrlichen Einschätzung. Erstgespräch kostenfrei, kein Verkaufsdruck.',
+      'ct.phone': 'Telefon', 'ct.phoneV': '+49 · auf Anfrage', 'ct.based': 'Standort', 'ct.basedV': 'Heilbronn, Deutschland',
+      'form.name': 'Wie heißt du?', 'form.email': 'Deine E-Mail', 'form.business': 'Was für ein Laden / Studio?', 'form.msg': 'Worum gehts? (kurz reicht)', 'form.send': 'Nachricht senden',
+      'ft.built': 'Webentwicklung aus Heilbronn · Impressum auf Anfrage'
     },
     en: {
-      'nav.about': 'About', 'nav.work': 'Work', 'nav.stack': 'Stack', 'nav.contact': 'Contact', 'nav.start': 'Start a project',
-      'hero.pill': 'Available for new projects',
-      'hero.t1': 'Beautiful websites for ', 'hero.t2': 'restaurants', 'hero.t3': 'small businesses',
-      'hero.sub': "Freelance web developer based in Germany — specialised in modern, performant websites for restaurants, studios and small businesses. Clear concepts, clean code, personal service.",
-      'hero.cta1': 'Get in touch', 'hero.cta2': 'See examples',
-      'trust.1': 'Response time', 'trust.2num': 'from €390', 'trust.2': 'Fair pricing', 'trust.3': 'Personal',
-      'about.eyebrow': 'About', 'about.title': 'Attention to detail.',
+      'nav.about': 'About', 'nav.process': 'Process', 'nav.work': 'Work', 'nav.stack': 'Pricing', 'nav.contact': 'Contact', 'nav.start': 'Start a project',
+      'hero.pill': 'Booking new projects',
+      'hero.t1': 'A website that ', 'hero.t2': 'brings in guests', 'hero.tMid': ', not ', 'hero.t3': 'just compliments',
+      'hero.sub': "I build websites for restaurants, studios and small shops that want to look online the way they actually feel in real life. Heilbronn-based — you talk to me, not a hotline.",
+      'hero.cta1': 'Get a quote', 'hero.cta2': 'View live examples',
+      'trust.1num': '14 days', 'trust.1': 'To launch', 'trust.2num': 'from €390', 'trust.2': 'Transparent pricing', 'trust.3': 'Direct contact',
+      'about.eyebrow': 'About', 'about.title': "What you get.",
       'about.cap': 'Michael Rusch',
-      'about.p1': "I build websites for small businesses that want to look as polished outside as they are inside. My approach: every project gets the attention it deserves — no templates, no agency bureaucracy.",
-      'about.p2': 'The focus is on what matters: fast loading times, flawless display on every device, and content your customers understand instantly. Whether one-pager or multi-page site — clean code and a design that fits your brand.',
-      'about.p3': "Sounds like what you're looking for? Then let's talk. First consultation is free and no-obligation.",
-      'facts.name': 'Name', 'facts.based': 'Based', 'facts.basedV': 'Germany', 'facts.works': 'Works with', 'facts.worksV': 'small businesses', 'facts.lang': 'Languages',
+      'about.quote': "A good website feels like a good shop window — inviting, clear, and unmistakably yours.",
+      'about.quoteAuthor': 'Michael Rusch',
+      'about.p1': "You don't want a website that looks like every other one. You want one that shows your shop, your studio, your restaurant <strong>the way it really is</strong> — with its own character, clear information, and an easy way for customers to reach you.",
+      'about.p2': "That's what I do. No drag-and-drop builder, no template. We talk first, I build, you give feedback, we refine. Two weeks later you're live — clean, fast, mobile-ready.",
+      'about.p3': "<strong>The first call is free.</strong> No commitment, no sales pressure. If it's a fit, we'll make something good. If not, you've at least got clarity.",
+      'facts.name': 'Name', 'facts.based': 'Based in', 'facts.basedV': 'Heilbronn, DE', 'facts.works': 'Works with', 'facts.worksV': 'small businesses', 'facts.lang': 'Languages',
+      'proc.eyebrow': 'Process', 'proc.title': "How we'll work together.", 'proc.note': 'Four clear steps — no surprises, no stress.',
+      'proc.s1t': 'First call', 'proc.s1time': '~30 min · free',
+      'proc.s1text': "We talk about your project — what you need, what your customers need, what your budget allows. Honest and no-obligation. You get a clear written quote afterwards by email.",
+      'proc.s2t': 'Concept & design', 'proc.s2time': '3–5 days',
+      'proc.s2text': 'I draft a first proposal — structure, copy, look. You give feedback, we refine together until it clicks. Only then do we move on.',
+      'proc.s3t': 'Build', 'proc.s3time': '7–10 days',
+      'proc.s3text': "I turn the concept into a real, living website. Clean code, mobile-optimised, fast. You get regular progress updates — no black box.",
+      'proc.s4t': 'Launch & support', 'proc.s4time': 'Day X + 30 days support',
+      'proc.s4text': "I handle everything — domain, hosting, Google. You're online. In the first month, all adjustments are free: typos, swap photos, change copy. No extra charge.",
       'proj.eyebrow': 'Selected work', 'proj.title': 'Selected concepts.', 'proj.note': 'Sample designs across different industries.',
-      'proj.b1': 'Restaurant · One-pager', 'proj.s1': 'Italian restaurant: one-pager with menu, image gallery and integrated reservation system. Mobile-first, fast, inviting.',
-      'proj.b2': 'Flower shop · Small site', 'proj.s2': 'Florist boutique: three-page website with product overview, location info and contact section. Local SEO included.',
-      'proj.b3': 'Strength Studio · One-pager', 'proj.s3': 'Strength training studio in Stuttgart: one-pager with class offerings, pricing tiers, trainer profile and online booking. Editorial look, premium feel.',
-      'proj.b4': 'Open slot', 'proj.t4': 'Your project?', 'proj.s4': 'Your business could be here. I develop concept and implementation — tailored to your industry and audience.', 'proj.tag4': 'Open',
-      'car.tip': 'Tip:', 'car.keys': 'Arrow keys', 'car.preview': 'Preview', 'car.open': 'Open', 'car.soon': 'Demo coming soon', 'car.view': 'Take a look', 'car.start': 'Request a project',
-      'srv.eyebrow': 'Services', 'srv.title': 'Clearly structured packages.', 'srv.note': 'Transparent pricing — no hidden costs.',
-      'srv.p1': 'from €390', 'srv.1a': 'Single page, everything on it', 'srv.1b': 'Mobile-friendly', 'srv.1c': 'Contact form', 'srv.1d': 'Basic SEO optimisation',
+      'proj.b1': 'Restaurant · One-pager', 'proj.s1': 'Italian restaurant: one-pager with menu, photo gallery and built-in reservation system. Mobile-first, fast, inviting.',
+      'proj.b2': 'Flower shop · Small site', 'proj.s2': 'Florist boutique: three-page site with product overview, location details and contact section. Local SEO included.',
+      'proj.b3': 'Strength Studio · One-pager', 'proj.s3': 'Strength training studio in Stuttgart: one-pager with classes, pricing tiers, trainer profile and online booking. Editorial look, premium feel.',
+      'proj.b4': 'Open slot', 'proj.t4': 'Your project?', 'proj.s4': "Your business could be next. Concept and build, tailored to your industry and audience.", 'proj.tag4': 'Open',
+      'car.tip': 'Tip:', 'car.keys': 'Arrow keys', 'car.preview': 'Preview', 'car.open': 'Open', 'car.soon': 'Demo coming soon', 'car.view': 'View live', 'car.start': 'Request a project',
+      'srv.eyebrow': 'Pricing', 'srv.title': 'Three clear packages.', 'srv.note': 'Transparent pricing — no hidden fees.',
+      'srv.p1': 'from €390', 'srv.1a': 'Single page, everything on it', 'srv.1b': 'Mobile & desktop ready', 'srv.1c': 'Contact form included', 'srv.1d': 'Google SEO basics', 'srv.1e': '<strong>Live in 14 days</strong>', 'srv.1f': '<strong>30 days of free revisions</strong>',
       'srv.popular': 'Popular', 'srv.n2': 'Small website', 'srv.p2': 'from €890',
-      'srv.2a': 'Multiple subpages', 'srv.2b': 'Menu / gallery', 'srv.2c': 'Google Maps & contact', 'srv.2d': 'Self-maintainable',
+      'srv.2a': 'Up to 5 subpages', 'srv.2b': 'Gallery, menu, schedule', 'srv.2c': 'Google Maps & contact form', 'srv.2d': "You can update it yourself", 'srv.2e': '<strong>Live in 3–4 weeks</strong>', 'srv.2f': '<strong>60 days of free revisions</strong>',
       'srv.n3': 'Extras', 'srv.p3': 'on request',
-      'srv.3a': 'Domain & hosting setup', 'srv.3b': 'Copy & photo tuning', 'srv.3c': 'SEO basics', 'srv.3d': 'Expandable later',
+      'srv.3a': 'Domain & hosting setup', 'srv.3b': 'Copy & photo touch-ups', 'srv.3c': 'SEO basics', 'srv.3d': 'Easy to expand later',
       'srv.cta': 'Get started',
-      'ct.eyebrow': 'Contact', 'ct.title': 'Request a project.',
-      'ct.big': "Describe your project briefly — I'll respond within 24 hours with an initial assessment. First consultation is free.",
-      'ct.phone': 'Phone', 'ct.phoneV': '+49 · on request', 'ct.based': 'Based', 'ct.basedV': 'Germany',
-      'form.name': 'Name', 'form.msg': 'Message', 'form.send': 'Send',
-      'ft.built': 'Built with HTML, CSS & JavaScript.'
+      'ct.eyebrow': 'Contact', 'ct.title': 'Start your project.',
+      'ct.big': "Tell me briefly about your project — I'll get back to you <strong>within 24 hours</strong> with an honest take. First conversation is free, no pressure.",
+      'ct.phone': 'Phone', 'ct.phoneV': '+49 · on request', 'ct.based': 'Based in', 'ct.basedV': 'Heilbronn, Germany',
+      'form.name': "Your name", 'form.email': 'Your email', 'form.business': 'What kind of business?', 'form.msg': "What's it about? (a sentence is plenty)", 'form.send': 'Send message',
+      'ft.built': 'Web development from Heilbronn · Imprint on request'
     }
   };
 
@@ -1474,7 +1691,13 @@
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (translations[lang][key] !== undefined) {
-        el.textContent = translations[lang][key];
+        const val = translations[lang][key];
+        // Wenn HTML-Tags drin sind, nutze innerHTML
+        if (val.indexOf('<') !== -1) {
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
+        }
       }
     });
     localStorage.setItem('lang', lang);
@@ -1737,9 +1960,10 @@
     e.preventDefault();
     const name = document.getElementById('f-name').value;
     const email = document.getElementById('f-email').value;
+    const business = document.getElementById('f-business').value;
     const msg = document.getElementById('f-msg').value;
-    const subject = encodeURIComponent('Anfrage von ' + name);
-    const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + '\n\nNachricht:\n' + msg);
+    const subject = encodeURIComponent('Anfrage von ' + name + (business ? ' (' + business + ')' : ''));
+    const body = encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + (business ? '\nBranche: ' + business : '') + '\n\nNachricht:\n' + msg);
     window.location.href = 'mailto:michael.rusch@gmail.com?subject=' + subject + '&body=' + body;
   });
 </script>
