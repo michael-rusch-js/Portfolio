@@ -1126,7 +1126,7 @@
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <div class="mini-gallery" data-gallery>
                 <div class="mini-gallery__track">
-                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="0">
+                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="180">
                     <iframe src="demos/trattoria/" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Start"></iframe>
                   </div>
                   <div class="mini-gallery__frame" data-page="Speisekarte" data-scroll="menu">
@@ -1169,7 +1169,7 @@
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <div class="mini-gallery" data-gallery>
                 <div class="mini-gallery__track">
-                  <div class="mini-gallery__frame is-active" data-page="Sortiment">
+                  <div class="mini-gallery__frame is-active" data-page="Sortiment" data-scroll="160">
                     <iframe src="demos/blumen-meier/index.html" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Sortiment"></iframe>
                   </div>
                   <div class="mini-gallery__frame" data-page="Standort">
@@ -1209,7 +1209,7 @@
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <div class="mini-gallery" data-gallery>
                 <div class="mini-gallery__track">
-                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="0">
+                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="220">
                     <iframe src="demos/forge-and-form/" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Start"></iframe>
                   </div>
                   <div class="mini-gallery__frame" data-page="Kurse" data-scroll="courses">
@@ -1647,7 +1647,10 @@
     }
     const dots = dotsContainer.querySelectorAll('.mini-gallery__dot');
 
-    // Wenn iframe einen data-scroll-Anker hat, scrolle nach Laden zu dem Bereich
+    // data-scroll kann sein:
+    //   - "0" oder leer: kein Scrollen (oben bleiben)
+    //   - eine Zahl wie "200": so viele Pixel nach unten scrollen
+    //   - ein Anker wie "menu": zur Element-ID scrollen
     items.forEach(item => {
       if (item.tagName !== 'DIV') return;
       const iframe = item.querySelector('iframe');
@@ -1657,9 +1660,14 @@
         try {
           const doc = iframe.contentDocument;
           if (!doc) return;
+          // Wenn nur Zahl: Pixel-Scroll
+          if (/^\d+$/.test(scrollTarget)) {
+            iframe.contentWindow.scrollTo(0, parseInt(scrollTarget, 10));
+            return;
+          }
+          // Sonst Anker-ID
           const target = doc.getElementById(scrollTarget);
           if (target) {
-            // Direkt zur Position springen (ohne smooth scroll)
             const top = target.getBoundingClientRect().top + iframe.contentWindow.pageYOffset - 20;
             iframe.contentWindow.scrollTo(0, top);
           }
