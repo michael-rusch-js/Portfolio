@@ -1112,16 +1112,16 @@
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <div class="mini-gallery" data-gallery>
                 <div class="mini-gallery__track">
-                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="8%">
+                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="0">
                     <iframe src="demos/trattoria/" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Start"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Geschichte" data-scroll="storia">
+                    <iframe src="demos/trattoria/#storia" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Geschichte"></iframe>
                   </div>
                   <div class="mini-gallery__frame" data-page="Speisekarte" data-scroll="menu">
                     <iframe src="demos/trattoria/#menu" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Speisekarte"></iframe>
                   </div>
-                  <div class="mini-gallery__frame" data-page="Galerie" data-scroll="galleria">
-                    <iframe src="demos/trattoria/#galleria" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Galerie"></iframe>
-                  </div>
-                  <div class="mini-gallery__frame" data-page="Reservierung" data-scroll="80%">
+                  <div class="mini-gallery__frame" data-page="Reservierung" data-scroll="reservierung">
                     <iframe src="demos/trattoria/#reservierung" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Reservierung"></iframe>
                   </div>
                 </div>
@@ -1155,13 +1155,13 @@
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <div class="mini-gallery" data-gallery>
                 <div class="mini-gallery__track">
-                  <div class="mini-gallery__frame is-active" data-page="Sortiment" data-scroll="0">
-                    <iframe src="demos/blumen-meier/index.html" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Sortiment"></iframe>
+                  <div class="mini-gallery__frame is-active" data-page="Sortiment" data-scroll="sortiment">
+                    <iframe src="demos/blumen-meier/index.html#sortiment" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Sortiment"></iframe>
                   </div>
-                  <div class="mini-gallery__frame" data-page="Standort" data-scroll="40%">
+                  <div class="mini-gallery__frame" data-page="Standort" data-scroll="0">
                     <iframe src="demos/blumen-meier/standort.html" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Standort"></iframe>
                   </div>
-                  <div class="mini-gallery__frame" data-page="Kontakt" data-scroll="35%">
+                  <div class="mini-gallery__frame" data-page="Kontakt" data-scroll="0">
                     <iframe src="demos/blumen-meier/kontakt.html" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Kontakt"></iframe>
                   </div>
                 </div>
@@ -1195,7 +1195,7 @@
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <div class="mini-gallery" data-gallery>
                 <div class="mini-gallery__track">
-                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="25%">
+                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="0">
                     <iframe src="demos/forge-and-form/" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Start"></iframe>
                   </div>
                   <div class="mini-gallery__frame" data-page="Kurse" data-scroll="courses">
@@ -1691,8 +1691,9 @@
         // Anker-ID
         const target = doc.getElementById(scrollTarget);
         if (target) {
-          const top = target.getBoundingClientRect().top + iframe.contentWindow.pageYOffset - 20;
-          iframe.contentWindow.scrollTo(0, top);
+          // 60px Puffer nach oben, damit Überschrift gut sichtbar ist
+          const top = target.getBoundingClientRect().top + iframe.contentWindow.pageYOffset - 60;
+          iframe.contentWindow.scrollTo(0, Math.max(0, top));
         }
       } catch (err) { /* CORS-fail silent */ }
     }
