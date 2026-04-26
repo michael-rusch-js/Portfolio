@@ -451,10 +451,145 @@
     background: linear-gradient(135deg, #c5532e, #9a3d1e);
   }
   .slide__preview--trattoria::before { display: none; }
-  .slide__preview--blumen {
-    background: linear-gradient(135deg, #f7f2ea, #ebe0cc);
+
+  /* ========= MINI-GALERIE ========= */
+  .slide__preview--gallery {
+    background: #1a1410;
+    padding: 0;
   }
-  .slide__preview--blumen::before { display: none; }
+  .slide__preview--gallery::before { display: none; }
+  .mini-gallery {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .mini-gallery__track {
+    position: absolute;
+    inset: 0;
+  }
+  .mini-gallery__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    overflow: hidden;
+    background: #f7f2ea;
+    pointer-events: none;
+  }
+  .mini-gallery__frame.is-active {
+    opacity: 1;
+  }
+  .mini-gallery__frame iframe {
+    /* Wir machen die Webseite klein durch Zoom + Skalierung,
+       damit die ganze Website-Vorschau reinpasst. */
+    width: 1280px;
+    height: 1800px;
+    border: none;
+    transform: scale(0.35);
+    transform-origin: top left;
+    pointer-events: none;
+    display: block;
+  }
+  @media (min-width: 800px) {
+    .mini-gallery__frame iframe {
+      width: 1280px;
+      height: 1500px;
+      transform: scale(0.45);
+    }
+  }
+  /* Skaliert sich automatisch je nach Slide-Breite */
+  @media (max-width: 500px) {
+    .mini-gallery__frame iframe {
+      width: 1000px;
+      height: 1500px;
+      transform: scale(0.32);
+    }
+  }
+  .mini-gallery__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    color: #1a1410;
+    border: none;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    padding: 0;
+  }
+  .mini-gallery__btn:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.1);
+  }
+  .mini-gallery__btn--prev { left: 12px; }
+  .mini-gallery__btn--next { right: 12px; }
+  .mini-gallery__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 16px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .mini-gallery__counter {
+    font-size: 11px;
+    opacity: 0.85;
+    background: rgba(0,0,0,0.4);
+    padding: 3px 8px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .mini-gallery__dots {
+    position: absolute;
+    bottom: 52px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 3;
+  }
+  .mini-gallery__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .mini-gallery__dot.is-active {
+    background: #fff;
+    width: 18px;
+    border-radius: 999px;
+  }
+  /* Hide arrows on small screens, only show dots */
+  @media (max-width: 600px) {
+    .mini-gallery__btn { width: 36px; height: 36px; font-size: 20px; }
+    .mini-gallery__btn--prev { left: 8px; }
+    .mini-gallery__btn--next { right: 8px; }
+  }
   .slide__tag {
     position: absolute;
     top: 16px; left: 16px;
@@ -987,54 +1122,31 @@
         <div class="carousel__track" id="cTrack">
 
           <article class="slide">
-            <div class="slide__preview slide__preview--trattoria" data-emoji="🍝">
+            <div class="slide__preview slide__preview--gallery" data-emoji="🍝">
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
-              <svg class="slide__svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                <defs>
-                  <linearGradient id="trattBg" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#c5532e"/>
-                    <stop offset="100%" stop-color="#9a3d1e"/>
-                  </linearGradient>
-                  <linearGradient id="trattPaper" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#faf6ee"/>
-                    <stop offset="100%" stop-color="#ede1cc"/>
-                  </linearGradient>
-                </defs>
-                <rect width="400" height="300" fill="url(#trattBg)"/>
-
-                <g opacity="0.18" fill="#3d4a26">
-                  <ellipse cx="40" cy="40" rx="14" ry="6" transform="rotate(-30 40 40)"/>
-                  <ellipse cx="60" cy="55" rx="12" ry="5" transform="rotate(20 60 55)"/>
-                  <ellipse cx="80" cy="75" rx="14" ry="6" transform="rotate(-30 80 75)"/>
-                  <ellipse cx="360" cy="240" rx="14" ry="6" transform="rotate(40 360 240)"/>
-                  <ellipse cx="345" cy="260" rx="12" ry="5" transform="rotate(-10 345 260)"/>
-                </g>
-
-                <rect x="60" y="62" width="280" height="190" rx="10" fill="rgba(0,0,0,0.25)"/>
-                <rect x="56" y="58" width="280" height="190" rx="10" fill="url(#trattPaper)"/>
-                <rect x="56" y="58" width="280" height="22" rx="10" fill="#ede1cc"/>
-                <rect x="56" y="72" width="280" height="8" fill="#ede1cc"/>
-                <circle cx="68" cy="69" r="3" fill="#c5532e"/>
-                <circle cx="78" cy="69" r="3" fill="#c89849"/>
-                <circle cx="88" cy="69" r="3" fill="#5a6b3a"/>
-                <rect x="100" y="65" width="180" height="9" rx="4.5" fill="#faf6ee"/>
-
-                <text x="196" y="125" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-style="italic" font-weight="700" fill="#c5532e">Trattoria</text>
-                <text x="196" y="148" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#2a1810" letter-spacing="3">DA LUCA</text>
-
-                <line x1="120" y1="162" x2="180" y2="162" stroke="#c89849" stroke-width="1"/>
-                <text x="196" y="166" text-anchor="middle" font-size="10" fill="#c89849">★</text>
-                <line x1="212" y1="162" x2="272" y2="162" stroke="#c89849" stroke-width="1"/>
-
-                <text x="196" y="184" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#5a6b3a" letter-spacing="2">CUCINA ITALIANA</text>
-
-                <rect x="156" y="200" width="80" height="22" rx="11" fill="#c5532e"/>
-                <text x="196" y="215" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#faf6ee" font-weight="600" letter-spacing="1">RESERVIEREN</text>
-
-                <rect x="80" y="234" width="60" height="2" rx="1" fill="#c89849" opacity="0.5"/>
-                <rect x="170" y="234" width="60" height="2" rx="1" fill="#c89849" opacity="0.5"/>
-                <rect x="260" y="234" width="56" height="2" rx="1" fill="#c89849" opacity="0.5"/>
-              </svg>
+              <div class="mini-gallery" data-gallery>
+                <div class="mini-gallery__track">
+                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="0">
+                    <iframe src="demos/trattoria/" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Start"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Speisekarte" data-scroll="menu">
+                    <iframe src="demos/trattoria/#menu" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Speisekarte"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Galerie" data-scroll="galleria">
+                    <iframe src="demos/trattoria/#galleria" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Galerie"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Reservierung" data-scroll="reservierung">
+                    <iframe src="demos/trattoria/#reservierung" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Reservierung"></iframe>
+                  </div>
+                </div>
+                <button class="mini-gallery__btn mini-gallery__btn--prev" data-gallery-prev type="button" aria-label="Vorheriger Bereich">‹</button>
+                <button class="mini-gallery__btn mini-gallery__btn--next" data-gallery-next type="button" aria-label="Nächster Bereich">›</button>
+                <div class="mini-gallery__dots" data-gallery-dots></div>
+                <div class="mini-gallery__caption">
+                  <span data-gallery-caption>Start</span>
+                  <span class="mini-gallery__counter"><span data-gallery-current>1</span>/<span data-gallery-total>4</span></span>
+                </div>
+              </div>
               <span class="slide__num-big">01</span>
             </div>
             <div class="slide__body">
@@ -1053,63 +1165,28 @@
           </article>
 
           <article class="slide">
-            <div class="slide__preview slide__preview--blumen" data-emoji="🌷">
+            <div class="slide__preview slide__preview--gallery" data-emoji="🌷">
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
-              <svg class="slide__svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                <defs>
-                  <linearGradient id="blumenBg" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#f7f2ea"/>
-                    <stop offset="100%" stop-color="#ebe0cc"/>
-                  </linearGradient>
-                  <linearGradient id="blumenPaper" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#fdfaf4"/>
-                    <stop offset="100%" stop-color="#f7f2ea"/>
-                  </linearGradient>
-                </defs>
-                <rect width="400" height="300" fill="url(#blumenBg)"/>
-
-                <g opacity="0.5">
-                  <circle cx="55" cy="55" r="10" fill="#e8b8a8"/>
-                  <circle cx="55" cy="55" r="5" fill="#c97e63"/>
-                  <ellipse cx="40" cy="65" rx="8" ry="3" fill="#6b7a4f" transform="rotate(-30 40 65)"/>
-                  <ellipse cx="70" cy="65" rx="8" ry="3" fill="#6b7a4f" transform="rotate(30 70 65)"/>
-                </g>
-                <g opacity="0.5">
-                  <circle cx="350" cy="245" r="9" fill="#c97e63"/>
-                  <circle cx="350" cy="245" r="4" fill="#a85f47"/>
-                  <ellipse cx="338" cy="255" rx="7" ry="3" fill="#6b7a4f" transform="rotate(-30 338 255)"/>
-                  <ellipse cx="362" cy="255" rx="7" ry="3" fill="#6b7a4f" transform="rotate(30 362 255)"/>
-                </g>
-                <g opacity="0.35">
-                  <circle cx="370" cy="60" r="6" fill="#e8b8a8"/>
-                  <ellipse cx="375" cy="68" rx="5" ry="2" fill="#6b7a4f" transform="rotate(40 375 68)"/>
-                </g>
-
-                <rect x="60" y="62" width="280" height="190" rx="10" fill="rgba(45,36,28,0.18)"/>
-                <rect x="56" y="58" width="280" height="190" rx="10" fill="url(#blumenPaper)"/>
-                <rect x="56" y="58" width="280" height="22" rx="10" fill="#f0e8db"/>
-                <rect x="56" y="72" width="280" height="8" fill="#f0e8db"/>
-                <circle cx="68" cy="69" r="3" fill="#c97e63"/>
-                <circle cx="78" cy="69" r="3" fill="#e8b8a8"/>
-                <circle cx="88" cy="69" r="3" fill="#6b7a4f"/>
-                <rect x="100" y="65" width="180" height="9" rx="4.5" fill="#fdfaf4"/>
-
-                <text x="196" y="120" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#8a7a66" letter-spacing="3">FLORISTIK-BOUTIQUE</text>
-
-                <text x="196" y="148" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-style="italic" font-weight="700" fill="#c97e63">Blumen</text>
-                <text x="196" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="500" fill="#2d241c">Meier</text>
-
-                <line x1="140" y1="184" x2="180" y2="184" stroke="#6b7a4f" stroke-width="0.8"/>
-                <circle cx="196" cy="184" r="2" fill="#c97e63"/>
-                <line x1="212" y1="184" x2="252" y2="184" stroke="#6b7a4f" stroke-width="0.8"/>
-
-                <rect x="141" y="200" width="110" height="22" rx="11" fill="#2d241c"/>
-                <text x="196" y="215" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#fdfaf4" letter-spacing="0.5">STRAUSS BESTELLEN</text>
-
-                <text x="80" y="240" font-family="Georgia, serif" font-size="8" fill="#8a7a66">SORTIMENT</text>
-                <text x="170" y="240" font-family="Georgia, serif" font-size="8" fill="#8a7a66">STANDORT</text>
-                <text x="260" y="240" font-family="Georgia, serif" font-size="8" fill="#8a7a66">KONTAKT</text>
-              </svg>
+              <div class="mini-gallery" data-gallery>
+                <div class="mini-gallery__track">
+                  <div class="mini-gallery__frame is-active" data-page="Sortiment">
+                    <iframe src="demos/blumen-meier/index.html" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Sortiment"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Standort">
+                    <iframe src="demos/blumen-meier/standort.html" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Standort"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Kontakt">
+                    <iframe src="demos/blumen-meier/kontakt.html" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Kontakt"></iframe>
+                  </div>
+                </div>
+                <button class="mini-gallery__btn mini-gallery__btn--prev" data-gallery-prev type="button" aria-label="Vorherige Seite">‹</button>
+                <button class="mini-gallery__btn mini-gallery__btn--next" data-gallery-next type="button" aria-label="Nächste Seite">›</button>
+                <div class="mini-gallery__dots" data-gallery-dots></div>
+                <div class="mini-gallery__caption">
+                  <span data-gallery-caption>Sortiment</span>
+                  <span class="mini-gallery__counter"><span data-gallery-current>1</span>/<span data-gallery-total>3</span></span>
+                </div>
+              </div>
               <span class="slide__num-big">02</span>
             </div>
             <div class="slide__body">
@@ -1450,10 +1527,15 @@
     if (e.key === 'ArrowRight') goTo(currentSlide + 1);
   });
 
-  // Swipe
+  // Swipe (ignoriert Swipes innerhalb einer Mini-Galerie)
   let touchStartX = 0;
-  cViewport.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  let touchInGallery = false;
+  cViewport.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchInGallery = e.target.closest('[data-gallery]') !== null;
+  }, { passive: true });
   cViewport.addEventListener('touchend', (e) => {
+    if (touchInGallery) return;
     const diff = touchStartX - e.changedTouches[0].screenX;
     if (Math.abs(diff) > 50) {
       if (diff > 0) goTo(currentSlide + 1);
@@ -1515,6 +1597,84 @@
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  // ============ MINI-GALERIE ============
+  document.querySelectorAll('[data-gallery]').forEach(gallery => {
+    const items = gallery.querySelectorAll('.mini-gallery__img, .mini-gallery__frame');
+    const dotsContainer = gallery.querySelector('[data-gallery-dots]');
+    const captionEl = gallery.querySelector('[data-gallery-caption]');
+    const currentEl = gallery.querySelector('[data-gallery-current]');
+    const totalEl = gallery.querySelector('[data-gallery-total]');
+    const prevBtn = gallery.querySelector('[data-gallery-prev]');
+    const nextBtn = gallery.querySelector('[data-gallery-next]');
+
+    if (!items.length) return;
+    let idx = 0;
+    const total = items.length;
+    if (totalEl) totalEl.textContent = total;
+
+    // Build dots
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'mini-gallery__dot';
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Seite ' + (i + 1));
+      dot.addEventListener('click', (e) => { e.stopPropagation(); show(i); });
+      dotsContainer.appendChild(dot);
+    }
+    const dots = dotsContainer.querySelectorAll('.mini-gallery__dot');
+
+    // Wenn iframe einen data-scroll-Anker hat, scrolle nach Laden zu dem Bereich
+    items.forEach(item => {
+      if (item.tagName !== 'DIV') return;
+      const iframe = item.querySelector('iframe');
+      const scrollTarget = item.dataset.scroll;
+      if (!iframe || !scrollTarget || scrollTarget === '0') return;
+      iframe.addEventListener('load', () => {
+        try {
+          const doc = iframe.contentDocument;
+          if (!doc) return;
+          const target = doc.getElementById(scrollTarget);
+          if (target) {
+            // Direkt zur Position springen (ohne smooth scroll)
+            const top = target.getBoundingClientRect().top + iframe.contentWindow.pageYOffset - 20;
+            iframe.contentWindow.scrollTo(0, top);
+          }
+        } catch (err) {
+          // CORS oder anderer Fehler — silent failen
+        }
+      });
+    });
+
+    function show(n) {
+      idx = (n + total) % total;
+      items.forEach((it, i) => it.classList.toggle('is-active', i === idx));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      if (captionEl) {
+        const label = items[idx].dataset.page || items[idx].alt || '';
+        captionEl.textContent = label;
+      }
+      if (currentEl) currentEl.textContent = idx + 1;
+    }
+
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+
+    // Touch/Swipe innerhalb der Mini-Galerie
+    let tStartX = 0;
+    gallery.addEventListener('touchstart', (e) => {
+      tStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    gallery.addEventListener('touchend', (e) => {
+      const diff = tStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) {
+        e.stopPropagation();
+        if (diff > 0) show(idx + 1); else show(idx - 1);
+      }
+    }, { passive: true });
+
+    show(0);
   });
 
   // Form -> mailto
