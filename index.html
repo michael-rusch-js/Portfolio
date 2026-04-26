@@ -1205,22 +1205,44 @@
           </article>
 
           <article class="slide">
-            <div class="slide__preview" style="--proj-color: #16a085; --proj-color-2: #0e6655;" data-emoji="🧘">
+            <div class="slide__preview slide__preview--gallery" data-emoji="🏋️">
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
-              <span class="slide__emoji">🧘</span>
+              <div class="mini-gallery" data-gallery>
+                <div class="mini-gallery__track">
+                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="0">
+                    <iframe src="demos/forge-and-form/" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Start"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Kurse" data-scroll="courses">
+                    <iframe src="demos/forge-and-form/#courses" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Kurse"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Preise" data-scroll="pricing">
+                    <iframe src="demos/forge-and-form/#pricing" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Preise"></iframe>
+                  </div>
+                  <div class="mini-gallery__frame" data-page="Buchung" data-scroll="booking">
+                    <iframe src="demos/forge-and-form/#booking" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Buchung"></iframe>
+                  </div>
+                </div>
+                <button class="mini-gallery__btn mini-gallery__btn--prev" data-gallery-prev type="button" aria-label="Vorheriger Bereich">‹</button>
+                <button class="mini-gallery__btn mini-gallery__btn--next" data-gallery-next type="button" aria-label="Nächster Bereich">›</button>
+                <div class="mini-gallery__dots" data-gallery-dots></div>
+                <div class="mini-gallery__caption">
+                  <span data-gallery-caption>Start</span>
+                  <span class="mini-gallery__counter"><span data-gallery-current>1</span>/<span data-gallery-total>4</span></span>
+                </div>
+              </div>
               <span class="slide__num-big">03</span>
             </div>
             <div class="slide__body">
-              <span class="slide__cat" data-i18n="proj.b3">Studio · One-Pager</span>
-              <h3 class="slide__name">Yoga mit Sarah</h3>
-              <p class="slide__sum" data-i18n="proj.s3">Yoga-Studio: One-Pager mit Kursplan, Preisstruktur, Trainerprofil und Online-Buchungsanbindung. Reduziertes Design, klare Hierarchie.</p>
+              <span class="slide__cat" data-i18n="proj.b3">Strength Studio · One-Pager</span>
+              <h3 class="slide__name">Forge <span class="accent-word">&amp; Form</span></h3>
+              <p class="slide__sum" data-i18n="proj.s3">Krafttraining-Studio in Stuttgart: One-Pager mit Kursangebot, Preismodellen, Trainerprofil und Online-Buchung. Editorial-Look, hochwertige Anmutung.</p>
               <div class="slide__chips">
-                <span class="slide__chip">Studio</span>
+                <span class="slide__chip">Strength</span>
                 <span class="slide__chip">One-Pager</span>
                 <span class="slide__chip">Buchung</span>
               </div>
-              <button class="slide__view slide__view--soon" data-demo="" type="button">
-                <span data-i18n="car.soon">Demo folgt bald</span> ○
+              <button class="slide__view" data-demo="demos/forge-and-form/" type="button">
+                <span data-i18n="car.view">Reinschauen</span> →
               </button>
             </div>
           </article>
@@ -1406,7 +1428,7 @@
       'proj.eyebrow': 'Beispielprojekte', 'proj.title': 'Ausgewählte Konzepte.', 'proj.note': 'Beispielentwürfe für unterschiedliche Branchen.',
       'proj.b1': 'Restaurant · One-Pager', 'proj.s1': 'Italienisches Restaurant: One-Pager mit Speisekarte, Bildgalerie und integriertem Reservierungssystem. Mobil-first, schnell, einladend.',
       'proj.b2': 'Blumenladen · Kleine Seite', 'proj.s2': 'Floristik-Boutique: dreiseitige Website mit Sortimentsübersicht, Standortinformationen und Kontaktbereich. Lokales SEO inklusive.',
-      'proj.b3': 'Studio · One-Pager', 'proj.s3': 'Yoga-Studio: One-Pager mit Kursplan, Preisstruktur, Trainerprofil und Online-Buchungsanbindung. Reduziertes Design, klare Hierarchie.',
+      'proj.b3': 'Strength Studio · One-Pager', 'proj.s3': 'Krafttraining-Studio in Stuttgart: One-Pager mit Kursangebot, Preismodellen, Trainerprofil und Online-Buchung. Editorial-Look, hochwertige Anmutung.',
       'proj.b4': 'Freier Platz', 'proj.t4': 'Dein Projekt?', 'proj.s4': 'Dein Unternehmen kann hier stehen. Ich entwickle Konzept und Umsetzung — auf deine Branche und Zielgruppe zugeschnitten.', 'proj.tag4': 'Frei',
       'car.tip': 'Tipp:', 'car.keys': 'Pfeiltasten', 'car.preview': 'Vorschau', 'car.open': 'Frei', 'car.soon': 'Demo folgt bald', 'car.view': 'Reinschauen', 'car.start': 'Projekt anfragen',
       'srv.eyebrow': 'Pakete', 'srv.title': 'Klar strukturierte Pakete.', 'srv.note': 'Transparent kalkuliert — keine versteckten Kosten.',
@@ -1438,7 +1460,7 @@
       'proj.eyebrow': 'Selected work', 'proj.title': 'Selected concepts.', 'proj.note': 'Sample designs across different industries.',
       'proj.b1': 'Restaurant · One-pager', 'proj.s1': 'Italian restaurant: one-pager with menu, image gallery and integrated reservation system. Mobile-first, fast, inviting.',
       'proj.b2': 'Flower shop · Small site', 'proj.s2': 'Florist boutique: three-page website with product overview, location info and contact section. Local SEO included.',
-      'proj.b3': 'Studio · One-pager', 'proj.s3': 'Yoga studio: one-pager with class schedule, pricing, instructor profile and online booking integration. Reduced design, clear hierarchy.',
+      'proj.b3': 'Strength Studio · One-pager', 'proj.s3': 'Strength training studio in Stuttgart: one-pager with class offerings, pricing tiers, trainer profile and online booking. Editorial look, premium feel.',
       'proj.b4': 'Open slot', 'proj.t4': 'Your project?', 'proj.s4': 'Your business could be here. I develop concept and implementation — tailored to your industry and audience.', 'proj.tag4': 'Open',
       'car.tip': 'Tip:', 'car.keys': 'Arrow keys', 'car.preview': 'Preview', 'car.open': 'Open', 'car.soon': 'Demo coming soon', 'car.view': 'Take a look', 'car.start': 'Request a project',
       'srv.eyebrow': 'Services', 'srv.title': 'Clearly structured packages.', 'srv.note': 'Transparent pricing — no hidden costs.',
