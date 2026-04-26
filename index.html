@@ -483,11 +483,8 @@
     opacity: 1;
   }
   .mini-gallery__frame iframe {
-    /* iframe wird IMMER mit 1280px Breite gerendert - überall identisch.
-       Die Skalierung wird per JS dynamisch gesetzt, sodass die Vorschau
-       die komplette Container-Breite ausfüllt - egal welches Gerät. */
     width: 1280px;
-    height: 1900px;
+    height: 2400px;
     border: none;
     transform: scale(var(--gallery-scale, 0.4));
     transform-origin: top left;
@@ -1121,6 +1118,9 @@
                   <div class="mini-gallery__frame" data-page="Speisekarte" data-scroll="menu">
                     <iframe src="demos/trattoria/#menu" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Speisekarte"></iframe>
                   </div>
+                  <div class="mini-gallery__frame" data-page="Galerie" data-scroll="galleria">
+                    <iframe src="demos/trattoria/#galleria" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Galerie"></iframe>
+                  </div>
                   <div class="mini-gallery__frame" data-page="Reservierung" data-scroll="reservierung">
                     <iframe src="demos/trattoria/#reservierung" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Reservierung"></iframe>
                   </div>
@@ -1130,7 +1130,7 @@
                 <div class="mini-gallery__dots" data-gallery-dots></div>
                 <div class="mini-gallery__caption">
                   <span data-gallery-caption>Start</span>
-                  <span class="mini-gallery__counter"><span data-gallery-current>1</span>/<span data-gallery-total>4</span></span>
+                  <span class="mini-gallery__counter"><span data-gallery-current>1</span>/<span data-gallery-total>5</span></span>
                 </div>
               </div>
               <span class="slide__num-big">01</span>
@@ -1195,7 +1195,7 @@
               <span class="slide__tag" data-i18n="car.preview">Vorschau</span>
               <div class="mini-gallery" data-gallery>
                 <div class="mini-gallery__track">
-                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="0">
+                  <div class="mini-gallery__frame is-active" data-page="Start" data-scroll="30%">
                     <iframe src="demos/forge-and-form/" loading="lazy" sandbox="allow-same-origin allow-scripts" title="Start"></iframe>
                   </div>
                   <div class="mini-gallery__frame" data-page="Kurse" data-scroll="courses">
