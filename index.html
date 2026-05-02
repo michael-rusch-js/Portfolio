@@ -1395,24 +1395,69 @@
     transform: none;
   }
 
+  .field__optional {
+    color: var(--fg-faint);
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+
   .form__terms {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    font-size: 13.5px;
-    color: var(--fg-muted);
-    line-height: 1.5;
-  }
-  .form__terms input {
+    gap: 12px;
+    padding: 4px 0;
+    cursor: pointer;
     margin-top: 4px;
-    width: auto;
-    accent-color: var(--accent);
-    flex-shrink: 0;
   }
-  .form__terms a {
+  .form__terms input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .form__terms-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1.5px solid var(--border-strong);
+    background: var(--card);
+    flex-shrink: 0;
+    transition: all 0.15s;
+    color: transparent;
+    margin-top: 1px;
+  }
+  .form__terms-box svg {
+    width: 16px;
+    height: 16px;
+  }
+  .form__terms input:checked ~ .form__terms-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .form__terms:hover .form__terms-box {
+    border-color: var(--accent);
+  }
+  .form__terms input:focus-visible ~ .form__terms-box {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .form__terms-text {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+  }
+  .form__terms-text a {
     color: var(--accent);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 2px;
+  }
+  .form__terms-text a:hover {
+    color: var(--fg);
   }
 
   /* Form-Status-Meldungen */
@@ -2148,7 +2193,7 @@
           <input id="f-email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field">
-          <label for="f-phone" data-i18n="form.phone">Telefonnummer <span style="color: var(--fg-faint);">(freiwillig)</span></label>
+          <label for="f-phone" data-i18n="form.phone">Telefon <span class="field__optional" data-i18n="form.optional">(optional)</span></label>
           <input id="f-phone" name="phone" type="tel" autocomplete="tel" data-i18n-placeholder="form.phonePh" placeholder="+49 ...">
         </div>
         <div class="field">
@@ -2187,9 +2232,14 @@
         </div>
         <label class="form__terms">
           <input type="checkbox" id="f-terms" name="terms" required>
-          <span data-i18n="form.terms">Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> gelesen und akzeptiere sie.</span>
+          <span class="form__terms-box" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8L7 12L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="form__terms-text" data-i18n="form.terms">Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> und <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu.</span>
         </label>
-                <button type="submit" class="form__submit"><span data-i18n="form.send">Nachricht senden</span> →</button>
+        <button type="submit" class="form__submit"><span data-i18n="form.send">Nachricht senden</span> →</button>
       </form>
     </div>
   </div>
@@ -2451,7 +2501,7 @@
       'ct.eyebrow': 'Kontakt', 'ct.title': 'Projekt anfragen.',
       'ct.big': 'Beschreib mir kurz dein Vorhaben - ich melde mich <strong>innerhalb von 24 Stunden</strong> mit einer ehrlichen Einschätzung. Erstgespräch kostenfrei, kein Verkaufsdruck.',
       'ct.phone': 'Telefon', 'ct.phoneV': '+49 157 36168028', 'ct.based': 'Standort', 'ct.basedV': 'Heilbronn, Deutschland',
-      'form.name': 'Wie heißt du?', 'form.email': 'Deine E-Mail', 'form.phone': 'Telefonnummer <span style="color: var(--fg-faint);">(freiwillig)</span>', 'form.phonePh': '+49 ...', 'form.business': 'Was für ein Laden / Studio?', 'form.businessPh': 'z.B. Restaurant, Yoga-Studio, Friseur ...', 'form.package': 'Welches Paket interessiert dich?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'ab 390 €', 'form.pkgSmall': 'Kleine Website', 'form.pkgSmallPrice': 'ab 890 €', 'form.pkgUnsure': 'Noch unsicher', 'form.pkgUnsureSub': 'Beraten lassen', 'form.msg': 'Worum gehts? (kurz reicht)', 'form.msgPh': 'Brauchst du eine neue Website oder eine Überarbeitung? Was ist dir besonders wichtig?', 'form.terms': 'Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> gelesen und akzeptiere sie.', 'form.send': 'Nachricht senden',
+      'form.name': 'Wie heißt du?', 'form.email': 'Deine E-Mail', 'form.phone': 'Telefon', 'form.optional': '(optional)', 'form.phonePh': '+49 ...', 'form.business': 'Was für ein Laden / Studio?', 'form.businessPh': 'z.B. Restaurant, Yoga-Studio, Friseur ...', 'form.package': 'Welches Paket interessiert dich?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'ab 390 €', 'form.pkgSmall': 'Kleine Website', 'form.pkgSmallPrice': 'ab 890 €', 'form.pkgUnsure': 'Noch unsicher', 'form.pkgUnsureSub': 'Beraten lassen', 'form.msg': 'Worum gehts? (kurz reicht)', 'form.msgPh': 'Brauchst du eine neue Website oder eine Überarbeitung? Was ist dir besonders wichtig?', 'form.terms': 'Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> und <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu.', 'form.send': 'Nachricht senden',
       'ft.built': 'Webentwicklung aus Heilbronn · Impressum auf Anfrage', 'ft.imprint': 'Impressum', 'ft.privacy': 'Datenschutz', 'ft.terms': 'AGB',
       'cookie.text': '<strong>Hinweis:</strong> Diese Website nutzt nur technisch notwendige Daten und externe Schriften (Google Fonts) sowie Bilder (Unsplash). Es werden keine Tracking-Cookies gesetzt. Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.',
       'cookie.ok': 'Verstanden',
@@ -2513,7 +2563,7 @@
       'ct.eyebrow': 'Contact', 'ct.title': 'Start your project.',
       'ct.big': "Tell me briefly about your project - I'll get back to you <strong>within 24 hours</strong> with an honest take. First conversation is free, no pressure.",
       'ct.phone': 'Phone', 'ct.phoneV': '+49 157 36168028', 'ct.based': 'Based in', 'ct.basedV': 'Heilbronn, Germany',
-      'form.name': "Your name", 'form.email': 'Your email', 'form.phone': 'Phone number <span style="color: var(--fg-faint);">(optional)</span>', 'form.phonePh': '+49 ...', 'form.business': 'What kind of business?', 'form.businessPh': 'e.g. Restaurant, Yoga studio, Salon ...', 'form.package': 'Which package interests you?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'from €390', 'form.pkgSmall': 'Small website', 'form.pkgSmallPrice': 'from €890', 'form.pkgUnsure': 'Not sure yet', 'form.pkgUnsureSub': 'Need advice', 'form.msg': "What's it about? (a sentence is plenty)", 'form.msgPh': "Do you need a new website or a redesign? What matters most to you?", 'form.terms': 'I have read and accept the <a href="agb.html" target="_blank" rel="noopener">terms and conditions</a>.', 'form.send': 'Send message',
+      'form.name': "Your name", 'form.email': 'Your email', 'form.phone': 'Phone', 'form.optional': '(optional)', 'form.phonePh': '+49 ...', 'form.business': 'What kind of business?', 'form.businessPh': 'e.g. Restaurant, Yoga studio, Salon ...', 'form.package': 'Which package interests you?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'from €390', 'form.pkgSmall': 'Small website', 'form.pkgSmallPrice': 'from €890', 'form.pkgUnsure': 'Not sure yet', 'form.pkgUnsureSub': 'Need advice', 'form.msg': "What's it about? (a sentence is plenty)", 'form.msgPh': "Do you need a new website or a redesign? What matters most to you?", 'form.terms': 'I have read the <a href="agb.html" target="_blank" rel="noopener">terms</a> and <a href="datenschutz.html" target="_blank" rel="noopener">privacy policy</a> and consent to the processing of my data to handle this inquiry.', 'form.send': 'Send message',
       'ft.built': 'Web development from Heilbronn · Imprint on request', 'ft.imprint': 'Imprint', 'ft.privacy': 'Privacy', 'ft.terms': 'Terms',
       'cookie.text': '<strong>Note:</strong> This site uses only technically necessary data plus external fonts (Google Fonts) and images (Unsplash). No tracking cookies are set. More in the <a href="datenschutz.html">privacy policy</a>.',
       'cookie.ok': 'Got it',
@@ -2835,26 +2885,33 @@
   const validationMsgs = {
     de: {
       empty: 'Bitte fülle dieses Feld aus.',
-      email: 'Bitte gib eine gültige E-Mail-Adresse ein.'
+      email: 'Bitte gib eine gültige E-Mail-Adresse ein.',
+      terms: 'Bitte bestätige die AGB und Datenschutzerklärung.'
     },
     en: {
       empty: 'Please fill out this field.',
-      email: 'Please enter a valid email address.'
+      email: 'Please enter a valid email address.',
+      terms: 'Please accept the terms and privacy policy.'
     }
   };
 
   function setupValidation(input) {
     const update = () => {
-      const lang = currentLang || 'de';
-      input.setCustomValidity('');  // erst zurücksetzen
+      const lang = document.documentElement.lang === 'en' ? 'en' : 'de';
+      input.setCustomValidity('');
       if (input.validity.valueMissing) {
-        input.setCustomValidity(validationMsgs[lang].empty);
+        if (input.type === 'checkbox') {
+          input.setCustomValidity(validationMsgs[lang].terms);
+        } else {
+          input.setCustomValidity(validationMsgs[lang].empty);
+        }
       } else if (input.validity.typeMismatch) {
         input.setCustomValidity(validationMsgs[lang].email);
       }
     };
     input.addEventListener('invalid', update);
     input.addEventListener('input', () => input.setCustomValidity(''));
+    input.addEventListener('change', () => input.setCustomValidity(''));
   }
 
   document.querySelectorAll('#contactForm input[required], #contactForm textarea[required]').forEach(setupValidation);
@@ -2915,10 +2972,11 @@
       name: name,
       email: email,
       phone: phone,
-      termsAccepted: true,
       business: business,
       package: pkg,
       message: msg,
+      termsAccepted: true,
+      termsAcceptedAt: new Date().toISOString(),
       language: lang,
       timestamp: new Date().toISOString(),
       source: 'michael-rusch-portfolio',

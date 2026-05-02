@@ -4,61 +4,169 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AGB - Michael Rusch</title>
+<meta name="description" content="Allgemeine Geschäftsbedingungen für Anfragen über die Website von Michael Rusch.">
 <meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill='%23d97a3c' d='M0 14 C0 5, 5 0, 14 0 L30 0 C39 0, 44 5, 44 14 L44 30 C44 39, 39 44, 30 44 L14 44 C5 44, 0 39, 0 30 Z'/%3E%3Cpath fill='white' d='M 10 30 L 10 14 L 13 14 L 17 22 L 17 30 L 14 30 L 14 19 L 13 19 Z M 22 30 L 22 22 L 26 14 L 29 14 L 29 30 L 26 30 L 26 19 L 25 19 Z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif; background: #1a1613; color: #f5ede0; line-height: 1.7; }
-  main { max-width: 820px; margin: 0 auto; padding: 48px 20px; }
-  a { color: #d97a3c; }
-  h1, h2 { font-family: system-ui, sans-serif; line-height: 1.2; }
-  h1 { font-size: clamp(32px, 6vw, 48px); margin-bottom: 12px; }
-  h2 { margin-top: 36px; color: #d97a3c; }
-  p, li { color: #b8a892; }
-  .box { border: 1px solid rgba(245,237,224,.12); background: #221d18; border-radius: 16px; padding: 20px; margin: 24px 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #1a1613;
+    color: #f5ede0;
+    line-height: 1.65;
+    padding: 60px 20px 80px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #d97a3c;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 32px;
+    transition: gap 0.2s;
+  }
+  .back:hover { gap: 10px; }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    color: #b8a892;
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #d97a3c;
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
+  h2 .num {
+    color: #8a7a64;
+    font-weight: 500;
+    margin-right: 6px;
+  }
+  p { color: #b8a892; margin-bottom: 12px; font-size: 15.5px; }
+  p strong { color: #f5ede0; font-weight: 600; }
+  a { color: #d97a3c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul { color: #b8a892; padding-left: 20px; margin-bottom: 12px; font-size: 15.5px; }
+  ul li { margin-bottom: 6px; }
+  hr { border: none; border-top: 1px solid rgba(245, 237, 224, 0.1); margin: 32px 0; }
+  .notice {
+    background: rgba(217, 122, 60, 0.08);
+    border-left: 3px solid #d97a3c;
+    padding: 16px 18px;
+    border-radius: 6px;
+    margin: 24px 0;
+    font-size: 14.5px;
+  }
+  .notice strong { color: #d97a3c; }
 </style>
 </head>
 <body>
-<main>
-  <p><a href="index.html">← Zurück zur Website</a></p>
+<div class="wrap">
+  <a href="index.html" class="back">← Zurück zur Startseite</a>
   <h1>Allgemeine Geschäftsbedingungen</h1>
-  <p>Stand: Mai 2026</p>
+  <p class="subtitle">Stand: April 2026</p>
 
-  <div class="box">
-    <p><strong>Hinweis:</strong> Diese Vorlage ist eine einfache Startfassung und ersetzt keine rechtliche Beratung. Vor kostenpflichtigen Aufträgen sollten die AGB rechtlich geprüft oder mit einem spezialisierten Generator erstellt werden.</p>
+  <div class="notice">
+    <strong>Hinweis:</strong> Diese Website ist derzeit ein <strong>privates Portfolio</strong>. Es werden aktuell keine kostenpflichtigen Dienstleistungen angeboten. Diese AGB regeln den Umgang mit unverbindlichen Anfragen und werden an aktuelle gesetzliche Anforderungen angepasst, sobald die Tätigkeit gewerblich aufgenommen wird.
   </div>
 
-  <h2>1. Geltungsbereich</h2>
-  <p>Diese Allgemeinen Geschäftsbedingungen gelten für Anfragen und mögliche Leistungen im Bereich Webdesign, Webentwicklung und damit verbundene digitale Dienstleistungen durch Michael Rusch.</p>
+  <h2><span class="num">§ 1</span>Geltungsbereich</h2>
+  <p>Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für sämtliche Anfragen und mögliche zukünftige Leistungen im Bereich Webdesign, Webentwicklung und damit verbundene digitale Dienstleistungen durch Michael Rusch (im Folgenden "Anbieter") gegenüber natürlichen oder juristischen Personen, die die Website nutzen oder das Kontaktformular verwenden.</p>
 
-  <h2>2. Anfrage über das Kontaktformular</h2>
-  <p>Das Absenden des Kontaktformulars stellt noch keinen Vertragsschluss dar. Es handelt sich zunächst um eine unverbindliche Anfrage. Ein Vertrag kommt erst zustande, wenn ein individuelles Angebot ausdrücklich angenommen wurde.</p>
+  <h2><span class="num">§ 2</span>Anfrage über das Kontaktformular</h2>
+  <p>Das Absenden des Kontaktformulars stellt <strong>keinen Vertragsschluss</strong> dar. Es handelt sich zunächst um eine unverbindliche Anfrage. Mit dem Absenden bestätigt der Nutzer:</p>
+  <ul>
+    <li>die Kenntnisnahme dieser AGB sowie der <a href="datenschutz.html">Datenschutzerklärung</a></li>
+    <li>das Einverständnis zur Verarbeitung der angegebenen Daten zwecks Bearbeitung der Anfrage</li>
+    <li>dass die Anfrage wahrheitsgemäß und in eigenem Namen erfolgt</li>
+  </ul>
+  <p>Ein Vertrag kommt erst dann zustande, wenn der Anbieter ein konkretes, individuelles Angebot unterbreitet und dieses ausdrücklich (schriftlich oder per E-Mail) angenommen wird.</p>
 
-  <h2>3. Angebote und Preise</h2>
-  <p>Genannte Preise auf der Website dienen der Orientierung. Der endgültige Preis richtet sich nach Umfang, Anforderungen und Aufwand des jeweiligen Projekts und wird in einem individuellen Angebot festgelegt.</p>
+  <h2><span class="num">§ 3</span>Angebote und Preise</h2>
+  <p>Die auf der Website genannten Preise (z.B. „ab 390 €") dienen ausschließlich der <strong>Orientierung</strong> und stellen kein verbindliches Angebot dar. Der endgültige Preis richtet sich nach Umfang, Anforderungen und Aufwand des jeweiligen Projekts und wird in einem individuellen Angebot festgelegt. Alle Preise verstehen sich, soweit nicht anders ausgewiesen, gemäß § 19 UStG ohne Umsatzsteuer (Kleinunternehmerregelung), solange diese Anwendung findet.</p>
 
-  <h2>4. Leistungen</h2>
-  <p>Der konkrete Leistungsumfang wird individuell vereinbart. Dazu können insbesondere Konzeption, Gestaltung, Umsetzung, technische Einrichtung und kleinere Anpassungen einer Website gehören.</p>
+  <h2><span class="num">§ 4</span>Leistungen</h2>
+  <p>Der konkrete Leistungsumfang wird individuell zwischen Anbieter und Kunde vereinbart und im jeweiligen Angebot definiert. Mögliche Leistungen umfassen insbesondere:</p>
+  <ul>
+    <li>Konzeption und Beratung</li>
+    <li>Gestaltung (Design) und Umsetzung von Websites</li>
+    <li>Technische Einrichtung (Domain, Hosting, E-Mail)</li>
+    <li>Texterstellung und Bildbearbeitung im vereinbarten Rahmen</li>
+    <li>Kleinere Anpassungen und Wartung nach Live-Schaltung</li>
+  </ul>
 
-  <h2>5. Mitwirkung des Kunden</h2>
-  <p>Der Kunde stellt benötigte Inhalte wie Texte, Bilder, Logos, Zugangsdaten oder sonstige Informationen rechtzeitig bereit, sofern nichts anderes vereinbart wurde.</p>
+  <h2><span class="num">§ 5</span>Mitwirkung des Kunden</h2>
+  <p>Der Kunde stellt benötigte Inhalte wie Texte, Bilder, Logos, Zugangsdaten oder sonstige Informationen rechtzeitig und in geeigneter Form bereit. Verzögerungen, die durch fehlende oder mangelhafte Zulieferungen entstehen, gehen nicht zulasten des Anbieters und können zu einer entsprechenden Verschiebung der Lieferzeit führen.</p>
 
-  <h2>6. Zahlungsbedingungen</h2>
-  <p>Zahlungsbedingungen, Anzahlungen und Fälligkeiten werden im jeweiligen Angebot oder in der Auftragsbestätigung geregelt.</p>
+  <h2><span class="num">§ 6</span>Zahlungsbedingungen</h2>
+  <p>Zahlungsbedingungen, Anzahlungen und Fälligkeiten werden im jeweiligen Angebot oder in der Auftragsbestätigung individuell geregelt. Üblich ist eine Anzahlung von 50 % bei Auftragserteilung und 50 % bei Live-Schaltung. Rechnungen sind innerhalb von 14 Tagen nach Rechnungsstellung ohne Abzug zur Zahlung fällig.</p>
 
-  <h2>7. Nutzungsrechte</h2>
-  <p>Nach vollständiger Zahlung erhält der Kunde die vereinbarten Nutzungsrechte an der erstellten Website. Rechte an verwendeten Drittinhalten, Schriften, Bildern oder Tools richten sich nach den jeweiligen Lizenzbedingungen.</p>
+  <h2><span class="num">§ 7</span>Nutzungsrechte</h2>
+  <p>Nach <strong>vollständiger Zahlung</strong> erhält der Kunde die vereinbarten einfachen Nutzungsrechte an der erstellten Website für die im Angebot festgelegten Zwecke. Rechte an verwendeten Drittinhalten (Schriften, Bilder, Plugins, Tools) richten sich nach den jeweiligen Lizenzbedingungen der Drittanbieter. Der Anbieter behält sich das Recht vor, das erstellte Werk in eigenen Referenzen (Portfolio) zu zeigen, sofern nichts anderes vereinbart ist.</p>
 
-  <h2>8. Haftung</h2>
-  <p>Für Schäden wird nur nach den gesetzlichen Vorschriften gehaftet. Für Inhalte, die der Kunde bereitstellt, ist der Kunde selbst verantwortlich.</p>
+  <h2><span class="num">§ 8</span>Widerrufsrecht für Verbraucher</h2>
+  <p>Verbraucher im Sinne des § 13 BGB haben bei einem im Fernabsatz geschlossenen Vertrag das Recht, binnen <strong>14 Tagen</strong> ohne Angabe von Gründen den Vertrag zu widerrufen. Die Widerrufsfrist beginnt mit dem Tag des Vertragsschlusses. Der Widerruf ist zu richten an:</p>
+  <p>
+    Michael Rusch<br>
+    Klingenbergerstr. 23<br>
+    74080 Heilbronn<br>
+    E-Mail: <a href="mailto:michael.rusch@gmail.com">michael.rusch@gmail.com</a>
+  </p>
+  <p>Beginnt die Erbringung der Dienstleistung auf ausdrücklichen Wunsch des Verbrauchers <strong>vor Ablauf der Widerrufsfrist</strong>, hat der Verbraucher den anteiligen Wert der bis dahin erbrachten Leistung zu zahlen, sofern er den Vertrag widerruft. Das Widerrufsrecht erlischt vollständig, wenn die Dienstleistung mit ausdrücklicher Zustimmung des Verbrauchers vor Ablauf der Frist vollständig erbracht wurde.</p>
 
-  <h2>9. Datenschutz</h2>
-  <p>Informationen zur Verarbeitung personenbezogener Daten befinden sich in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+  <h2><span class="num">§ 9</span>Haftung</h2>
+  <p>Der Anbieter haftet nach den gesetzlichen Vorschriften:</p>
+  <ul>
+    <li>Unbeschränkt für Vorsatz und grobe Fahrlässigkeit, für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit</li>
+    <li>Bei einfacher Fahrlässigkeit nur für Schäden aus der Verletzung wesentlicher Vertragspflichten (Kardinalpflichten), begrenzt auf den vertragstypischen, vorhersehbaren Schaden</li>
+    <li>Nicht für mittelbare Schäden, entgangenen Gewinn oder Datenverluste, sofern diese nicht durch grobe Fahrlässigkeit oder Vorsatz verursacht wurden</li>
+  </ul>
+  <p>Für Inhalte, die der Kunde bereitstellt (Texte, Bilder, Marken etc.), ist ausschließlich der Kunde verantwortlich. Der Kunde stellt den Anbieter von Ansprüchen Dritter frei, die sich aus diesen Inhalten ergeben.</p>
 
-  <h2>10. Schlussbestimmungen</h2>
-  <p>Es gilt deutsches Recht. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
+  <h2><span class="num">§ 10</span>Höhere Gewalt</h2>
+  <p>Bei Ereignissen höherer Gewalt (z.B. Naturkatastrophen, Pandemien, Stromausfälle, technische Störungen externer Anbieter) verlängern sich Lieferzeiten entsprechend. Schadensersatzansprüche aus daraus resultierenden Verzögerungen sind ausgeschlossen.</p>
 
-  <h2>Kontakt</h2>
-  <p>Michael Rusch<br>
-  E-Mail: <a href="mailto:michael.rusch@gmail.com">michael.rusch@gmail.com</a></p>
-</main>
+  <h2><span class="num">§ 11</span>Datenschutz</h2>
+  <p>Informationen zur Verarbeitung personenbezogener Daten finden sich in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+
+  <h2><span class="num">§ 12</span>Streitbeilegung</h2>
+  <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a></p>
+  <p>Der Anbieter ist nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+  <h2><span class="num">§ 13</span>Schlussbestimmungen</h2>
+  <p>Es gilt das Recht der Bundesrepublik Deutschland. Bei Verträgen mit Verbrauchern gilt diese Rechtswahl nur insoweit, als nicht der gewährte Schutz durch zwingende Bestimmungen des Rechts des Staates, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat, entzogen wird.</p>
+  <p>Sollten einzelne Bestimmungen dieser AGB ganz oder teilweise unwirksam sein oder werden, so bleibt die Wirksamkeit der übrigen Bestimmungen unberührt. An die Stelle der unwirksamen Bestimmung tritt die gesetzliche Regelung.</p>
+
+  <hr>
+
+  <h2>Anbieter</h2>
+  <p>
+    <strong>Michael Rusch</strong><br>
+    Klingenbergerstr. 23<br>
+    74080 Heilbronn<br>
+    Telefon: <a href="tel:+4915736168028">+49 157 36168028</a><br>
+    E-Mail: <a href="mailto:michael.rusch@gmail.com">michael.rusch@gmail.com</a>
+  </p>
+  <p>Weitere Angaben siehe <a href="impressum.html">Impressum</a>.</p>
+
+  <hr>
+
+  <p style="font-size: 13px; color: #8a7a64;">Stand: April 2026. Diese AGB werden überarbeitet, sobald die gewerbliche Tätigkeit aufgenommen wird. Hinweise nach § 36 VSBG, Widerrufsbelehrung und steuerliche Angaben werden dann an die dann gültige Rechtslage angepasst. Vor Vertragsabschluss empfiehlt sich eine anwaltliche Prüfung individueller Vereinbarungen.</p>
+</div>
 </body>
 </html>
