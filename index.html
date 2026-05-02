@@ -2858,8 +2858,11 @@
     const pkgInput = document.querySelector('input[name="package"]:checked');
     const pkg = pkgInput ? pkgInput.value : '';
 
+    // Sprache wasserfest aus html-Attribut lesen (immer aktuell)
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'de';
+
     // Status-Texte je nach Sprache
-    const t = currentLang === 'en'
+    const t = lang === 'en'
       ? {
           sending: 'Sending...',
           success: '✓ Thanks! I\'ll get back to you within 24 hours.',
@@ -2883,7 +2886,7 @@
       business: business,
       package: pkg,
       message: msg,
-      language: currentLang,
+      language: lang,
       timestamp: new Date().toISOString(),
       source: 'michael-rusch-portfolio',
       userAgent: navigator.userAgent
