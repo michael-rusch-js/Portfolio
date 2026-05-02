@@ -387,7 +387,24 @@
     max-width: 600px;
     margin-bottom: 36px;
   }
-  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 60px; }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+  .hero__guarantee {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 60px;
+    font-size: 13.5px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+    max-width: 520px;
+  }
+  .hero__guarantee strong { color: var(--fg); font-weight: 600; }
+  .hero__guarantee-icon {
+    color: var(--accent);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
   .cta {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 24px; border-radius: 999px;
@@ -547,6 +564,46 @@
     flex-shrink: 0;
   }
   .local-badge strong { font-weight: 600; color: var(--accent); }
+
+  /* Werte/Prinzipien als Mini-Karten */
+  .values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  @media (min-width: 600px) {
+    .values { grid-template-columns: repeat(3, 1fr); }
+  }
+  .value {
+    padding: 16px 0;
+  }
+  .value__icon {
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--accent-soft);
+  }
+  .value__title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+  .value__text {
+    font-size: 13.5px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+  }
   .about__text strong, .contact__big strong {
     color: var(--fg);
     font-weight: 600;
@@ -1055,6 +1112,54 @@
   .modal__placeholder__sub strong { color: var(--accent); font-weight: 600; }
 
   /* SERVICES */
+  /* Bonus-Bar über den Paketen */
+  .bonus-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .bonus-bar__title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+  .bonus-bar__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 24px;
+    margin: 0;
+    padding: 0;
+  }
+  .bonus-bar__list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--fg);
+  }
+  .bonus-bar__check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
   .stack { display: grid; grid-template-columns: 1fr; gap: 18px; }
   @media (min-width: 768px) { .stack { grid-template-columns: repeat(3, 1fr); } }
   .stack__col {
@@ -1065,7 +1170,11 @@
     padding: 28px 22px;
     transition: transform 0.2s, border-color 0.2s;
   }
-  .stack__col:hover { border-color: var(--accent); }
+  .stack__col:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  }
   .stack__col.is-featured {
     border-color: var(--accent);
     background: var(--card);
@@ -1491,27 +1600,42 @@
   /* FOOTER */
   .footer {
     padding: 32px 20px;
-    text-align: center;
     color: var(--fg-faint);
     font-size: 13px;
     border-top: 1px solid var(--border);
+  }
+  .footer__main {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   @media (min-width: 600px) {
-    .footer {
+    .footer__main {
       flex-direction: row;
       justify-content: space-between;
-      max-width: 1200px;
-      margin: 0 auto;
+      align-items: center;
+      text-align: left;
     }
+  }
+  .footer__brand {
+    font-weight: 500;
+    color: var(--fg-muted);
+    margin-bottom: 4px;
+  }
+  .footer__tag {
+    font-size: 12px;
+    color: var(--fg-faint);
+    font-style: italic;
   }
   .footer__legal {
     display: flex;
     gap: 12px;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
   }
   .footer__legal a {
     color: var(--fg-faint);
@@ -1811,6 +1935,10 @@
       <a href="#contact" class="cta cta--primary"><span data-i18n="hero.cta1">Unverbindlich anfragen</span> →</a>
       <a href="#projects" class="cta cta--ghost" data-i18n="hero.cta2">Live-Beispiele ansehen</a>
     </div>
+    <div class="hero__guarantee" data-reveal>
+      <span class="hero__guarantee-icon" aria-hidden="true">✦</span>
+      <span data-i18n="hero.guarantee"><strong>Erstgespräch kostenfrei.</strong> Antwort innerhalb von 24 Stunden. Keine Vertragsbindung.</span>
+    </div>
     <div class="hero__trust" data-reveal data-reveal-stats>
       <div>
         <div class="trust__num" data-i18n="trust.1num">14 Tage</div>
@@ -1860,6 +1988,24 @@
         <div class="local-badge" data-reveal>
           <span class="local-badge__icon" aria-hidden="true">📞</span>
           <span data-i18n="about.local"><strong>Lieber telefonisch?</strong> Wir können auch einfach kurz telefonieren, oder ich komm direkt bei dir im Laden vorbei. Wie es für dich passt.</span>
+        </div>
+
+        <div class="values" data-reveal>
+          <div class="value">
+            <div class="value__icon" aria-hidden="true">⚡</div>
+            <div class="value__title" data-i18n="value.1t">Ehrliche Zeitpläne</div>
+            <div class="value__text" data-i18n="value.1text">Ich verspreche keine 7-Tage-Wunder. Wenn ich sage 14 Tage, dann sind es 14 Tage.</div>
+          </div>
+          <div class="value">
+            <div class="value__icon" aria-hidden="true">⚙</div>
+            <div class="value__title" data-i18n="value.2t">Saubere Technik</div>
+            <div class="value__text" data-i18n="value.2text">HTML, CSS, JavaScript - kein WordPress-Wirrwarr. Schnell, wartungsarm, dir gehörts.</div>
+          </div>
+          <div class="value">
+            <div class="value__icon" aria-hidden="true">♥</div>
+            <div class="value__title" data-i18n="value.3t">Kein Pitch</div>
+            <div class="value__text" data-i18n="value.3text">Wenn dein Projekt nicht zu mir passt, sag ich das. Du sparst Zeit und Geld.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2098,6 +2244,17 @@
       <h2 class="sh__title" data-i18n="srv.title">Klar strukturierte Pakete.</h2>
       <span class="sh__note" data-i18n="srv.note">Transparent kalkuliert - keine versteckten Kosten.</span>
     </header>
+
+    <div class="bonus-bar" data-reveal>
+      <div class="bonus-bar__title" data-i18n="bonus.title">In jedem Paket enthalten</div>
+      <ul class="bonus-bar__list">
+        <li data-i18n="bonus.1"><span class="bonus-bar__check" aria-hidden="true">✓</span>Kostenfreies Erstgespräch</li>
+        <li data-i18n="bonus.2"><span class="bonus-bar__check" aria-hidden="true">✓</span>Domain &amp; Hosting-Beratung</li>
+        <li data-i18n="bonus.3"><span class="bonus-bar__check" aria-hidden="true">✓</span>Mobil-Optimierung garantiert</li>
+        <li data-i18n="bonus.4"><span class="bonus-bar__check" aria-hidden="true">✓</span>Du bekommst alle Zugänge</li>
+      </ul>
+    </div>
+
     <div class="stack">
       <div class="stack__col" data-reveal>
         <div class="stack__head">
@@ -2316,17 +2473,42 @@
         </div>
       </details>
 
+      <details class="faq__item">
+        <summary class="faq__q">
+          <span data-i18n="faq.q7">Was, wenn du krank wirst oder mal nicht erreichbar bist?</span>
+          <span class="faq__icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq__a" data-i18n="faq.a7">
+          Ehrliche Antwort: Ich bin ein Mensch, kein Konzern. Falls ich mal krank werde, melde ich mich aktiv bei dir. <strong>Verspätungen werden vorher kommuniziert</strong>, nicht nachträglich erklärt. Bei längeren Ausfällen (das ist sehr selten) gibts dein Geld natürlich anteilig zurück.
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">
+          <span data-i18n="faq.q8">Wie viele Projekte machst du gleichzeitig?</span>
+          <span class="faq__icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq__a" data-i18n="faq.a8">
+          <strong>Maximal 2-3 parallel.</strong> Das ist eine bewusste Entscheidung: lieber weniger Projekte mit voller Aufmerksamkeit als zehn nebenbei. Wenn ich gerade ausgebucht bin, sage ich das offen und nenne dir einen realistischen Starttermin.
+        </div>
+      </details>
+
     </div>
   </div>
 </section>
 <footer class="footer">
-  <div>© 2026 · Michael Rusch</div>
-  <div class="footer__legal">
-    <a href="impressum.html" data-i18n="ft.imprint">Impressum</a>
-    <span aria-hidden="true">·</span>
-    <a href="datenschutz.html" data-i18n="ft.privacy">Datenschutz</a>
-    <span aria-hidden="true">·</span>
-    <a href="agb.html" data-i18n="ft.terms">AGB</a>
+  <div class="footer__main">
+    <div>
+      <div class="footer__brand">© 2026 · Michael Rusch</div>
+      <div class="footer__tag" data-i18n="ft.tag">Mit Sorgfalt gebaut in Heilbronn.</div>
+    </div>
+    <div class="footer__legal">
+      <a href="impressum.html" data-i18n="ft.imprint">Impressum</a>
+      <span aria-hidden="true">·</span>
+      <a href="datenschutz.html" data-i18n="ft.privacy">Datenschutz</a>
+      <span aria-hidden="true">·</span>
+      <a href="agb.html" data-i18n="ft.terms">AGB</a>
+    </div>
   </div>
 </footer>
 
@@ -2452,6 +2634,20 @@
       'hero.t1': 'Eine Website, die ', 'hero.t2': 'Gäste bringt', 'hero.tMid': ' - nicht nur ', 'hero.t3': 'Komplimente',
       'hero.sub': 'Ich baue Websites für Restaurants, Studios und kleine Läden, die online endlich so wirken wollen, wie sie wirklich sind. Direkter Ansprechpartner aus Heilbronn - keine Agentur-Hotline, keine Schablonen.',
       'hero.cta1': 'Unverbindlich anfragen', 'hero.cta2': 'Live-Beispiele ansehen',
+      'hero.guarantee': '<strong>Erstgespräch kostenfrei.</strong> Antwort innerhalb von 24 Stunden. Keine Vertragsbindung.',
+      'value.1t': 'Ehrliche Zeitpläne', 'value.1text': 'Ich verspreche keine 7-Tage-Wunder. Wenn ich sage 14 Tage, dann sind es 14 Tage.',
+      'value.2t': 'Saubere Technik', 'value.2text': 'HTML, CSS, JavaScript - kein WordPress-Wirrwarr. Schnell, wartungsarm, dir gehörts.',
+      'value.3t': 'Kein Pitch', 'value.3text': 'Wenn dein Projekt nicht zu mir passt, sag ich das. Du sparst Zeit und Geld.',
+      'bonus.title': 'In jedem Paket enthalten',
+      'bonus.1': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Kostenfreies Erstgespräch',
+      'bonus.2': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Domain &amp; Hosting-Beratung',
+      'bonus.3': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Mobil-Optimierung garantiert',
+      'bonus.4': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Du bekommst alle Zugänge',
+      'faq.q7': 'Was, wenn du krank wirst oder mal nicht erreichbar bist?',
+      'faq.a7': 'Ehrliche Antwort: Ich bin ein Mensch, kein Konzern. Falls ich mal krank werde, melde ich mich aktiv bei dir. <strong>Verspätungen werden vorher kommuniziert</strong>, nicht nachträglich erklärt. Bei längeren Ausfällen (das ist sehr selten) gibts dein Geld natürlich anteilig zurück.',
+      'faq.q8': 'Wie viele Projekte machst du gleichzeitig?',
+      'faq.a8': '<strong>Maximal 2-3 parallel.</strong> Das ist eine bewusste Entscheidung: lieber weniger Projekte mit voller Aufmerksamkeit als zehn nebenbei. Wenn ich gerade ausgebucht bin, sage ich das offen und nenne dir einen realistischen Starttermin.',
+      'ft.tag': 'Mit Sorgfalt gebaut in Heilbronn.',
       'trust.1num': '14 Tage', 'trust.1': 'Bis online', 'trust.2num': 'ab 390 €', 'trust.2': 'Transparente Preise', 'trust.3': 'Direkter Kontakt',
       'about.eyebrow': 'Über mich', 'about.title': 'Was du bekommst.',
       'about.cap': 'Michael Rusch',
@@ -2514,6 +2710,20 @@
       'hero.t1': 'A website that ', 'hero.t2': 'brings in guests', 'hero.tMid': ', not ', 'hero.t3': 'just compliments',
       'hero.sub': "I build websites for restaurants, studios and small shops that want to look online the way they actually feel in real life. Heilbronn-based - you talk to me, not a hotline.",
       'hero.cta1': 'Get a quote', 'hero.cta2': 'View live examples',
+      'hero.guarantee': '<strong>First consultation is free.</strong> Reply within 24 hours. No contract commitment.',
+      'value.1t': 'Honest timelines', 'value.1text': "I won't promise 7-day miracles. If I say 14 days, it's 14 days.",
+      'value.2t': 'Clean tech', 'value.2text': 'HTML, CSS, JavaScript - no WordPress mess. Fast, low-maintenance, all yours.',
+      'value.3t': 'No pitch', 'value.3text': "If your project isn't a fit for me, I'll say so. You save time and money.",
+      'bonus.title': 'Included in every package',
+      'bonus.1': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Free first consultation',
+      'bonus.2': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Domain &amp; hosting advice',
+      'bonus.3': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Mobile-perfect guaranteed',
+      'bonus.4': '<span class="bonus-bar__check" aria-hidden="true">✓</span>You get all credentials',
+      'faq.q7': "What if you get sick or can't be reached?",
+      'faq.a7': "Honest answer: I'm a person, not a corporation. If I get sick, I'll reach out to you proactively. <strong>Delays are communicated upfront</strong>, not explained afterwards. For longer absences (very rare) you get a partial refund of course.",
+      'faq.q8': 'How many projects do you handle at once?',
+      'faq.a8': "<strong>Max 2-3 in parallel.</strong> A deliberate choice: fewer projects with full attention rather than ten on the side. If I'm fully booked, I'll tell you and give you a realistic start date.",
+      'ft.tag': 'Crafted with care in Heilbronn.',
       'trust.1num': '14 days', 'trust.1': 'To launch', 'trust.2num': 'from €390', 'trust.2': 'Transparent pricing', 'trust.3': 'Direct contact',
       'about.eyebrow': 'About', 'about.title': "What you get.",
       'about.cap': 'Michael Rusch',
