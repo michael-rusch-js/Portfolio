@@ -75,7 +75,10 @@
     --fg-faint: #8a7a64;
     --accent: #d97a3c;
     --accent-2: #b8552a;
+    --accent-warm: #e3a05c;
+    --accent-deep: #9a4419;
     --accent-soft: rgba(217, 122, 60, 0.15);
+    --highlight: #f0c75e;
     --border: rgba(245, 237, 224, 0.1);
     --border-strong: rgba(245, 237, 224, 0.2);
     --card: #2a231d;
@@ -91,7 +94,10 @@
     --fg-faint: #8a7a64;
     --accent: #c25a1f;
     --accent-2: #a04415;
+    --accent-warm: #d68348;
+    --accent-deep: #7a3210;
     --accent-soft: rgba(194, 90, 31, 0.12);
+    --highlight: #d4a93e;
     --border: rgba(30, 26, 23, 0.1);
     --border-strong: rgba(30, 26, 23, 0.2);
     --card: #ffffff;
@@ -335,6 +341,23 @@
   /* HERO */
   .hero { position: relative; padding: 80px 0 100px; overflow: hidden; }
   .hero__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+  /* Subtile handgezeichnete Linien im Hintergrund */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 12%;
+    right: -5%;
+    width: 240px;
+    height: 240px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cpath d='M20 20 Q 60 5, 100 25 T 180 30 Q 220 35, 220 60 Q 218 100, 200 130 Q 180 160, 160 180 Q 130 200, 100 195 Q 60 188, 40 160 Q 25 130, 20 100 Q 18 60, 20 20 Z' fill='none' stroke='%23d97a3c' stroke-width='1' opacity='0.12' stroke-dasharray='2 4'/%3E%3Cpath d='M40 100 Q 80 80, 120 100 T 200 100' fill='none' stroke='%23d97a3c' stroke-width='1' opacity='0.15'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .hero::after { display: block; }
+  }
   .blob {
     position: absolute;
     border-radius: 50%;
@@ -362,7 +385,11 @@
     font-size: 13px;
     color: var(--fg-muted);
     margin-bottom: 24px;
+    /* Subtile Schräglage - wie aufgeklebt */
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
   }
+  .pill:hover { transform: rotate(0deg); }
   .pill__dot {
     width: 8px; height: 8px;
     border-radius: 50%;
@@ -380,31 +407,35 @@
     letter-spacing: -0.02em;
     margin-bottom: 24px;
   }
-  .accent-word { color: var(--accent); font-style: italic; }
+  /* Akzent-Wörter: italic + handgezeichnete Wellen-Unterstreichung */
+  .accent-word {
+    color: var(--accent);
+    font-style: italic;
+    position: relative;
+    display: inline-block;
+  }
+  .accent-word::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    height: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4' fill='none' stroke='%23d97a3c' stroke-width='1.5' stroke-linecap='round' opacity='0.55'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+  }
+  html.light .accent-word::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4' fill='none' stroke='%23c25a1f' stroke-width='1.5' stroke-linecap='round' opacity='0.55'/%3E%3C/svg%3E");
+  }
   .hero__sub {
     font-size: clamp(16px, 2.5vw, 19px);
     color: var(--fg-muted);
     max-width: 600px;
     margin-bottom: 36px;
   }
-  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
-  .hero__guarantee {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 60px;
-    font-size: 13.5px;
-    color: var(--fg-muted);
-    line-height: 1.5;
-    max-width: 520px;
-  }
-  .hero__guarantee strong { color: var(--fg); font-weight: 600; }
-  .hero__guarantee-icon {
-    color: var(--accent);
-    font-size: 14px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 60px; }
   .cta {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 24px; border-radius: 999px;
@@ -422,42 +453,90 @@
     gap: 16px;
     padding-top: 32px;
     border-top: 1px solid var(--border);
+    position: relative;
+  }
+  /* Kleiner Punkt zwischen den Trust-Werten */
+  .hero__trust > div {
+    position: relative;
+  }
+  .hero__trust > div:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -8px;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.5;
+    transform: translateY(-50%);
   }
   .trust__num {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(20px, 4vw, 28px);
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    color: var(--fg);
+  }
+  /* Erstes Trust-Element bekommt Akzentfarbe (asymmetrisch!) */
+  .hero__trust > div:first-child .trust__num {
+    color: var(--accent);
   }
   .trust__label {
     font-size: 12px;
     color: var(--fg-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
   }
 
   /* SECTIONS */
   .sec { padding: 80px 0; }
+  /* Erste und dritte Section bekommen leicht andere padding-Werte für weniger AI-Symmetrie */
+  .sec:nth-of-type(3n+1) { padding-top: 88px; }
+  .sec:nth-of-type(3n+2) { padding-bottom: 92px; }
   .sec--soft { background: var(--bg-soft); }
-  .sh { margin-bottom: 48px; text-align: center; }
+  .sh { margin-bottom: 48px; text-align: center; position: relative; }
+  /* Manche Headers leicht versetzt - menschlicher Look */
+  .sh--offset { text-align: left; padding-left: 4%; }
   .sh__eyebrow {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 13px;
     color: var(--accent);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 12px;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
     font-weight: 500;
+  }
+  /* Kleines handgezeichnetes Symbol vor jedem Eyebrow */
+  .sh__eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.6;
   }
   .sh__title {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(28px, 5vw, 44px);
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 8px;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    margin-bottom: 10px;
+    /* Subtile Markierung am ersten Buchstaben */
   }
-  .sh__note { color: var(--fg-muted); font-size: 15px; }
+  /* Manche Sektionen mit eigenem Charakter: erster Buchstabe etwas größer */
+  .sec:nth-of-type(odd) .sh__title::first-letter {
+    color: var(--accent);
+  }
+  .sh__note {
+    color: var(--fg-muted);
+    font-size: 15px;
+    font-style: italic;
+    opacity: 0.85;
+  }
 
   /* ABOUT */
   .about { display: grid; gap: 40px; }
@@ -470,15 +549,30 @@
     padding: 36px 28px 32px;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 24px;
+    /* Asymmetrische Border-Radien */
+    border-radius: 28px 22px 22px 28px;
     overflow: hidden;
+    /* Leicht schief - wie eine Notizkarte */
+    transform: rotate(-0.4deg);
+    transition: transform 0.4s ease;
   }
+  .quote:hover { transform: rotate(0deg); }
   .quote::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
     width: 4px; height: 100%;
-    background: var(--accent);
+    background: linear-gradient(to bottom, var(--accent), var(--accent-warm));
+  }
+  /* Kleines Sternchen oben rechts in der Quote-Box */
+  .quote::after {
+    content: '✦';
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 14px;
+    color: var(--accent);
+    opacity: 0.5;
   }
   .quote__mark {
     display: block;
@@ -490,6 +584,7 @@
     opacity: 0.35;
     margin-bottom: -12px;
     user-select: none;
+    transform: rotate(2deg);
   }
   .quote__text {
     font-family: 'Space Grotesk', sans-serif;
@@ -564,46 +659,6 @@
     flex-shrink: 0;
   }
   .local-badge strong { font-weight: 600; color: var(--accent); }
-
-  /* Werte/Prinzipien als Mini-Karten */
-  .values {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 32px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-  @media (min-width: 600px) {
-    .values { grid-template-columns: repeat(3, 1fr); }
-  }
-  .value {
-    padding: 16px 0;
-  }
-  .value__icon {
-    font-size: 22px;
-    color: var(--accent);
-    margin-bottom: 10px;
-    display: inline-flex;
-    width: 38px;
-    height: 38px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    background: var(--accent-soft);
-  }
-  .value__title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--fg);
-    margin-bottom: 4px;
-  }
-  .value__text {
-    font-size: 13.5px;
-    color: var(--fg-muted);
-    line-height: 1.5;
-  }
   .about__text strong, .contact__big strong {
     color: var(--fg);
     font-weight: 600;
@@ -1112,81 +1167,59 @@
   .modal__placeholder__sub strong { color: var(--accent); font-weight: 600; }
 
   /* SERVICES */
-  /* Bonus-Bar über den Paketen */
-  .bonus-bar {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 22px 24px;
-    margin-bottom: 24px;
-    text-align: center;
-  }
-  .bonus-bar__title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 14px;
-  }
-  .bonus-bar__list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px 24px;
-    margin: 0;
-    padding: 0;
-  }
-  .bonus-bar__list li {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: var(--fg);
-  }
-  .bonus-bar__check {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--accent-soft);
-    color: var(--accent);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
   .stack { display: grid; grid-template-columns: 1fr; gap: 18px; }
-  @media (min-width: 768px) { .stack { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 768px) { .stack { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
   .stack__col {
     position: relative;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 28px 22px;
-    transition: transform 0.2s, border-color 0.2s;
+    padding: 28px 24px;
+    transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.25s;
+  }
+  /* Jede Karte mit eigenem Charakter - leicht unterschiedliche Radien */
+  @media (min-width: 768px) {
+    .stack__col:nth-child(1) { border-radius: 22px 18px 18px 18px; }
+    .stack__col:nth-child(2) { border-radius: 18px 22px 22px 18px; }
+    .stack__col:nth-child(3) { border-radius: 18px 18px 18px 22px; }
   }
   .stack__col:hover {
     border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
   }
   .stack__col.is-featured {
     border-color: var(--accent);
     background: var(--card);
+    /* Featured Card: leichter Glow */
+    box-shadow: 0 0 0 1px var(--accent), 0 4px 30px rgba(217, 122, 60, 0.08);
+  }
+  /* Kleine handgemachte Ecke oben rechts bei jedem Service */
+  .stack__col::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z' fill='%23d97a3c' opacity='0.18'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+  .stack__col.is-featured::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z' fill='%23d97a3c' opacity='0.5'/%3E%3C/svg%3E");
   }
   .stack__tag {
     position: absolute;
-    top: -10px; left: 22px;
+    top: -12px; left: 22px;
     background: var(--accent); color: #fff;
-    padding: 4px 12px; border-radius: 999px;
+    padding: 5px 14px; border-radius: 999px;
     font-size: 11px; font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    /* Leicht schief — wie aufgeklebt */
+    transform: rotate(-3deg);
+    box-shadow: 0 3px 8px rgba(217, 122, 60, 0.3);
   }
   .stack__head {
     display: flex;
@@ -1196,7 +1229,13 @@
     gap: 8px; flex-wrap: wrap;
   }
   .stack__name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; }
-  .stack__price { color: var(--accent); font-weight: 600; font-size: 15px; }
+  .stack__price {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 17px;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.01em;
+  }
   .stack__col ul { list-style: none; margin-bottom: 22px; }
   .stack__col li {
     display: flex; gap: 10px;
@@ -1231,15 +1270,37 @@
     border-radius: 18px;
     transition: border-color 0.2s, transform 0.2s;
   }
+  /* Jeder Step ein bisschen anders - unten anders gerundet */
+  .process__step:nth-child(odd) { border-radius: 22px 18px 18px 22px; }
+  .process__step:nth-child(even) { border-radius: 18px 22px 22px 18px; }
   .process__step:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
   }
+  /* Kleiner Akzentstrich oben links — wie ein Marker-Strich */
+  .process__step::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 14px;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.4;
+    border-radius: 2px;
+    transform: rotate(-12deg);
+  }
+  .process__step:nth-child(even)::before { transform: rotate(12deg); }
   .process__num {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 48px;
     font-weight: 700;
+    /* Subtiler Farbverlauf statt einheitlich orange */
     color: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-warm) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     line-height: 1;
     letter-spacing: -0.03em;
     margin-bottom: 16px;
@@ -1313,6 +1374,25 @@
   .faq__item {
     border-bottom: 1px solid var(--border);
     transition: border-color 0.2s;
+    position: relative;
+  }
+  /* Beim Öffnen erscheint ein kleiner orangefarbener Strich links */
+  .faq__item::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 22px;
+    width: 8px;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-4px);
+    border-radius: 2px;
+  }
+  .faq__item[open]::before {
+    opacity: 1;
+    transform: translateX(0);
   }
   .faq__item:first-child {
     border-top: 1px solid var(--border);
@@ -1504,69 +1584,24 @@
     transform: none;
   }
 
-  .field__optional {
-    color: var(--fg-faint);
-    font-weight: 400;
-    font-size: 12px;
-    margin-left: 4px;
-  }
-
   .form__terms {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 4px 0;
-    cursor: pointer;
-    margin-top: 4px;
-  }
-  .form__terms input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  .form__terms-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
-    border: 1.5px solid var(--border-strong);
-    background: var(--card);
-    flex-shrink: 0;
-    transition: all 0.15s;
-    color: transparent;
-    margin-top: 1px;
-  }
-  .form__terms-box svg {
-    width: 16px;
-    height: 16px;
-  }
-  .form__terms input:checked ~ .form__terms-box {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-  .form__terms:hover .form__terms-box {
-    border-color: var(--accent);
-  }
-  .form__terms input:focus-visible ~ .form__terms-box {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-  .form__terms-text {
+    gap: 10px;
     font-size: 13.5px;
-    line-height: 1.55;
     color: var(--fg-muted);
+    line-height: 1.5;
   }
-  .form__terms-text a {
+  .form__terms input {
+    margin-top: 4px;
+    width: auto;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+  .form__terms a {
     color: var(--accent);
     text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .form__terms-text a:hover {
-    color: var(--fg);
+    text-underline-offset: 3px;
   }
 
   /* Form-Status-Meldungen */
@@ -1600,42 +1635,27 @@
   /* FOOTER */
   .footer {
     padding: 32px 20px;
+    text-align: center;
     color: var(--fg-faint);
     font-size: 13px;
     border-top: 1px solid var(--border);
-  }
-  .footer__main {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    text-align: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 8px;
   }
   @media (min-width: 600px) {
-    .footer__main {
+    .footer {
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
-      text-align: left;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-  }
-  .footer__brand {
-    font-weight: 500;
-    color: var(--fg-muted);
-    margin-bottom: 4px;
-  }
-  .footer__tag {
-    font-size: 12px;
-    color: var(--fg-faint);
-    font-style: italic;
   }
   .footer__legal {
     display: flex;
     gap: 12px;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
   }
   .footer__legal a {
     color: var(--fg-faint);
@@ -1935,10 +1955,6 @@
       <a href="#contact" class="cta cta--primary"><span data-i18n="hero.cta1">Unverbindlich anfragen</span> →</a>
       <a href="#projects" class="cta cta--ghost" data-i18n="hero.cta2">Live-Beispiele ansehen</a>
     </div>
-    <div class="hero__guarantee" data-reveal>
-      <span class="hero__guarantee-icon" aria-hidden="true">✦</span>
-      <span data-i18n="hero.guarantee"><strong>Erstgespräch kostenfrei.</strong> Antwort innerhalb von 24 Stunden. Keine Vertragsbindung.</span>
-    </div>
     <div class="hero__trust" data-reveal data-reveal-stats>
       <div>
         <div class="trust__num" data-i18n="trust.1num">14 Tage</div>
@@ -1988,24 +2004,6 @@
         <div class="local-badge" data-reveal>
           <span class="local-badge__icon" aria-hidden="true">📞</span>
           <span data-i18n="about.local"><strong>Lieber telefonisch?</strong> Wir können auch einfach kurz telefonieren, oder ich komm direkt bei dir im Laden vorbei. Wie es für dich passt.</span>
-        </div>
-
-        <div class="values" data-reveal>
-          <div class="value">
-            <div class="value__icon" aria-hidden="true">⚡</div>
-            <div class="value__title" data-i18n="value.1t">Ehrliche Zeitpläne</div>
-            <div class="value__text" data-i18n="value.1text">Ich verspreche keine 7-Tage-Wunder. Wenn ich sage 14 Tage, dann sind es 14 Tage.</div>
-          </div>
-          <div class="value">
-            <div class="value__icon" aria-hidden="true">⚙</div>
-            <div class="value__title" data-i18n="value.2t">Saubere Technik</div>
-            <div class="value__text" data-i18n="value.2text">HTML, CSS, JavaScript - kein WordPress-Wirrwarr. Schnell, wartungsarm, dir gehörts.</div>
-          </div>
-          <div class="value">
-            <div class="value__icon" aria-hidden="true">♥</div>
-            <div class="value__title" data-i18n="value.3t">Kein Pitch</div>
-            <div class="value__text" data-i18n="value.3text">Wenn dein Projekt nicht zu mir passt, sag ich das. Du sparst Zeit und Geld.</div>
-          </div>
         </div>
       </div>
     </div>
@@ -2244,17 +2242,6 @@
       <h2 class="sh__title" data-i18n="srv.title">Klar strukturierte Pakete.</h2>
       <span class="sh__note" data-i18n="srv.note">Transparent kalkuliert - keine versteckten Kosten.</span>
     </header>
-
-    <div class="bonus-bar" data-reveal>
-      <div class="bonus-bar__title" data-i18n="bonus.title">In jedem Paket enthalten</div>
-      <ul class="bonus-bar__list">
-        <li data-i18n="bonus.1"><span class="bonus-bar__check" aria-hidden="true">✓</span>Kostenfreies Erstgespräch</li>
-        <li data-i18n="bonus.2"><span class="bonus-bar__check" aria-hidden="true">✓</span>Domain &amp; Hosting-Beratung</li>
-        <li data-i18n="bonus.3"><span class="bonus-bar__check" aria-hidden="true">✓</span>Mobil-Optimierung garantiert</li>
-        <li data-i18n="bonus.4"><span class="bonus-bar__check" aria-hidden="true">✓</span>Du bekommst alle Zugänge</li>
-      </ul>
-    </div>
-
     <div class="stack">
       <div class="stack__col" data-reveal>
         <div class="stack__head">
@@ -2350,7 +2337,7 @@
           <input id="f-email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field">
-          <label for="f-phone" data-i18n="form.phone">Telefon <span class="field__optional">(freiwillig)</span></label>
+          <label for="f-phone" data-i18n="form.phone">Telefonnummer <span style="color: var(--fg-faint);">(freiwillig)</span></label>
           <input id="f-phone" name="phone" type="tel" autocomplete="tel" data-i18n-placeholder="form.phonePh" placeholder="+49 ...">
         </div>
         <div class="field">
@@ -2389,14 +2376,9 @@
         </div>
         <label class="form__terms">
           <input type="checkbox" id="f-terms" name="terms" required>
-          <span class="form__terms-box" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 8L7 12L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <span class="form__terms-text" data-i18n="form.terms">Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> und <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu.</span>
+          <span data-i18n="form.terms">Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> gelesen und akzeptiere sie.</span>
         </label>
-        <button type="submit" class="form__submit"><span data-i18n="form.send">Nachricht senden</span> →</button>
+                <button type="submit" class="form__submit"><span data-i18n="form.send">Nachricht senden</span> →</button>
       </form>
     </div>
   </div>
@@ -2473,42 +2455,17 @@
         </div>
       </details>
 
-      <details class="faq__item">
-        <summary class="faq__q">
-          <span data-i18n="faq.q7">Was, wenn du krank wirst oder mal nicht erreichbar bist?</span>
-          <span class="faq__icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="faq__a" data-i18n="faq.a7">
-          Ehrliche Antwort: Ich bin ein Mensch, kein Konzern. Falls ich mal krank werde, melde ich mich aktiv bei dir. <strong>Verspätungen werden vorher kommuniziert</strong>, nicht nachträglich erklärt. Bei längeren Ausfällen (das ist sehr selten) gibts dein Geld natürlich anteilig zurück.
-        </div>
-      </details>
-
-      <details class="faq__item">
-        <summary class="faq__q">
-          <span data-i18n="faq.q8">Wie viele Projekte machst du gleichzeitig?</span>
-          <span class="faq__icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="faq__a" data-i18n="faq.a8">
-          <strong>Maximal 2-3 parallel.</strong> Das ist eine bewusste Entscheidung: lieber weniger Projekte mit voller Aufmerksamkeit als zehn nebenbei. Wenn ich gerade ausgebucht bin, sage ich das offen und nenne dir einen realistischen Starttermin.
-        </div>
-      </details>
-
     </div>
   </div>
 </section>
 <footer class="footer">
-  <div class="footer__main">
-    <div>
-      <div class="footer__brand">© 2026 · Michael Rusch</div>
-      <div class="footer__tag" data-i18n="ft.tag">Mit Sorgfalt gebaut in Heilbronn.</div>
-    </div>
-    <div class="footer__legal">
-      <a href="impressum.html" data-i18n="ft.imprint">Impressum</a>
-      <span aria-hidden="true">·</span>
-      <a href="datenschutz.html" data-i18n="ft.privacy">Datenschutz</a>
-      <span aria-hidden="true">·</span>
-      <a href="agb.html" data-i18n="ft.terms">AGB</a>
-    </div>
+  <div>© 2026 · Michael Rusch</div>
+  <div class="footer__legal">
+    <a href="impressum.html" data-i18n="ft.imprint">Impressum</a>
+    <span aria-hidden="true">·</span>
+    <a href="datenschutz.html" data-i18n="ft.privacy">Datenschutz</a>
+    <span aria-hidden="true">·</span>
+    <a href="agb.html" data-i18n="ft.terms">AGB</a>
   </div>
 </footer>
 
@@ -2634,20 +2591,6 @@
       'hero.t1': 'Eine Website, die ', 'hero.t2': 'Gäste bringt', 'hero.tMid': ' - nicht nur ', 'hero.t3': 'Komplimente',
       'hero.sub': 'Ich baue Websites für Restaurants, Studios und kleine Läden, die online endlich so wirken wollen, wie sie wirklich sind. Direkter Ansprechpartner aus Heilbronn - keine Agentur-Hotline, keine Schablonen.',
       'hero.cta1': 'Unverbindlich anfragen', 'hero.cta2': 'Live-Beispiele ansehen',
-      'hero.guarantee': '<strong>Erstgespräch kostenfrei.</strong> Antwort innerhalb von 24 Stunden. Keine Vertragsbindung.',
-      'value.1t': 'Ehrliche Zeitpläne', 'value.1text': 'Ich verspreche keine 7-Tage-Wunder. Wenn ich sage 14 Tage, dann sind es 14 Tage.',
-      'value.2t': 'Saubere Technik', 'value.2text': 'HTML, CSS, JavaScript - kein WordPress-Wirrwarr. Schnell, wartungsarm, dir gehörts.',
-      'value.3t': 'Kein Pitch', 'value.3text': 'Wenn dein Projekt nicht zu mir passt, sag ich das. Du sparst Zeit und Geld.',
-      'bonus.title': 'In jedem Paket enthalten',
-      'bonus.1': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Kostenfreies Erstgespräch',
-      'bonus.2': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Domain &amp; Hosting-Beratung',
-      'bonus.3': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Mobil-Optimierung garantiert',
-      'bonus.4': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Du bekommst alle Zugänge',
-      'faq.q7': 'Was, wenn du krank wirst oder mal nicht erreichbar bist?',
-      'faq.a7': 'Ehrliche Antwort: Ich bin ein Mensch, kein Konzern. Falls ich mal krank werde, melde ich mich aktiv bei dir. <strong>Verspätungen werden vorher kommuniziert</strong>, nicht nachträglich erklärt. Bei längeren Ausfällen (das ist sehr selten) gibts dein Geld natürlich anteilig zurück.',
-      'faq.q8': 'Wie viele Projekte machst du gleichzeitig?',
-      'faq.a8': '<strong>Maximal 2-3 parallel.</strong> Das ist eine bewusste Entscheidung: lieber weniger Projekte mit voller Aufmerksamkeit als zehn nebenbei. Wenn ich gerade ausgebucht bin, sage ich das offen und nenne dir einen realistischen Starttermin.',
-      'ft.tag': 'Mit Sorgfalt gebaut in Heilbronn.',
       'trust.1num': '14 Tage', 'trust.1': 'Bis online', 'trust.2num': 'ab 390 €', 'trust.2': 'Transparente Preise', 'trust.3': 'Direkter Kontakt',
       'about.eyebrow': 'Über mich', 'about.title': 'Was du bekommst.',
       'about.cap': 'Michael Rusch',
@@ -2697,7 +2640,7 @@
       'ct.eyebrow': 'Kontakt', 'ct.title': 'Projekt anfragen.',
       'ct.big': 'Beschreib mir kurz dein Vorhaben - ich melde mich <strong>innerhalb von 24 Stunden</strong> mit einer ehrlichen Einschätzung. Erstgespräch kostenfrei, kein Verkaufsdruck.',
       'ct.phone': 'Telefon', 'ct.phoneV': '+49 157 36168028', 'ct.based': 'Standort', 'ct.basedV': 'Heilbronn, Deutschland',
-      'form.name': 'Wie heißt du?', 'form.email': 'Deine E-Mail', 'form.phone': 'Telefon <span class="field__optional">(freiwillig)</span>', 'form.optional': '(freiwillig)', 'form.phonePh': '+49 ...', 'form.business': 'Was für ein Laden / Studio?', 'form.businessPh': 'z.B. Restaurant, Yoga-Studio, Friseur ...', 'form.package': 'Welches Paket interessiert dich?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'ab 390 €', 'form.pkgSmall': 'Kleine Website', 'form.pkgSmallPrice': 'ab 890 €', 'form.pkgUnsure': 'Noch unsicher', 'form.pkgUnsureSub': 'Beraten lassen', 'form.msg': 'Worum gehts? (kurz reicht)', 'form.msgPh': 'Brauchst du eine neue Website oder eine Überarbeitung? Was ist dir besonders wichtig?', 'form.terms': 'Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> und <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage zu.', 'form.send': 'Nachricht senden',
+      'form.name': 'Wie heißt du?', 'form.email': 'Deine E-Mail', 'form.phone': 'Telefonnummer <span style="color: var(--fg-faint);">(freiwillig)</span>', 'form.phonePh': '+49 ...', 'form.business': 'Was für ein Laden / Studio?', 'form.businessPh': 'z.B. Restaurant, Yoga-Studio, Friseur ...', 'form.package': 'Welches Paket interessiert dich?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'ab 390 €', 'form.pkgSmall': 'Kleine Website', 'form.pkgSmallPrice': 'ab 890 €', 'form.pkgUnsure': 'Noch unsicher', 'form.pkgUnsureSub': 'Beraten lassen', 'form.msg': 'Worum gehts? (kurz reicht)', 'form.msgPh': 'Brauchst du eine neue Website oder eine Überarbeitung? Was ist dir besonders wichtig?', 'form.terms': 'Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> gelesen und akzeptiere sie.', 'form.send': 'Nachricht senden',
       'ft.built': 'Webentwicklung aus Heilbronn · Impressum auf Anfrage', 'ft.imprint': 'Impressum', 'ft.privacy': 'Datenschutz', 'ft.terms': 'AGB',
       'cookie.text': '<strong>Hinweis:</strong> Diese Website nutzt nur technisch notwendige Daten und externe Schriften (Google Fonts) sowie Bilder (Unsplash). Es werden keine Tracking-Cookies gesetzt. Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.',
       'cookie.ok': 'Verstanden',
@@ -2710,20 +2653,6 @@
       'hero.t1': 'A website that ', 'hero.t2': 'brings in guests', 'hero.tMid': ', not ', 'hero.t3': 'just compliments',
       'hero.sub': "I build websites for restaurants, studios and small shops that want to look online the way they actually feel in real life. Heilbronn-based - you talk to me, not a hotline.",
       'hero.cta1': 'Get a quote', 'hero.cta2': 'View live examples',
-      'hero.guarantee': '<strong>First consultation is free.</strong> Reply within 24 hours. No contract commitment.',
-      'value.1t': 'Honest timelines', 'value.1text': "I won't promise 7-day miracles. If I say 14 days, it's 14 days.",
-      'value.2t': 'Clean tech', 'value.2text': 'HTML, CSS, JavaScript - no WordPress mess. Fast, low-maintenance, all yours.',
-      'value.3t': 'No pitch', 'value.3text': "If your project isn't a fit for me, I'll say so. You save time and money.",
-      'bonus.title': 'Included in every package',
-      'bonus.1': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Free first consultation',
-      'bonus.2': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Domain &amp; hosting advice',
-      'bonus.3': '<span class="bonus-bar__check" aria-hidden="true">✓</span>Mobile-perfect guaranteed',
-      'bonus.4': '<span class="bonus-bar__check" aria-hidden="true">✓</span>You get all credentials',
-      'faq.q7': "What if you get sick or can't be reached?",
-      'faq.a7': "Honest answer: I'm a person, not a corporation. If I get sick, I'll reach out to you proactively. <strong>Delays are communicated upfront</strong>, not explained afterwards. For longer absences (very rare) you get a partial refund of course.",
-      'faq.q8': 'How many projects do you handle at once?',
-      'faq.a8': "<strong>Max 2-3 in parallel.</strong> A deliberate choice: fewer projects with full attention rather than ten on the side. If I'm fully booked, I'll tell you and give you a realistic start date.",
-      'ft.tag': 'Crafted with care in Heilbronn.',
       'trust.1num': '14 days', 'trust.1': 'To launch', 'trust.2num': 'from €390', 'trust.2': 'Transparent pricing', 'trust.3': 'Direct contact',
       'about.eyebrow': 'About', 'about.title': "What you get.",
       'about.cap': 'Michael Rusch',
@@ -2773,7 +2702,7 @@
       'ct.eyebrow': 'Contact', 'ct.title': 'Start your project.',
       'ct.big': "Tell me briefly about your project - I'll get back to you <strong>within 24 hours</strong> with an honest take. First conversation is free, no pressure.",
       'ct.phone': 'Phone', 'ct.phoneV': '+49 157 36168028', 'ct.based': 'Based in', 'ct.basedV': 'Heilbronn, Germany',
-      'form.name': "Your name", 'form.email': 'Your email', 'form.phone': 'Phone <span class="field__optional">(optional)</span>', 'form.optional': '(optional)', 'form.phonePh': '+49 ...', 'form.business': 'What kind of business?', 'form.businessPh': 'e.g. Restaurant, Yoga studio, Salon ...', 'form.package': 'Which package interests you?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'from €390', 'form.pkgSmall': 'Small website', 'form.pkgSmallPrice': 'from €890', 'form.pkgUnsure': 'Not sure yet', 'form.pkgUnsureSub': 'Need advice', 'form.msg': "What's it about? (a sentence is plenty)", 'form.msgPh': "Do you need a new website or a redesign? What matters most to you?", 'form.terms': 'I have read the <a href="agb.html" target="_blank" rel="noopener">terms</a> and <a href="datenschutz.html" target="_blank" rel="noopener">privacy policy</a> and consent to the processing of my data to handle this inquiry.', 'form.send': 'Send message',
+      'form.name': "Your name", 'form.email': 'Your email', 'form.phone': 'Phone number <span style="color: var(--fg-faint);">(optional)</span>', 'form.phonePh': '+49 ...', 'form.business': 'What kind of business?', 'form.businessPh': 'e.g. Restaurant, Yoga studio, Salon ...', 'form.package': 'Which package interests you?', 'form.pkgOne': 'One-Pager', 'form.pkgOnePrice': 'from €390', 'form.pkgSmall': 'Small website', 'form.pkgSmallPrice': 'from €890', 'form.pkgUnsure': 'Not sure yet', 'form.pkgUnsureSub': 'Need advice', 'form.msg': "What's it about? (a sentence is plenty)", 'form.msgPh': "Do you need a new website or a redesign? What matters most to you?", 'form.terms': 'I have read and accept the <a href="agb.html" target="_blank" rel="noopener">terms and conditions</a>.', 'form.send': 'Send message',
       'ft.built': 'Web development from Heilbronn · Imprint on request', 'ft.imprint': 'Imprint', 'ft.privacy': 'Privacy', 'ft.terms': 'Terms',
       'cookie.text': '<strong>Note:</strong> This site uses only technically necessary data plus external fonts (Google Fonts) and images (Unsplash). No tracking cookies are set. More in the <a href="datenschutz.html">privacy policy</a>.',
       'cookie.ok': 'Got it',
@@ -3095,33 +3024,26 @@
   const validationMsgs = {
     de: {
       empty: 'Bitte fülle dieses Feld aus.',
-      email: 'Bitte gib eine gültige E-Mail-Adresse ein.',
-      terms: 'Bitte bestätige die AGB und Datenschutzerklärung.'
+      email: 'Bitte gib eine gültige E-Mail-Adresse ein.'
     },
     en: {
       empty: 'Please fill out this field.',
-      email: 'Please enter a valid email address.',
-      terms: 'Please accept the terms and privacy policy.'
+      email: 'Please enter a valid email address.'
     }
   };
 
   function setupValidation(input) {
     const update = () => {
-      const lang = document.documentElement.lang === 'en' ? 'en' : 'de';
-      input.setCustomValidity('');
+      const lang = currentLang || 'de';
+      input.setCustomValidity('');  // erst zurücksetzen
       if (input.validity.valueMissing) {
-        if (input.type === 'checkbox') {
-          input.setCustomValidity(validationMsgs[lang].terms);
-        } else {
-          input.setCustomValidity(validationMsgs[lang].empty);
-        }
+        input.setCustomValidity(validationMsgs[lang].empty);
       } else if (input.validity.typeMismatch) {
         input.setCustomValidity(validationMsgs[lang].email);
       }
     };
     input.addEventListener('invalid', update);
     input.addEventListener('input', () => input.setCustomValidity(''));
-    input.addEventListener('change', () => input.setCustomValidity(''));
   }
 
   document.querySelectorAll('#contactForm input[required], #contactForm textarea[required]').forEach(setupValidation);
@@ -3182,11 +3104,10 @@
       name: name,
       email: email,
       phone: phone,
+      termsAccepted: true,
       business: business,
       package: pkg,
       message: msg,
-      termsAccepted: true,
-      termsAcceptedAt: new Date().toISOString(),
       language: lang,
       timestamp: new Date().toISOString(),
       source: 'michael-rusch-portfolio',
